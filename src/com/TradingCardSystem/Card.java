@@ -1,0 +1,68 @@
+package com.TradingCardSystem;
+
+public class Card {
+    private String name;
+    private String rarity;
+    private String variant;
+    private float value;
+    private int count;
+
+    public Card(String name, String rarity, String variant, float value) {
+        this.name = name;
+        this.rarity = rarity;
+        this.variant = variant;
+        this.value = value;
+        this.count = 0;
+    }
+
+    public Card() {}
+
+    public String getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(String rarity) {
+        this.rarity = rarity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getVariant() {
+        return variant;
+    }
+
+    public void setVariant(String variant) {
+        this.variant = variant;
+    }
+
+    public float getValue() {
+        return value;
+    }
+
+    public void setValue(float value) {
+        this.value = value;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Card card = (Card) obj;
+        return this.name.equals(card.name);
+    }
+}
