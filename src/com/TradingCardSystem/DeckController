@@ -1,0 +1,62 @@
+package com.TradingCardSystem;
+
+public class DeckController {
+    private Collection collection;
+
+    public DeckController(Collection collection) {
+        this.collection = collection;
+    }
+
+    public DeckController() {
+        this.collection = new Collection();
+    }
+
+    public Deck createDeck(){
+        Deck newDeck = new Deck();
+        collection.addDeck(newDeck);
+        return newDeck;
+    }
+
+    public void removeDeck(Deck deck){
+        for(Card card : deck.getCards()){
+            collection.addCard(card);
+        }
+        collection.removeDeck(deck);
+    }
+
+    public boolean addCardToDeck(Card card, Deck deck){
+        if(deck.getCardCount() >= 10){
+            return false;
+        }
+        if(deck.getCards().contains(card)){
+            return false;
+        }
+        if(!collection.getCards().contains(card)){
+            return false;
+        }
+
+        deck.addCard(card);
+        collection.removeCard(card);
+        return true;
+    }
+
+    public boolean removeCardFromDeck(Card card, Deck deck){
+        if(!deck.getCards().contains(card)){
+            return false;
+        }
+
+        deck.removeCard(card);
+        collection.addCard(card);
+        return true;
+    }
+
+    public void displayDeck(Deck deck){
+        for(Card card : deck.getCards()){
+            System.out.printf("Card Name: %s\nRarity: %s\nVariant: %s\nValue: %.2f\n",
+                    card.getName(),
+                    card.getRarity(),
+                    card.getVariant(),
+                    card.getValue());
+        }
+    }
+}
