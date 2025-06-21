@@ -1,11 +1,15 @@
 package com.TradingCardSystem;
 
+import java.util.ArrayList;
+
 public class Card {
     private String name;
     private String rarity;
     private String variant;
-    private float value;
+    private double value;
     private int count;
+    ArrayList<String> rarityList;
+    ArrayList<String> variantList;
 
     public Card(String name, String rarity, String variant, float value) {
         this.name = name;
@@ -13,9 +17,19 @@ public class Card {
         this.variant = variant;
         this.value = value;
         this.count = 0;
+        this.rarityList = new ArrayList<>();
+        this.variantList = new ArrayList<>();
     }
 
-    public Card() {}
+    public Card() {
+        this.name = null;
+        this.rarity = null;
+        this.variant = null;
+        this.value = 0;
+        this.count = 0;
+        this.rarityList = new ArrayList<>();
+        this.variantList = new ArrayList<>();
+    }
 
     public String getRarity() {
         return rarity;
@@ -41,11 +55,11 @@ public class Card {
         this.variant = variant;
     }
 
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

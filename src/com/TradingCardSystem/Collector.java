@@ -8,7 +8,7 @@ public class Collector {
     private Collection collection;
 
     public Collector() {
-        this.username = null;
+        this.username = "fn";
         this.collection = new Collection();
     }
 
