@@ -30,15 +30,28 @@ public class Collection {
         this.collectionCardCount = count;
     }
 
-    public void addCard(Card card) {
-        collectionCards.add(card);
-        collectionCardCount++;
+    public boolean addCard(Card card) {
+        String name = card.getName();
+        if (!this.hasCardWithName(name)) {
+            card.setCount(1);
+            collectionCards.add(card);
+            collectionCardCount++;
+            return true;
+        } else {
+            this.getCardWithName(name).incrementCount();
+            collectionCardCount++;
+            return true;
+        }
     }
 
-    public void removeCard(Card card) {
-        if (collectionCards.remove(card)) {
-            collectionCardCount--;
+    public boolean removeCard(Card card) {
+        String name = card.getName();
+        if (this.hasCardWithName(name)) {
+            collectionCards.remove(card);
+            this.collectionCardCount--;
+            return true;
         }
+        return false;
     }
 
     public ArrayList<Binder> getBinders() {
@@ -63,5 +76,29 @@ public class Collection {
 
     public void removeDeck(Deck deck) {
         this.decks.remove(deck);
+    }
+
+    public void displayCards() {
+        for (Card card : this.collectionCards) {
+            System.out.printf("%s (%s) : %f\n" ,card.getName(), card.getRarity(), card.getValue());
+        }
+    }
+
+    public boolean hasCardWithName(String name) {
+        for (Card card : this.collectionCards) {
+            if (card.getName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Card getCardWithName(String name) {
+        for (Card card : this.collectionCards) {
+            if (card.getName().equalsIgnoreCase(name)) {
+                return card;
+            }
+        }
+        return null;
     }
 }

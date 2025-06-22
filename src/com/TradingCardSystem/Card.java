@@ -71,6 +71,14 @@ public class Card {
         this.count = count;
     }
 
+    public void incrementCount() {
+        this.count++;
+    }
+
+    public void decrementCount() {
+        this.count--;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

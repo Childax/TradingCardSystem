@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class CardController {
 
-
     public static Card makeCard() {
         String cardName, rarity, variant;
         double value;
@@ -14,10 +13,10 @@ public class CardController {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter Card Name: ");
         cardName = sc.next();
-        System.out.print("Select Card Rarity");
+        System.out.print("Select Card Rarity: ");
         rarity = sc.next();
         if (rarity.equalsIgnoreCase("Legendary")) {
-            System.out.print("Select Card Variant");
+            System.out.print("Select Card Variant: ");
             variant = sc.next();
         } else {
             variant = null;
@@ -30,6 +29,27 @@ public class CardController {
         newCard.setVariant(variant);
         newCard.setValue(value);
 
+        if (variant != null)
+        {
+            adjustVariantValue(newCard, variant);
+        }
+
         return newCard;
     }
+
+    private static void adjustVariantValue(Card card, String variant) {
+        switch (variant) {
+            case "Extended-art":
+                card.setValue(card.getValue() + (card.getValue() * .50));
+                break;
+            case "Full-art":
+                card.setValue(card.getValue() + (card.getValue()));
+                break;
+            case "Alt-art":
+                card.setValue(card.getValue() + (card.getValue() * 2));
+                break;
+        }
+    }
+
+
 }

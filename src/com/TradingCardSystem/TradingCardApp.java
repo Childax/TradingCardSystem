@@ -25,16 +25,13 @@ public class TradingCardApp {
 
         switch (choice) {
             case 1:
-                Card card = new Card();
-
-                if (card != null) {
-                    collector.getCollection().addCard(card);
-                }
+                CollectionController.promptAddCard(collector.getCollection());
                 break;
             case 2:
                 break;
             case 3:
                 break;
         }
+        collector.getCollection().displayCards();
     }
 }
