@@ -47,6 +47,7 @@ public class Card {
 
     public void setVariant(Variant variant) {
         this.variant = variant;
+        this.adjustValueByVariant();
     }
 
     public double getValue() {
@@ -80,5 +81,21 @@ public class Card {
 
         Card card = (Card) obj;
         return this.name.equals(card.name);
+    }
+
+    public void adjustValueByVariant() {
+        switch (this.variant) {
+            case EXTENDED_ART:
+                this.setValue(this.getValue() * 1.5);
+                break;
+            case FULL_ART:
+                this.setValue(this.getValue() * 2);
+                break;
+            case ALT_ART:
+                this.setValue(this.getValue() * 3);
+                break;
+            default:
+                break;
+        }
     }
 }

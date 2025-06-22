@@ -5,11 +5,15 @@ import java.util.ArrayList;
 public class Collector {
 
     private String username;
-    private Collection collection;
+    private ArrayList<Card> cards;
+    private ArrayList<Binder> binders;
+    private ArrayList<Deck> decks;
 
     public Collector() {
         this.username = "fn";
-        this.collection = new Collection();
+        this.cards = new ArrayList<>();
+        this.binders = new ArrayList<>();
+        this.decks = new ArrayList<>();
     }
 
     public String getName() {
@@ -20,7 +24,7 @@ public class Collector {
         this.username = name;
     }
 
-    public Collection getCollection() {
-        return collection;
+    public ArrayList<Card> getCollection() {
+        return cards;
     }
 }
