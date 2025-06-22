@@ -80,7 +80,7 @@ public class Collection {
 
     public void displayCards() {
         for (Card card : this.collectionCards) {
-            System.out.printf("%s (%s) : %f\n" ,card.getName(), card.getRarity(), card.getValue());
+            System.out.printf("[%d pcs] %s (%s) : %.2f\n", card.getCount() ,card.getName(), card.getRarity(), card.getValue());
         }
     }
 
