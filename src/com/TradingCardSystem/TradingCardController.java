@@ -3,10 +3,12 @@ package com.TradingCardSystem;
 public class TradingCardController {
     private Collector collector;
     private TradingCardView view;
+    private CollectorView collectorView;
 
-    public TradingCardController(Collector collector, TradingCardView view) {
+    public TradingCardController(Collector collector, TradingCardView view, CollectorView collectorView) {
         this.collector = collector;
         this.view = view;
+        this.collectorView = collectorView;
     }
 
     public void start() {
@@ -29,8 +31,7 @@ public class TradingCardController {
     private void handleChoice(int choice) {
         switch (choice) {
             case 1:
-                CollectionController.promptAddCard(collector.getCollection());
-                collector.getCollection().displayCards();
+                collectorView.promptAddCard(collector);
                 break;
             case 2:
                 // Placeholder for binder creation logic
