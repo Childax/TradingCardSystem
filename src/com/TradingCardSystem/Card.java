@@ -4,12 +4,20 @@ import java.util.ArrayList;
 
 public class Card {
     private String name;
-    private String rarity;
-    private String variant;
+    private Rarity rarity;
+    private Variant variant;
     private double value;
     private int count;
 
-    public Card(String name, String rarity, String variant, float value) {
+    public enum Rarity {
+        COMMON, UNCOMMON, RARE, LEGENDARY
+    }
+    public enum Variant {
+        NONE, NORMAL, EXTENDED_ART, FULL_ART, ALT_ART,
+    }
+
+
+    public Card(String name, Rarity rarity, Variant variant, float value) {
         this.name = name;
         this.rarity = rarity;
         this.variant = variant;
@@ -25,11 +33,11 @@ public class Card {
         this.count = 0;
     }
 
-    public String getRarity() {
+    public Rarity getRarity() {
         return rarity;
     }
 
-    public void setRarity(String rarity) {
+    public void setRarity(Rarity rarity) {
         this.rarity = rarity;
     }
 
@@ -41,11 +49,11 @@ public class Card {
         this.name = name;
     }
 
-    public String getVariant() {
+    public Variant getVariant() {
         return variant;
     }
 
-    public void setVariant(String variant) {
+    public void setVariant(Variant variant) {
         this.variant = variant;
     }
 
