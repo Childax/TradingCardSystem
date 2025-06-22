@@ -12,21 +12,16 @@ public class TradingCardView {
         System.out.println("[3] Create a new Deck");
 
         if (!collector.getCards().isEmpty()) {
-            System.out.println("----- Card Options -----");
-            System.out.println("4. View collection");
-            System.out.println("5. Remove a card");
+            System.out.println("[4] View collection");
+            System.out.println("[5] Remove a card");
         }
 
         if (!collector.getBinders().isEmpty()) {
-            System.out.println("----- Binder Options -----");
-            System.out.println("6. View binders");
-            // more binder-related actions
+            System.out.println("[6] View binders");
         }
 
         if (!collector.getDecks().isEmpty()) {
-            System.out.println("----- Deck Options -----");
-            System.out.println("7. View decks");
-            // more deck-related actions
+            System.out.println("[7] View decks");
         }
         System.out.println("[0] Exit");
         System.out.print("> ");

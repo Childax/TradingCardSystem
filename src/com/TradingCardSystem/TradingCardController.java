@@ -22,7 +22,7 @@ public class TradingCardController {
                 if (choice < 0 || choice > 7) {
                     view.showInvalidChoice(choice);
                 }
-            } while (choice < 0 || choice > 3);
+            } while (choice < 0 || choice > 7);
 
             handleChoice(choice);
         } while (choice != 0);
@@ -41,6 +41,7 @@ public class TradingCardController {
                 break;
             case 4:
                 collectorView.displayCollection(collector);
+                break;
             case 0:
                 view.showExitMessage();
                 break;
