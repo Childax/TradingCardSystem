@@ -6,21 +6,33 @@ import java.util.Scanner;
 public class CardController {
 
     public static Card makeCard() {
-        String cardName, rarity, variant;
+        String cardName;
         double value;
         Card newCard = new Card();
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter Card Name: ");
         cardName = sc.next();
-        System.out.print("Select Card Rarity: ");
-        rarity = sc.next();
-        if (rarity.equalsIgnoreCase("Legendary")) {
-            System.out.print("Select Card Variant: ");
-            variant = sc.next();
-        } else {
-            variant = null;
+        System.out.println("Select Card Rarity (COMMON, UNCOMMON, RARE, LEGENDARY): ");
+        Rarity rarity;
+        try {
+            rarity = Rarity.valueOf(sc.next().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid rarity. Defaulting to COMMON.");
+            rarity = Rarity.COMMON;
         }
+
+        Variant variant = Variant.NONE;
+        if (rarity == Rarity.LEGENDARY) {
+            System.out.println("Select Card Variant (NORMAL, EXTENDED_ART, FULL_ART, ALT_ART): ");
+            try {
+                variant = Variant.valueOf(sc.next().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid variant. Defaulting to NORMAL.");
+                variant = Variant.NORMAL;
+            }
+        }
+
         System.out.print("Input Card Value: ");
         value = sc.nextDouble();
 
@@ -29,24 +41,21 @@ public class CardController {
         newCard.setVariant(variant);
         newCard.setValue(value);
 
-        if (variant != null)
-        {
-            adjustVariantValue(newCard, variant);
-        }
-
         return newCard;
     }
 
-    private static void adjustVariantValue(Card card, String variant) {
+    private static void adjustVariantValue(Card card, Variant variant) {
         switch (variant) {
-            case "Extended-art":
-                card.setValue(card.getValue() + (card.getValue() * .50));
+            case EXTENDED_ART:
+                card.setValue(card.getValue() * 1.5);
                 break;
-            case "Full-art":
-                card.setValue(card.getValue() + (card.getValue()));
+            case FULL_ART:
+                card.setValue(card.getValue() * 2);
                 break;
-            case "Alt-art":
-                card.setValue(card.getValue() + (card.getValue() * 2));
+            case ALT_ART:
+                card.setValue(card.getValue() * 3);
+                break;
+            default:
                 break;
         }
     }

@@ -9,14 +9,6 @@ public class Card {
     private double value;
     private int count;
 
-    public enum Rarity {
-        COMMON, UNCOMMON, RARE, LEGENDARY
-    }
-    public enum Variant {
-        NONE, NORMAL, EXTENDED_ART, FULL_ART, ALT_ART,
-    }
-
-
     public Card(String name, Rarity rarity, Variant variant, float value) {
         this.name = name;
         this.rarity = rarity;
