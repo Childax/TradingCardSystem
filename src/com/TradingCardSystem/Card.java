@@ -8,8 +8,6 @@ public class Card {
     private String variant;
     private double value;
     private int count;
-    ArrayList<String> rarityList;
-    ArrayList<String> variantList;
 
     public Card(String name, String rarity, String variant, float value) {
         this.name = name;
@@ -17,8 +15,6 @@ public class Card {
         this.variant = variant;
         this.value = value;
         this.count = 0;
-        this.rarityList = new ArrayList<>();
-        this.variantList = new ArrayList<>();
     }
 
     public Card() {
@@ -27,8 +23,6 @@ public class Card {
         this.variant = null;
         this.value = 0;
         this.count = 0;
-        this.rarityList = new ArrayList<>();
-        this.variantList = new ArrayList<>();
     }
 
     public String getRarity() {
