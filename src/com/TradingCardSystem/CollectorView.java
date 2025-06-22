@@ -31,5 +31,9 @@ public class CollectorView {
         }
 
     }
+
+    public void displayCollection(Collector collector) {
+        collector.displayCards();
+    }
 }
 

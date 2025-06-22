@@ -5,11 +5,29 @@ import java.util.Scanner;
 public class TradingCardView {
     private Scanner sc = new Scanner(System.in);
 
-    public void displayMenu() {
+    public void displayMenu(Collector collector) {
         System.out.println("Trading Card Inventory System");
         System.out.println("[1] Add a Card");
         System.out.println("[2] Create a new Binder");
         System.out.println("[3] Create a new Deck");
+
+        if (!collector.getCards().isEmpty()) {
+            System.out.println("----- Card Options -----");
+            System.out.println("4. View collection");
+            System.out.println("5. Remove a card");
+        }
+
+        if (!collector.getBinders().isEmpty()) {
+            System.out.println("----- Binder Options -----");
+            System.out.println("6. View binders");
+            // more binder-related actions
+        }
+
+        if (!collector.getDecks().isEmpty()) {
+            System.out.println("----- Deck Options -----");
+            System.out.println("7. View decks");
+            // more deck-related actions
+        }
         System.out.println("[0] Exit");
         System.out.print("> ");
     }

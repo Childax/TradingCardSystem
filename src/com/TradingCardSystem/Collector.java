@@ -24,8 +24,16 @@ public class Collector {
         this.username = name;
     }
 
-    public ArrayList<Card> getCollection() {
+    public ArrayList<Card> getCards() {
         return cards;
+    }
+
+    public ArrayList<Binder> getBinders() {
+        return binders;
+    }
+
+    public ArrayList<Deck> getDecks() {
+        return decks;
     }
 
     // Add card to collection (merge if name matches)
