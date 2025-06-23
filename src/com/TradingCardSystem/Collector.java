@@ -1,6 +1,7 @@
 package com.TradingCardSystem;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Collector {
 
@@ -68,6 +69,8 @@ public class Collector {
             System.out.println("Your collection is empty.");
             return;
         }
+
+        cards.sort(Comparator.comparing(Card::getName, String.CASE_INSENSITIVE_ORDER));
 
         System.out.println("Your Collection:");
         for (Card card : cards) {
