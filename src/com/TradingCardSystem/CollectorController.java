@@ -10,14 +10,25 @@ public class CollectorController {
     }
 
     public boolean addCardToCollection(Collector collector) {
-        Card card = collectorView.promptAddCard();
-        if (collectorView.promptAddCardConfirmation(card).equalsIgnoreCase("Y")) {
-            System.out.println("Added " + card.getName() + " to your collection.");
-            collector.addCard(card);
-            return true;
+        Card card = collectorView.promptAddCard(collector);
+        if (!collector.hasCardWithName(card.getName())) {
+            if (collectorView.promptAddCardChoice().equalsIgnoreCase("Y")) {
+                collectorView.displayAddCardConfirmation(card);
+                collector.addCard(card);
+                return true;
+            } else {
+                collectorView.displayAddCardDenial();
+                return false;
+            }
         } else {
-            System.out.println("Card was not added to the collection.");
-            return false;
+            if (collectorView.promptDuplicateCard().equalsIgnoreCase("Y")) {
+                collector.getCardWithName(card.getName()).incrementCount();
+                collectorView.displayAddCardConfirmation(card);
+                return true;
+            } else {
+                collectorView.displayAddCardDenial();
+                return false;
+            }
         }
     }
 

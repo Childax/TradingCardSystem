@@ -4,18 +4,38 @@ import java.util.Scanner;
 
 public class CollectorView {
     private CardController cardController;
+    private CardView cardView;
     private Scanner sc = new Scanner(System.in);
 
-    public CollectorView(CardController cardController) {
+    public CollectorView(CardController cardController, CardView cardView) {
         this.cardController = cardController;
+        this.cardView = cardView;
     }
 
-    public Card promptAddCard() {
-        return cardController.makeCard();
+    public Card promptAddCard(Collector collector) {
+        String name = cardView.promptCardName();
+        if (collector.hasCardWithName(name)) {
+            return collector.getCardWithName(name);
+        }
+        return cardController.makeCardFromName(name);
     }
 
-    public String promptAddCardConfirmation(Card card) {
+    public String promptAddCardChoice() {
         System.out.print("Do you want to add this card to your collection? (y/n): ");
+        return sc.next();
+    }
+
+    public void displayAddCardConfirmation(Card card) {
+        System.out.println("Added " + card.getName() + " to your collection.");
+    }
+
+    public void displayAddCardDenial() {
+        System.out.println("Card was not added to the collection.");
+    }
+
+    public String promptDuplicateCard() {
+        System.out.println("You already have this card in your collection");
+        System.out.print("Increment card count? (y/n): ");
         return sc.next();
     }
 

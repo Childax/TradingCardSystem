@@ -11,10 +11,10 @@ public class CardController {
         this.view = view;
     }
 
-    public Card makeCard() {
+    public Card makeCardFromName(String name) {
         Card newCard = new Card();
 
-        String name = view.promptCardName();
+        newCard.setName(name);
         view.displayRarities();
         Rarity rarity = view.promptRarity();
 
