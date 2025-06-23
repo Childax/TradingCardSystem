@@ -66,6 +66,7 @@ public class CollectorView {
     }
 
     public void showCardDetails(Collector collector) {
+        this.displayCollection(collector);
         System.out.print("Enter the name of the card to view details: ");
         String name = sc.next();
 
