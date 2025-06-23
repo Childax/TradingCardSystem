@@ -42,6 +42,9 @@ public class TradingCardController {
             case 4:
                 collectorView.displayCollection(collector);
                 break;
+            case 6:
+                collectorView.showCardDetails(collector);
+                break;
             case 0:
                 view.showExitMessage();
                 break;

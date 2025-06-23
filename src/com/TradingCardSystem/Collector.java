@@ -71,7 +71,7 @@ public class Collector {
 
         System.out.println("Your Collection:");
         for (Card card : cards) {
-            System.out.println("- " + card.getName() + " (x" + card.getCount() + "): $" + card.getValue() + " each");
+            System.out.printf("- %s (x%d): $%.2f each\n", card.getName(), card.getCount(), card.getValue());
         }
     }
 

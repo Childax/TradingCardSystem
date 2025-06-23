@@ -14,14 +14,15 @@ public class TradingCardView {
         if (!collector.getCards().isEmpty()) {
             System.out.println("[4] View collection");
             System.out.println("[5] Remove a card");
+            System.out.println("[6] View Card Details");
         }
 
         if (!collector.getBinders().isEmpty()) {
-            System.out.println("[6] View binders");
+            System.out.println("[] View binders");
         }
 
         if (!collector.getDecks().isEmpty()) {
-            System.out.println("[7] View decks");
+            System.out.println("[] View decks");
         }
         System.out.println("[0] Exit");
         System.out.print("> ");
