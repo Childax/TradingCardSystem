@@ -39,20 +39,26 @@ public class CollectorView {
         return sc.next();
     }
 
-    public void promptRemoveCard(Collector collector) {
-        collector.displayCards();
-
+    public String promptRemoveCard() {
         System.out.print("Select card to remove (by name): ");
-        String name = sc.next();
+        return sc.next();
+    }
 
-        if (collector.hasCardWithName(name)) {
-            Card card = collector.getCardWithName(name);
-            card.decrementCount();
-            System.out.println("Removed one copy of " + name + " from your collection.");
-        } else {
-            System.out.println("Card does not exist.");
-        }
+    public String promptRemoveCardChoice(String name) {
+        System.out.printf("Are you sure you want to remove %s from the collection? (y/n): ", name);
+        return sc.next();
+    }
 
+    public void displayRemoveCardConfirmation(String name) {
+        System.out.println("Removed " + name + " from the collection");
+    }
+
+    public void displayRemoveCardDenial(String name) {
+        System.out.println(name + " was not removed from the collection");
+    }
+
+    public void displayCardNotFound() {
+        System.out.println("Card not found.");
     }
 
     public void displayCollection(Collector collector) {
@@ -61,7 +67,7 @@ public class CollectorView {
 
     public void showCardDetails(Collector collector) {
         System.out.print("Enter the name of the card to view details: ");
-        String name = sc.nextLine();
+        String name = sc.next();
 
         Card card = collector.getCardWithName(name);
         if (card != null) {

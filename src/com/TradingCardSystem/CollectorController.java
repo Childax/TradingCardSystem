@@ -32,5 +32,34 @@ public class CollectorController {
         }
     }
 
+    public boolean removeCardFromCollection(Collector collector) {
+        String name = collectorView.promptRemoveCard();
+        Card card = collector.getCardWithName(name);
+
+        if (card == null) {
+            collectorView.displayCardNotFound();
+            return false;
+        }
+
+        if (collectorView.promptRemoveCardChoice(name).equalsIgnoreCase("Y")) {
+            card.decrementCount();
+
+            if (card.getCount() <= 0 && !collector.isCardInBindersOrDecks(name)) {
+                collector.removeCardObject(name);
+            }
+            collectorView.displayRemoveCardConfirmation(name);
+
+            return true;
+        } else {
+            collectorView.displayRemoveCardDenial(name);
+            return false;
+        }
+
+
+
+
+
+    }
+
 
 }

@@ -13,8 +13,8 @@ public class TradingCardView {
 
         if (!collector.getCards().isEmpty()) {
             System.out.println("[4] View collection");
-            System.out.println("[5] Remove a card");
-            System.out.println("[6] View Card Details");
+            System.out.println("[5] View card details");
+            System.out.println("[6] Remove a card");
         }
 
         if (!collector.getBinders().isEmpty()) {

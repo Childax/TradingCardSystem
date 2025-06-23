@@ -48,7 +48,7 @@ public class Collector {
     }
 
     // Remove card by name
-    public boolean removeCard(String name) {
+    public boolean removeCardObject(String name) {
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
             if (card.getName().equalsIgnoreCase(name)) {
@@ -94,6 +94,27 @@ public class Collector {
         }
         return null;
     }
+
+    public boolean isCardInBindersOrDecks(String name) {
+        for (Binder binder : binders) {
+            for (Card c : binder.getCards()) {
+                if (c.getName().equalsIgnoreCase(name)) {
+                    return true;
+                }
+            }
+        }
+
+        for (Deck deck : decks) {
+            for (Card c : deck.getCards()) {
+                if (c.getName().equalsIgnoreCase(name)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
 
 
 }

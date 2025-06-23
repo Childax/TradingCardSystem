@@ -1,5 +1,7 @@
 package com.TradingCardSystem;
 
+import java.util.Scanner;
+
 public class TradingCardController {
     private Collector collector;
     private TradingCardView view;
@@ -48,10 +50,10 @@ public class TradingCardController {
                 collectorView.displayCollection(collector);
                 break;
             case 5:
-                // Placeholder for card removal from collection
+                collectorView.showCardDetails(collector);
                 break;
             case 6:
-                collectorView.showCardDetails(collector);
+                collectorController.removeCardFromCollection(collector);
                 break;
             case 7:
                 // Placeholder for managing binders
@@ -62,6 +64,8 @@ public class TradingCardController {
             case 0:
                 view.showExitMessage();
                 break;
+            default:
+                view.showInvalidChoice(choice);
         }
     }
 }
