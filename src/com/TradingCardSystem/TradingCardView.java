@@ -30,7 +30,7 @@ public class TradingCardView {
 
     public int getMenuChoice() {
         int choice = sc.nextInt();
-        sc.nextLine(); // Clear newline
+        sc.nextLine();
         return choice;
     }
 

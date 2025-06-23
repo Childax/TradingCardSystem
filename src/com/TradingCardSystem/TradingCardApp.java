@@ -8,8 +8,9 @@ public class TradingCardApp {
         CardView cardView = new CardView();
         CardController cardController = new CardController(cardView);
         CollectorView collectorView = new CollectorView(cardController);
+        CollectorController collectorController = new CollectorController(collector, collectorView);
         TradingCardView view = new TradingCardView();
-        TradingCardController controller = new TradingCardController(collector, view, collectorView);
+        TradingCardController controller = new TradingCardController(collector, view, collectorView, collectorController);
         controller.start();
     }
 }

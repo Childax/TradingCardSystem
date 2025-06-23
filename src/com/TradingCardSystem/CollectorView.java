@@ -10,14 +10,16 @@ public class CollectorView {
         this.cardController = cardController;
     }
 
-    public void promptAddCard(Collector collector) {
-        Card card = cardController.makeCard();
-        collector.addCard(card);
-        System.out.println("Added " + card.getName() + " to your collection.");
+    public Card promptAddCard() {
+        return cardController.makeCard();
+    }
+
+    public String promptAddCardConfirmation(Card card) {
+        System.out.print("Do you want to add this card to your collection? (y/n): ");
+        return sc.next();
     }
 
     public void promptRemoveCard(Collector collector) {
-        sc = new Scanner(System.in);
         collector.displayCards();
 
         System.out.print("Select card to remove (by name): ");
@@ -38,8 +40,6 @@ public class CollectorView {
     }
 
     public void showCardDetails(Collector collector) {
-        sc = new Scanner(System.in);
-
         System.out.print("Enter the name of the card to view details: ");
         String name = sc.nextLine();
 
