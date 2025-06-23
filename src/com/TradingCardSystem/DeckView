@@ -2,7 +2,7 @@ package com.TradingCardSystem;
 
 import java.util.Scanner;
 
-public class DeckView(){
+public class DeckView {
     private Scanner sc = new Scanner(System.in);
 
     public String promptAddCardToDeck(){

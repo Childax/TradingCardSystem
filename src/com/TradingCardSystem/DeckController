@@ -23,17 +23,17 @@ public class DeckController {
         String cardName = view.promptAddCardToDeck();
 
         Card card = collector.getCardWithName(cardName);
-        if(card == null){
+        if (card == null){
             System.out.println("Invalid card name");
             return false;
         }
-        if(deck.getCardCount() >= 10){
+        if (deck.getCardCount() >= 10){
             return false;
         }
-        if(deck.getCards().contains(card)){
+        if (deck.getCards().contains(card)){
             return false;
         }
-        if(!collector.getCards().contains(card)){
+        if (!collector.getCards().contains(card)){
             return false;
         }
 
@@ -60,7 +60,7 @@ public class DeckController {
         }
         
         deck.removeCard(card);
-        collector.addCard(card)
+        collector.addCard(card);
         System.out.println("Card removed successfully!");
         return true;
     }
