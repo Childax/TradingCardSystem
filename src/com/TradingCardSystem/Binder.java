@@ -3,28 +3,24 @@ package com.TradingCardSystem;
 import java.util.ArrayList;
 
 public class Binder {
+    private String name;
     private ArrayList<Card> binderCards;
-    private int binderCardCount;
 
-    public Binder() {
+    public Binder(String name) {
         this.binderCards = new ArrayList<>();
-        this.binderCardCount = 0;
+        this.name = name;
     }
 
     public ArrayList<Card> getCards() {
         return binderCards;
     }
 
-    public Card getCard(int index) {
-        return binderCards.get(index);
+    public String getName() {
+        return name;
     }
 
-    public int getCardCount() {
-        return binderCardCount;
-    }
-
-    public void setCardCount(int count) {
-        this.binderCardCount = count;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void displayBinder() {
@@ -33,13 +29,10 @@ public class Binder {
 
     public void addCard(Card card) {
         this.binderCards.add(card);
-        binderCardCount++;
     }
 
     public void removeCard(Card card) {
-        if (binderCards.remove(card)) {
-            binderCardCount--;
-        }
+        this.binderCards.remove(card);
     }
 
     public void tradeCard(Card card) {

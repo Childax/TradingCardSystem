@@ -55,12 +55,12 @@ public class CollectorController {
             collectorView.displayRemoveCardDenial(name);
             return false;
         }
-
-
-
-
-
     }
 
-
+    public boolean createBinder(Collector collector) {
+        String name = collectorView.promptBinderName();
+        collector.addBinder(name);
+        collectorView.displayBinderCreation(name);
+        return true;
+    }
 }

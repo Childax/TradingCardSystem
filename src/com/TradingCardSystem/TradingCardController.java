@@ -64,7 +64,7 @@ public class TradingCardController {
                 collectorController.addCardToCollection(collector);
                 break;
             case 2:
-                // Placeholder for binder creation logic
+                collectorController.createBinder(collector);
                 break;
             case 3:
                 // Placeholder for deck creation logic

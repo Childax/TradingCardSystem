@@ -118,6 +118,26 @@ public class Collector {
         return false;
     }
 
+    public void addBinder(String name) {
+        binders.add(new Binder(name));
+    }
 
+    public Binder getBinderByName(String name) {
+        for (Binder b : binders) {
+            if (b.getName().equalsIgnoreCase(name)) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public boolean hasBinderWithName(String name) {
+        for (Binder b : binders) {
+            if (b.getName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

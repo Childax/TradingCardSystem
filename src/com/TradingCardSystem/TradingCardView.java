@@ -18,7 +18,7 @@ public class TradingCardView {
         }
 
         if (!collector.getBinders().isEmpty()) {
-            System.out.println("[] View binders");
+            System.out.println("[7] Manage Binders");
         }
 
         if (!collector.getDecks().isEmpty()) {

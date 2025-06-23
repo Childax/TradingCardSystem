@@ -82,5 +82,14 @@ public class CollectorView {
             System.out.println("Card not found in your collection.");
         }
     }
+
+    public String promptBinderName() {
+        System.out.print("Enter Binder Name: ");
+        return sc.next();
+    }
+
+    public void displayBinderCreation(String name) {
+        System.out.printf("Binder \"%s\" created.\n", name);
+    }
 }
 
