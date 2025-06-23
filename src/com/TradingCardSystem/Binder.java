@@ -1,6 +1,8 @@
 package com.TradingCardSystem;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class Binder {
     private String name;
@@ -39,6 +41,16 @@ public class Binder {
 
     }
 
+    public ArrayList<Card> getCardsSortedWithDuplicates() {
+        ArrayList<Card> expanded = new ArrayList<>();
+        for (Card card : binderCards) {
+            for (int i = 0; i < card.getCount(); i++) {
+                expanded.add(card);
+            }
+        }
 
+        expanded.sort(Comparator.comparing(Card::getName, String.CASE_INSENSITIVE_ORDER));
+        return expanded;
+    }
 
 }

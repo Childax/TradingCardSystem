@@ -74,6 +74,15 @@ public class Card {
         this.count--;
     }
 
+    public void displayCardHidden() {
+        System.out.printf("- %s (x%d): $%.2f each\n", this.getName(), this.getCount(), this.getValue());
+    }
+
+    public void displayCardDetails() {
+        System.out.printf("Name: %s | Rarity: %s | Variant: %s | Value: %.2f | Count: %d\n",
+                this.getName(), this.getRarity(), this.getVariant(), this.getValue(), this.getCount());
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

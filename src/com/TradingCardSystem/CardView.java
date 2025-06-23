@@ -53,8 +53,4 @@ public class CardView {
         }
     }
 
-    public void displayCard(Card card) {
-        System.out.printf("Name: %s | Rarity: %s | Variant: %s | Value: %.2f | Count: %d\n",
-                card.getName(), card.getRarity(), card.getVariant(), card.getValue(), card.getCount());
-    }
 }
