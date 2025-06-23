@@ -29,7 +29,7 @@ public class CardView {
         }
     }
 
-    public Variant promptVariantIfLegendary() {
+    public Variant promptVariantIfRareOrLegendary() {
         while (true) {
             displayVariants();
             System.out.print("Select Card Variant: ");

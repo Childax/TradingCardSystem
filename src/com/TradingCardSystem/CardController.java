@@ -19,8 +19,8 @@ public class CardController {
         Rarity rarity = view.promptRarity();
 
         Variant variant = Variant.NONE;
-        if (rarity == Rarity.LEGENDARY) {
-            variant = view.promptVariantIfLegendary();
+        if (rarity == Rarity.RARE || rarity == Rarity.LEGENDARY) {
+            variant = view.promptVariantIfRareOrLegendary();
         }
 
         double value = view.promptCardValue();
