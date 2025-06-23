@@ -33,6 +33,7 @@ public class CollectorController {
     }
 
     public boolean removeCardFromCollection(Collector collector) {
+        collectorView.displayCollection(collector);
         String name = collectorView.promptRemoveCard();
         Card card = collector.getCardWithName(name);
 
