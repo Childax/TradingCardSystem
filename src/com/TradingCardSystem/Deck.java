@@ -7,7 +7,8 @@ public class Deck {
     private ArrayList<Card> deckCards;
     private int deckCardCount;
 
-    public Deck() {
+    public Deck(String name) {
+        this.deckName = name;
         this.deckCards = new ArrayList<>();
         this.deckCardCount = 0;
     }
