@@ -36,7 +36,7 @@ public class CollectorView {
     }
 
     public String promptDuplicateCard() {
-        System.out.println("You already have this card in your collection");
+        System.out.println("Card is already in your collection");
         System.out.print("Increment card count? (y/n): ");
         return sc.next();
     }
@@ -128,6 +128,10 @@ public class CollectorView {
     public String promptDeckName(){
         System.out.print("Enter Deck Name: ");
         return sc.nextLine();
+    }
+
+    public void displayDeckCreation(String name) {
+        System.out.printf("Deck \"%s\" created.\n", name);
     }
 }
 

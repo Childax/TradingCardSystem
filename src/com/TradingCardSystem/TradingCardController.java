@@ -88,8 +88,8 @@ public class TradingCardController {
             case 7:
                 Binder binder = collectorController.returnBinderChoice();
                 if (binder != null){
-                    BinderView binderView = new BinderView(binder, cardView, sc);
-                    BinderController binderController = new BinderController(collector, binder, binderView, cardView);
+                    BinderView binderView = new BinderView(sc);
+                    BinderController binderController = new BinderController(collector, binder, binderView);
 
                     binderController.manageBinder();
                 } else {
@@ -98,6 +98,14 @@ public class TradingCardController {
                 break;
             case 8:
                 Deck deck = collectorController.returnDeckChoice();
+                if (deck != null) {
+                    DeckView deckView = new DeckView(sc);
+                    DeckController deckController = new DeckController(collector, deckView, deck);
+
+                    deckController.manageDeck();
+                } else {
+                    System.out.println("Deck not found.");
+                }
                 break;
             case 0:
                 view.showExitMessage();

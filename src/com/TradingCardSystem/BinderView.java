@@ -4,17 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BinderView {
-    private Binder binder;
-    private CardView cardView;
     private Scanner sc;
 
-    public BinderView(Binder binder, CardView cardView, Scanner sc) {
-        this.binder = binder;
-        this.cardView = cardView;
+    public BinderView(Scanner sc) {
         this.sc = sc;
     }
 
-    public void displayBinderMenu() {
+    public void displayBinderMenu(Binder binder) {
         System.out.printf("Binder Selected: [%s]\n", binder.getName());
         System.out.println("[1] Add a Card to Binder");
         System.out.println("[2] Remove a Card from Binder");
@@ -25,7 +21,7 @@ public class BinderView {
         System.out.print("> ");
     }
 
-    public void displayCardsFromBinder() {
+    public void displayCardsFromBinder(Binder binder) {
         ArrayList<Card> cards = binder.getCardsSortedWithDuplicates();
         System.out.println("========== [" + binder.getName() + "] ==========");
         System.out.println("Total Cards: " + cards.size());
@@ -66,7 +62,7 @@ public class BinderView {
     }
 
     public String promptAddCard() {
-        System.out.print("Enter the card you want to transfer: ");
+        System.out.print("Enter the card you want to add: ");
         return sc.nextLine();
     }
 
@@ -85,5 +81,9 @@ public class BinderView {
 
     public void displayCardNotFound() {
         System.out.println("Card was not in your collection.");
+    }
+
+    public void displayBinderFull() {
+        System.out.println("Maximum card count reached");
     }
 }

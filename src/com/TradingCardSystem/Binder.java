@@ -41,6 +41,10 @@ public class Binder {
         this.binderCards.remove(card);
     }
 
+    public boolean isFull() {
+        return binderCards.size() >= 20;
+    }
+
     public void tradeCard(Card card) {
 
     }

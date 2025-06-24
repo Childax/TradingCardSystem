@@ -6,18 +6,16 @@ public class BinderController {
     private CollectorController collectorController;
     private Binder binder;
     private BinderView binderView;
-    private CardView cardView;
 
-    public BinderController(Collector collector, Binder binder, BinderView binderView, CardView cardView) {
+    public BinderController(Collector collector, Binder binder, BinderView binderView) {
         this.collector = collector;
         this.binder = binder;
         this.binderView = binderView;
-        this.cardView = cardView;
     }
 
     public void manageBinder() {
         while (true) {
-            binderView.displayBinderMenu();
+            binderView.displayBinderMenu(binder);
             int choice = binderView.promptBinderMenuChoice();
 
             switch (choice) {
@@ -31,7 +29,7 @@ public class BinderController {
                     //handleTradeCard();
                     break;
                 case 4:
-                    binderView.displayCardsFromBinder();
+                    binderView.displayCardsFromBinder(binder);
                     break;
                 case 5:
                     if (handleDeleteBinder()) {
@@ -58,6 +56,9 @@ public class BinderController {
             card.decrementCount();
             binderView.displayAddCardConfirmation(name, binder.getName());
             return true;
+        } else if (binder.isFull()) {
+            binderView.displayBinderFull();
+            return false;
         } else {
             binderView.displayCardNotFound();
             return false;
@@ -65,7 +66,7 @@ public class BinderController {
     }
 
     public boolean handleRemoveCardFromBinder() {
-        binderView.displayCardsFromBinder();
+        binderView.displayCardsFromBinder(binder);
         String name = binderView.promptRemoveCard();
 
         Card card = binder.getCardWithName(name);

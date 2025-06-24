@@ -27,6 +27,10 @@ public class Deck {
         return deckCards.size();
     }
 
+    public boolean isFull() {
+        return deckCards.size() >= 10;
+    }
+
     public void addCard(Card card) {
         deckCards.add(card);
     }
@@ -34,6 +38,17 @@ public class Deck {
     public void removeCard(Card card) {
         deckCards.remove(card);
     }
+
+    public Card getCardWithName(String name) {
+        for (Card card : deckCards) {
+            if (card.getName().equalsIgnoreCase(name)) {
+                return card;
+            }
+        }
+        return null;
+    }
+
+
 }
 
 

@@ -84,6 +84,7 @@ public class CollectorController {
             return false;
         }
         collector.addDeck(name);
+        collectorView.displayDeckCreation(name);
         return true;
     }
 
@@ -96,7 +97,7 @@ public class CollectorController {
 
     public boolean removeDeck(Collector collector) {
         String name = collectorView.promptDeckName();
-        collector.removeDeck(name);
+        collector.deleteDeck(name);
         return true;
     }
 }

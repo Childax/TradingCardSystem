@@ -162,11 +162,11 @@ public class Collector {
         decks.add(new Deck(name));
     }
 
-    public boolean removeDeck(String name) {
+    public boolean deleteDeck(String name) {
         Deck deckToRemove = getDeckByName(name);
 
         if (deckToRemove == null) {
-            System.out.println("Deck not found.");
+            System.out.println("Deck with name \\\"\" + name + \"\\\" not found.");
             return false;
         }
 
