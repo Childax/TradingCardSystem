@@ -59,9 +59,15 @@ public class CollectorController {
 
     public boolean createBinder(Collector collector) {
         String name = collectorView.promptBinderName();
-        collector.addBinder(name);
-        collectorView.displayBinderCreation(name);
-        return true;
+
+        if (collector.hasBinderWithName(name)) {
+            System.out.println("Binder already exists");
+            return false;
+        } else {
+            collector.addBinder(name);
+            collectorView.displayBinderCreation(name);
+            return true;
+        }
     }
 
     public Binder returnBinderChoice() {
@@ -75,7 +81,7 @@ public class CollectorController {
         String name = collectorView.promptDeckName();
 
         if(collector.hasDeckWithName(name)) {
-            System.out.print("Name already exists.");
+            System.out.println("Deck already exists.");
             return false;
         }
         collector.addDeck(name);

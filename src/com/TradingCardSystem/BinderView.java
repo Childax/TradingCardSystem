@@ -15,6 +15,7 @@ public class BinderView {
     }
 
     public void displayBinderMenu() {
+        System.out.printf("Binder Selected: [%s]\n", binder.getName());
         System.out.println("[1] Add a Card to Binder");
         System.out.println("[2] Remove a Card from Binder");
         System.out.println("[3] Trade Card");
