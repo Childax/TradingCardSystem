@@ -63,4 +63,21 @@ public class CollectorController {
         collectorView.displayBinderCreation(name);
         return true;
     }
+
+    public boolean createDeck(Collector collector) {
+        String name = collectorView.promptDeckName();
+
+        if(collector.hasDeckWithName(name)) {
+            System.out.print("Name already exists.");
+            return false;
+        }
+        collector.addDeck(name);
+        return true;
+    }
+
+    public boolean removeDeck(Collector collector) {
+        String name = collectorView.promptDeckName();
+        collector.removeDeck(name);
+        return true;
+    }
 }
