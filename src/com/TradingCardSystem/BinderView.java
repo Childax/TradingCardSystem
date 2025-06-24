@@ -57,7 +57,7 @@ public class BinderView {
 
     public String promptAddCard() {
         System.out.print("Enter the card you want to transfer: ");
-        return sc.next();
+        return sc.nextLine();
     }
 
     public void displayCardNotFound() {
