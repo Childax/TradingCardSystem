@@ -26,7 +26,7 @@ public class TradingCardView {
         }
 
         if (!collector.getDecks().isEmpty()) {
-            System.out.println("[] View decks");
+            System.out.println("[8] Manage Decks");
         }
         System.out.println("[0] Exit");
         System.out.print("> ");

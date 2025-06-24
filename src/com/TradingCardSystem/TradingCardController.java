@@ -74,7 +74,7 @@ public class TradingCardController {
                 collectorController.createBinder(collector);
                 break;
             case 3:
-                // Placeholder for deck creation logic
+                collectorController.createDeck(collector);
                 break;
             case 4:
                 collectorView.displayCollection(collector);
@@ -86,8 +86,8 @@ public class TradingCardController {
                 collectorController.removeCardFromCollection(collector);
                 break;
             case 7:
-                Binder binder = new Binder();
-                if ((binder = collectorController.returnBinderChoice()) != null){
+                Binder binder = collectorController.returnBinderChoice();
+                if (binder != null){
                     BinderView binderView = new BinderView(binder, cardView, sc);
                     BinderController binderController = new BinderController(collector, binder, binderView, cardView);
 
@@ -97,7 +97,7 @@ public class TradingCardController {
                 }
                 break;
             case 8:
-                // Placeholder for managing decks
+                Deck deck = collectorController.returnDeckChoice();
                 break;
             case 0:
                 view.showExitMessage();

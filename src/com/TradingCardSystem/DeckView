@@ -16,4 +16,16 @@ public class DeckView {
         System.out.println("Please enter the card you want to remove from the deck");
         return sc.nextLine().trim();
     }
+
+    public void displayCardNotFound() {
+        System.out.println("Card was not in your collection.");
+    }
+
+    public void displayMaxCardCountReached() {
+        System.out.println("Maximum card count reached.");
+    }
+
+    public void displayCardExists() {
+        System.out.println("Card is already in your deck.");
+    }
 }

@@ -5,15 +5,13 @@ import java.util.ArrayList;
 public class Deck {
     private String deckName;
     private ArrayList<Card> deckCards;
-    private int deckCardCount;
 
     public Deck(String name) {
         this.deckName = name;
         this.deckCards = new ArrayList<>();
-        this.deckCardCount = 0;
     }
 
-    public String getDeckName() {
+    public String getName() {
         return this.deckName;
     }
 
@@ -26,18 +24,15 @@ public class Deck {
     }
 
     public int getCardCount() {
-        return deckCardCount;
+        return deckCards.size();
     }
 
     public void addCard(Card card) {
         deckCards.add(card);
-        deckCardCount++;
     }
 
     public void removeCard(Card card) {
-        if (deckCards.remove(card)) {
-            deckCardCount--;
-        }
+        deckCards.remove(card);
     }
 }
 

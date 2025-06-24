@@ -182,7 +182,7 @@ public class Collector {
 
     public Deck getDeckByName(String name) {
         for (Deck d : decks) {
-            if(d.getDeckName().equalsIgnoreCase(name)) {
+            if(d.getName().equalsIgnoreCase(name)) {
                 return d;
             }
         }
@@ -191,7 +191,7 @@ public class Collector {
 
     public boolean hasDeckWithName(String name) {
         for (Deck d : decks) {
-            if (d.getDeckName().equalsIgnoreCase(name)) {
+            if (d.getName().equalsIgnoreCase(name)) {
                 return true;
             }
         }

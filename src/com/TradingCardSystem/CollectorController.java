@@ -63,16 +63,15 @@ public class CollectorController {
         if (collector.hasBinderWithName(name)) {
             System.out.println("Binder already exists");
             return false;
-        } else {
-            collector.addBinder(name);
-            collectorView.displayBinderCreation(name);
-            return true;
         }
+        collector.addBinder(name);
+        collectorView.displayBinderCreation(name);
+        return true;
     }
 
     public Binder returnBinderChoice() {
         collectorView.displayBinders(collector);
-        String name = collectorView.promptBinderOption();
+        String name = collectorView.promptBinderName();
 
         return collector.getBinderByName(name);
     }
@@ -86,6 +85,13 @@ public class CollectorController {
         }
         collector.addDeck(name);
         return true;
+    }
+
+    public Deck returnDeckChoice() {
+        collectorView.displayDecks(collector);
+        String name = collectorView.promptDeckName();
+
+        return collector.getDeckByName(name);
     }
 
     public boolean removeDeck(Collector collector) {

@@ -4,36 +4,38 @@ import java.util.Scanner;
 
 public class DeckController {
     private Collector collector;
-    private DeckView view;
+    private DeckView deckView;
 
     public DeckController(Collector collector, DeckView deckView) {
         this.collector = collector;
-        this.view = view;
+        this.deckView = deckView;
     }
 
     public DeckController() {
         this.collector = new Collector();
-        this.view = new DeckView();
+        this.deckView = new DeckView();
     }
 
     public boolean addCardToDeck(Deck deck){
-        System.out.println("Here is your collecton:");
         collector.displayCards();
 
-        String cardName = view.promptAddCardToDeck();
+        String cardName = deckView.promptAddCardToDeck();
 
         Card card = collector.getCardWithName(cardName);
         if (card == null){
-            System.out.println("Invalid card name");
+            deckView.displayCardNotFound();
             return false;
         }
-        if (deck.getCardCount() >= 10){
+        if (deck.getCardCount() >= 10) {
+            deckView.displayMaxCardCountReached();
             return false;
         }
-        if (deck.getCards().contains(card)){
+        if (deck.getCards().contains(card)) {
+            deckView.displayCardExists();
             return false;
         }
-        if (!collector.getCards().contains(card)){
+        if (!collector.getCards().contains(card)) {
+            deckView.displayCardNotFound();
             return false;
         }
 
@@ -46,7 +48,7 @@ public class DeckController {
     public boolean removeCardFromDeck(Deck deck){
         displayCardsInDeck(deck);
 
-        String cardName = view.promptRemoveCardFromDeck();
+        String cardName = deckView.promptRemoveCardFromDeck();
 
         Card card = null;
         for(Card c : deck.getCards()){

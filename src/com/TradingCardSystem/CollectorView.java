@@ -107,9 +107,22 @@ public class CollectorView {
         System.out.println("===================================");
     }
 
-    public String promptBinderOption() {
-        System.out.print("Enter Binder Name: ");
-        return sc.nextLine();
+    public void displayDecks(Collector collector) {
+        ArrayList<Deck> decks = collector.getDecks();
+
+        if (decks.isEmpty()) {
+            System.out.println("You have no decks.");
+            return;
+        }
+
+        System.out.println("========= [ Your Decks ] =========");
+
+        int index = 1;
+        for (Deck deck : decks) {
+            System.out.printf("[%d] %s - %d cards\n", index++, deck.getName(), deck.getCardCount());
+        }
+
+        System.out.println("===================================");
     }
 
     public String promptDeckName(){
