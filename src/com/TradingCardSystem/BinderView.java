@@ -51,6 +51,15 @@ public class BinderView {
         return choice;
     }
 
+    public String promptBinderDeletionConfirmation(String name) {
+        System.out.printf("Are you sure you want to delete binder \"%s\"? (y/n): ", name);
+        return sc.nextLine();
+    }
+
+    public void displayBinderNotDeleted() {
+        System.out.println("Binder was not deleted.");
+    }
+
     public void displayReturnMessage() {
         System.out.println("Returning to main menu...");
     }
@@ -60,12 +69,20 @@ public class BinderView {
         return sc.nextLine();
     }
 
+    public void displayAddCardConfirmation(String cardName, String binderName) {
+        System.out.printf("%s was added to %s\n", cardName, binderName);
+    }
+
     public String promptRemoveCard() {
         System.out.print("Enter the card you want to remove: ");
         return sc.nextLine();
     }
 
+    public void displayRemoveCardConfirmation(String cardName) {
+        System.out.printf("%s was returned to collection\n", cardName);
+    }
+
     public void displayCardNotFound() {
-        System.out.println("Card not found.");
+        System.out.println("Card was not in your collection.");
     }
 }

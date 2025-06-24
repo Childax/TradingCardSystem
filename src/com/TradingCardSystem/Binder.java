@@ -29,8 +29,8 @@ public class Binder {
         this.name = name;
     }
 
-    public void displayBinder() {
-
+    public int getCardCount() {
+        return this.binderCards.size();
     }
 
     public void addCard(Card card) {

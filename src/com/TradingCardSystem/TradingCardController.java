@@ -1,5 +1,6 @@
 package com.TradingCardSystem;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -86,10 +87,14 @@ public class TradingCardController {
                 break;
             case 7:
                 Binder binder = new Binder();
-                BinderView binderView = new BinderView(binder, cardView, sc);
-                BinderController binderController = new BinderController(collector, binder, binderView, cardView);
+                if ((binder = collectorController.returnBinderChoice()) != null){
+                    BinderView binderView = new BinderView(binder, cardView, sc);
+                    BinderController binderController = new BinderController(collector, binder, binderView, cardView);
 
-                binderController.manageBinder();
+                    binderController.manageBinder();
+                } else {
+                    System.out.println("Binder not found.");
+                }
                 break;
             case 8:
                 // Placeholder for managing decks

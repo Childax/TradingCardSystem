@@ -3,6 +3,7 @@ package com.TradingCardSystem;
 public class BinderController {
 
     private Collector collector;
+    private CollectorController collectorController;
     private Binder binder;
     private BinderView binderView;
     private CardView cardView;
@@ -24,7 +25,7 @@ public class BinderController {
                     handleAddCardToBinder();
                     break;
                 case 2:
-                    //handleRemoveCardFromBinder();
+                    handleRemoveCardFromBinder();
                     break;
                 case 3:
                     //handleTradeCard();
@@ -33,8 +34,11 @@ public class BinderController {
                     binderView.displayCardsFromBinder();
                     break;
                 case 5:
-                    //handleDeleteBinder();
-                    return;
+                    if (handleDeleteBinder()) {
+                        return;
+                    } else {
+                        break;
+                    }
                 case 0:
                     binderView.displayReturnMessage();
                     return;
@@ -52,6 +56,7 @@ public class BinderController {
         if (card != null && card.getCount() > 0) {
             binder.addCard(new Card(card));
             card.decrementCount();
+            binderView.displayAddCardConfirmation(name, binder.getName());
             return true;
         } else {
             binderView.displayCardNotFound();
@@ -71,7 +76,18 @@ public class BinderController {
 
         binder.removeCard(card);
         collector.addCard(card);
-        System.out.println("Card removed successfully.");
+        binderView.displayRemoveCardConfirmation(name);
         return true;
+    }
+
+    public boolean handleDeleteBinder() {
+        String name = binder.getName();
+        if (binderView.promptBinderDeletionConfirmation(name).equalsIgnoreCase("Y")) {
+            collector.deleteBinder(name);
+            return true;
+        } else {
+            binderView.displayBinderNotDeleted();
+            return false;
+        }
     }
 }

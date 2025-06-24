@@ -122,7 +122,7 @@ public class Collector {
         binders.add(new Binder(name));
     }
 
-    public boolean removeBinder(String name) {
+    public boolean deleteBinder(String name) {
         Binder binderToRemove = getBinderByName(name);
 
         if(binderToRemove == null){

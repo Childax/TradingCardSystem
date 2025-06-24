@@ -64,6 +64,13 @@ public class CollectorController {
         return true;
     }
 
+    public Binder returnBinderChoice() {
+        collectorView.displayBinders(collector);
+        String name = collectorView.promptBinderOption();
+
+        return collector.getBinderByName(name);
+    }
+
     public boolean createDeck(Collector collector) {
         String name = collectorView.promptDeckName();
 

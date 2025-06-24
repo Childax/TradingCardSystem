@@ -1,5 +1,6 @@
 package com.TradingCardSystem;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CollectorView {
@@ -86,6 +87,29 @@ public class CollectorView {
 
     public void displayBinderCreation(String name) {
         System.out.printf("Binder \"%s\" created.\n", name);
+    }
+
+    public void displayBinders(Collector collector) {
+        ArrayList<Binder> binders = collector.getBinders();
+
+        if (binders.isEmpty()) {
+            System.out.println("You have no binders.");
+            return;
+        }
+
+        System.out.println("========= [ Your Binders ] =========");
+
+        int index = 1;
+        for (Binder binder : binders) {
+            System.out.printf("[%d] %s - %d cards\n", index++, binder.getName(), binder.getCardCount());
+        }
+
+        System.out.println("===================================");
+    }
+
+    public String promptBinderOption() {
+        System.out.print("Enter Binder Name: ");
+        return sc.nextLine();
     }
 
     public String promptDeckName(){
