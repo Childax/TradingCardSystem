@@ -60,6 +60,11 @@ public class BinderView {
         return sc.nextLine();
     }
 
+    public String promptRemoveCard() {
+        System.out.print("Enter the card you want to remove: ");
+        return sc.nextLine();
+    }
+
     public void displayCardNotFound() {
         System.out.println("Card not found.");
     }
