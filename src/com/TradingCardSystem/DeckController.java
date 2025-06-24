@@ -38,7 +38,7 @@ public class DeckController {
         }
 
         deck.addCard(card);
-        card.decrementCount();
+        collector.removeCardObject(cardName);
         System.out.println("Card added successfully");
         return true;
     }
