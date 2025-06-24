@@ -87,5 +87,10 @@ public class CollectorView {
     public void displayBinderCreation(String name) {
         System.out.printf("Binder \"%s\" created.\n", name);
     }
+
+    public String promptDeckName(){
+        System.out.print("Enter Deck Name: ");
+        return sc.nextLine();
+    }
 }
 
