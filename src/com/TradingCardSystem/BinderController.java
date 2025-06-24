@@ -58,4 +58,20 @@ public class BinderController {
             return false;
         }
     }
+
+    public boolean handleRemoveCardFromBinder() {
+        binderView.displayCardsFromBinder();
+        String name = binderView.promptRemoveCard();
+
+        Card card = binder.getCardWithName(name);
+        if(card == null){
+            binderView.displayCardNotFound();
+            return false;
+        }
+
+        binder.removeCard(card);
+        collector.addCard(card);
+        System.out.println("Card removed successfully.");
+        return true;
+    }
 }
