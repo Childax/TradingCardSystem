@@ -12,7 +12,11 @@ public class TradingCardApp {
         CollectorController collectorController = new CollectorController(collector, collectorView);
 
         TradingCardView view = new TradingCardView();
-        TradingCardController controller = new TradingCardController(collector, view, collectorView, collectorController);
+        TradingCardController controller = new TradingCardController(collector,
+                view,
+                collectorView,
+                collectorController,
+                cardView);
 
         controller.start();
     }

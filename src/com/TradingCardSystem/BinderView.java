@@ -15,7 +15,7 @@ public class BinderView {
     }
 
     public void displayBinderMenu() {
-        System.out.println("[1] Add a Card from Binder");
+        System.out.println("[1] Add a Card to Binder");
         System.out.println("[2] Remove a Card from Binder");
         System.out.println("[3] Trade Card");
         System.out.println("[4] View Binder Cards");
@@ -53,5 +53,14 @@ public class BinderView {
 
     public void displayReturnMessage() {
         System.out.println("Returning to main menu...");
+    }
+
+    public String promptAddCard() {
+        System.out.print("Enter the card you want to transfer: ");
+        return sc.next();
+    }
+
+    public void displayCardNotFound() {
+        System.out.println("Card not found.");
     }
 }

@@ -25,6 +25,14 @@ public class Card {
         this.count = 0;
     }
 
+    public Card(Card card) {
+        this.name = card.getName();
+        this.rarity = card.getRarity();
+        this.variant = card.getVariant();
+        this.value = card.getValue();
+        this.count = 1;
+    }
+
     public Rarity getRarity() {
         return rarity;
     }

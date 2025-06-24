@@ -9,15 +9,18 @@ public class TradingCardController {
     private TradingCardView view;
     private CollectorView collectorView;
     private CollectorController collectorController;
+    private CardView cardView;
 
     public TradingCardController(Collector collector,
                                  TradingCardView view,
                                  CollectorView collectorView,
-                                 CollectorController collectorController) {
+                                 CollectorController collectorController,
+                                 CardView cardView) {
         this.collector = collector;
         this.view = view;
         this.collectorView = collectorView;
         this.collectorController = collectorController;
+        this.cardView = cardView;
     }
 
     public Set<Integer> getValidChoices() {
@@ -79,7 +82,11 @@ public class TradingCardController {
                 collectorController.removeCardFromCollection(collector);
                 break;
             case 7:
-                // Placeholder for managing binders
+                Binder binder = new Binder();
+                BinderView binderView = new BinderView(binder, cardView);
+                BinderController binderController = new BinderController(collector, binder, binderView, cardView);
+
+                binderController.manageBinder();
                 break;
             case 8:
                 // Placeholder for managing decks

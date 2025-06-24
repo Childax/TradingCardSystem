@@ -21,7 +21,7 @@ public class BinderController {
 
             switch (choice) {
                 case 1:
-                    //handleAddCardToBinder();
+                    handleAddCardToBinder();
                     break;
                 case 2:
                     //handleRemoveCardFromBinder();
@@ -41,6 +41,21 @@ public class BinderController {
                 default:
 
             }
+        }
+    }
+
+    public boolean handleAddCardToBinder() {
+        collector.displayCards();
+        String name = binderView.promptAddCard();
+        Card card = collector.getCardWithName(name);
+
+        if (card != null && card.getCount() > 0) {
+            binder.addCard(new Card(card));
+            card.decrementCount();
+            return true;
+        } else {
+            binderView.displayCardNotFound();
+            return false;
         }
     }
 }
