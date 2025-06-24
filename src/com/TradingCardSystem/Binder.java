@@ -2,7 +2,6 @@ package com.TradingCardSystem;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class Binder {
     private String name;
@@ -58,4 +57,12 @@ public class Binder {
         return expanded;
     }
 
+    public Card getCardWithName(String name) {
+        for (Card card : binderCards) {
+            if (card.getName().equalsIgnoreCase(name)) {
+                return card;
+            }
+        }
+        return null;
+    }
 }
