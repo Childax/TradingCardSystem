@@ -6,12 +6,12 @@ import java.util.Scanner;
 public class BinderView {
     private Binder binder;
     private CardView cardView;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
 
-    public BinderView(Binder binder, CardView cardView) {
+    public BinderView(Binder binder, CardView cardView, Scanner sc) {
         this.binder = binder;
         this.cardView = cardView;
-
+        this.sc = sc;
     }
 
     public void displayBinderMenu() {

@@ -86,9 +86,40 @@ public class Card {
         System.out.printf("- %s (x%d): $%.2f each\n", this.getName(), this.getCount(), this.getValue());
     }
 
-    public void displayCardDetails() {
+    public void displayCardInline() {
         System.out.printf("Name: %s | Rarity: %s | Variant: %s | Value: %.2f | Count: %d\n",
                 this.getName(), this.getRarity(), this.getVariant(), this.getValue(), this.getCount());
+    }
+
+    public void displayCardBox() {
+        String name = "Name: " + this.getName();
+        String rarity = "Rarity: " + this.getRarity();
+        String variant = "Variant: " + (this.getVariant() != null ? this.getVariant() : "None");
+        String value = String.format("Value: $%.2f", this.getValue());
+        String count = "Count: " + this.getCount();
+
+        int contentWidth = Math.max(
+                Math.max(name.length(), rarity.length()),
+                Math.max(Math.max(variant.length(), value.length()), count.length())
+        );
+        int width = contentWidth + 4; // 2 for borders, 2 for spacing
+
+        String border = "+" + "-".repeat(width - 2) + "+";
+
+        String title = "CARD DETAILS";
+        int padding = (width - 2 - title.length()) / 2;
+        String titleLine = "|" + " ".repeat(padding) + title + " ".repeat(width - 2 - padding - title.length()) + "|";
+
+        // Print box
+        System.out.println(border);
+        System.out.println(titleLine);
+        System.out.println(border);
+        System.out.printf("| %-" + contentWidth + "s |\n", name);
+        System.out.printf("| %-" + contentWidth + "s |\n", rarity);
+        System.out.printf("| %-" + contentWidth + "s |\n", variant);
+        System.out.printf("| %-" + contentWidth + "s |\n", value);
+        System.out.printf("| %-" + contentWidth + "s |\n", count);
+        System.out.println(border);
     }
 
     @Override

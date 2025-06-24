@@ -10,17 +10,20 @@ public class TradingCardController {
     private CollectorView collectorView;
     private CollectorController collectorController;
     private CardView cardView;
+    private Scanner sc;
 
     public TradingCardController(Collector collector,
                                  TradingCardView view,
                                  CollectorView collectorView,
                                  CollectorController collectorController,
-                                 CardView cardView) {
+                                 CardView cardView,
+                                 Scanner sc) {
         this.collector = collector;
         this.view = view;
         this.collectorView = collectorView;
         this.collectorController = collectorController;
         this.cardView = cardView;
+        this.sc = sc;
     }
 
     public Set<Integer> getValidChoices() {
@@ -83,7 +86,7 @@ public class TradingCardController {
                 break;
             case 7:
                 Binder binder = new Binder();
-                BinderView binderView = new BinderView(binder, cardView);
+                BinderView binderView = new BinderView(binder, cardView, sc);
                 BinderController binderController = new BinderController(collector, binder, binderView, cardView);
 
                 binderController.manageBinder();

@@ -3,7 +3,11 @@ package com.TradingCardSystem;
 import java.util.Scanner;
 
 public class TradingCardView {
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
+
+    public TradingCardView(Scanner sc) {
+        this.sc = sc;
+    }
 
     public void displayMenu(Collector collector) {
         System.out.println("Trading Card Inventory System");

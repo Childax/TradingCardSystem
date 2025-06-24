@@ -5,11 +5,12 @@ import java.util.Scanner;
 public class CollectorView {
     private CardController cardController;
     private CardView cardView;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
 
-    public CollectorView(CardController cardController, CardView cardView) {
+    public CollectorView(CardController cardController, CardView cardView, Scanner sc) {
         this.cardController = cardController;
         this.cardView = cardView;
+        this.sc = sc;
     }
 
     public Card promptAddCard(Collector collector) {
@@ -68,16 +69,11 @@ public class CollectorView {
     public void showCardDetails(Collector collector) {
         this.displayCollection(collector);
         System.out.print("Enter the name of the card to view details: ");
-        String name = sc.next();
+        String name = sc.nextLine();
 
         Card card = collector.getCardWithName(name);
         if (card != null) {
-            System.out.println("----- Card Details -----");
-            System.out.println("Name: " + card.getName());
-            System.out.println("Rarity: " + card.getRarity());
-            System.out.println("Variant: " + card.getVariant());
-            System.out.println("Value: " + card.getValue());
-            System.out.println("Count: " + card.getCount());
+            card.displayCardBox();
         } else {
             System.out.println("Card not found in your collection.");
         }
@@ -85,7 +81,7 @@ public class CollectorView {
 
     public String promptBinderName() {
         System.out.print("Enter Binder Name: ");
-        return sc.next();
+        return sc.nextLine();
     }
 
     public void displayBinderCreation(String name) {

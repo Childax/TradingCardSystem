@@ -3,7 +3,11 @@ package com.TradingCardSystem;
 import java.util.Scanner;
 
 public class CardView {
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
+
+    public CardView(Scanner sc) {
+        this.sc = sc;
+    }
 
     public String promptCardName() {
         System.out.print("Enter Card Name: ");
