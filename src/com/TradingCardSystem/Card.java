@@ -9,7 +9,7 @@ public class Card {
     private double value;
     private int count;
 
-    public Card(String name, Rarity rarity, Variant variant, float value) {
+    public Card(String name, Rarity rarity, Variant variant, double value) {
         this.name = name;
         this.rarity = rarity;
         this.variant = variant;

@@ -88,7 +88,7 @@ public class DeckController {
 
     public boolean handleDeleteDeck() {
         String name = deck.getName();
-        if (deckView.promptBinderDeletionConfirmation(name).equalsIgnoreCase("Y")) {
+        if (deckView.promptDeckDeletionConfirmation(name).equalsIgnoreCase("Y")) {
             collector.deleteDeck(name);
             return true;
         } else {

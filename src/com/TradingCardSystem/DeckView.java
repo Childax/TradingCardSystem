@@ -86,7 +86,7 @@ public class DeckView {
         System.out.printf("%s was returned to collection\n", cardName);
     }
 
-    public String promptBinderDeletionConfirmation(String name) {
+    public String promptDeckDeletionConfirmation(String name) {
         System.out.printf("Are you sure you want to delete deck \"%s\"? (y/n): ", name);
         return sc.nextLine();
     }

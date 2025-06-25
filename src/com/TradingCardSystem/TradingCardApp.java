@@ -18,7 +18,6 @@ public class TradingCardApp {
                 view,
                 collectorView,
                 collectorController,
-                cardView,
                 sc);
 
         controller.start();

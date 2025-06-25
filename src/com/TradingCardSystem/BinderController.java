@@ -3,7 +3,6 @@ package com.TradingCardSystem;
 public class BinderController {
 
     private Collector collector;
-    private CollectorController collectorController;
     private Binder binder;
     private BinderView binderView;
 

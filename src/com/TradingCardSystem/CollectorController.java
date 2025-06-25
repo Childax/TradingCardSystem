@@ -94,10 +94,4 @@ public class CollectorController {
 
         return collector.getDeckByName(name);
     }
-
-    public boolean removeDeck(Collector collector) {
-        String name = collectorView.promptDeckName();
-        collector.deleteDeck(name);
-        return true;
-    }
 }

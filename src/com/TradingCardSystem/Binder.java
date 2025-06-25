@@ -7,11 +7,6 @@ public class Binder {
     private String name;
     private ArrayList<Card> binderCards;
 
-    public Binder() {
-        this.binderCards = new ArrayList<>();
-        this.name = null;
-    }
-
     public Binder(String name) {
         this.binderCards = new ArrayList<>();
         this.name = name;

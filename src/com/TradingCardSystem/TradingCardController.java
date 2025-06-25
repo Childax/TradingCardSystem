@@ -10,20 +10,17 @@ public class TradingCardController {
     private TradingCardView view;
     private CollectorView collectorView;
     private CollectorController collectorController;
-    private CardView cardView;
     private Scanner sc;
 
     public TradingCardController(Collector collector,
                                  TradingCardView view,
                                  CollectorView collectorView,
                                  CollectorController collectorController,
-                                 CardView cardView,
                                  Scanner sc) {
         this.collector = collector;
         this.view = view;
         this.collectorView = collectorView;
         this.collectorController = collectorController;
-        this.cardView = cardView;
         this.sc = sc;
     }
 
