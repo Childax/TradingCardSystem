@@ -103,7 +103,7 @@ public class BinderView {
     }
 
     public Card promptTradeCardDetails(CardController cardController) {
-        System.out.print("Enter the details of the card to be traded: ");
+        System.out.println("Enter the details of the card to be traded: ");
 
         String name = promptTradeNewCard();
         return cardController.makeCardFromName(name);

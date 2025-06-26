@@ -3,7 +3,6 @@ package com.TradingCardSystem;
 public class BinderController {
 
     private Collector collector;
-    private CollectorController collectorController;
     private Binder binder;
     private BinderView binderView;
     private CardController cardController;
@@ -29,6 +28,7 @@ public class BinderController {
                     break;
                 case 3:
                     //handleTradeCard();
+                    handleTradeCard();
                     break;
                 case 4:
                     binderView.displayCardsFromBinder(binder);
@@ -95,6 +95,8 @@ public class BinderController {
     }
 
     public boolean handleTradeCard() {
+        binderView.displayCardsFromBinder(binder);
+
         String name = binderView.promptTradeCardName();
 
         if(binder.getCardWithName(name) == null){
@@ -108,7 +110,7 @@ public class BinderController {
 
         switch (binderView.promptTradeConfirmation(cardToBeRemoved.getValue(), cardToBeAdded.getValue())) {
             case 'y' -> {
-                binder.tradeCard(cardToBeRemoved, cardToBeAdded);
+                binder.tradeCard(cardToBeAdded, cardToBeRemoved);
                 System.out.println("Trade successfully completed!");
                 binderView.displayTradeInformation(cardToBeRemoved, cardToBeAdded);
                 return true;

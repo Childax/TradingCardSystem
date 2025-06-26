@@ -47,7 +47,7 @@ public class DeckController {
         String cardName = deckView.promptAddCardToDeck();
 
         Card card = collector.getCardWithName(cardName);
-        if (card == null){
+        if (card == null || card.getCount() <= 0){
             deckView.displayCardNotFound();
             return false;
         }
