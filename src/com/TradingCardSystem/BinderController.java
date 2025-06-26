@@ -3,13 +3,16 @@ package com.TradingCardSystem;
 public class BinderController {
 
     private Collector collector;
+    private CollectorController collectorController;
     private Binder binder;
     private BinderView binderView;
+    private CardController cardController;
 
-    public BinderController(Collector collector, Binder binder, BinderView binderView) {
+    public BinderController(Collector collector, Binder binder, BinderView binderView,  CardController cardController) {
         this.collector = collector;
         this.binder = binder;
         this.binderView = binderView;
+        this.cardController = cardController;
     }
 
     public void manageBinder() {
@@ -88,6 +91,35 @@ public class BinderController {
         } else {
             binderView.displayBinderNotDeleted();
             return false;
+        }
+    }
+
+    public boolean handleTradeCard() {
+        String name = binderView.promptTradeCardName();
+
+        if(binder.getCardWithName(name) == null){
+            binderView.displayCardNotFound();
+            return false;
+        }
+
+        Card cardToBeRemoved = binder.getCardWithName(name);
+
+        Card cardToBeAdded = binderView.promptTradeCardDetails(cardController);
+
+        switch (binderView.promptTradeConfirmation(cardToBeRemoved.getValue(), cardToBeAdded.getValue())) {
+            case 'y' -> {
+                binder.tradeCard(cardToBeRemoved, cardToBeAdded);
+                System.out.println("Trade successfully completed!");
+                binderView.displayTradeInformation(cardToBeRemoved, cardToBeAdded);
+                return true;
+            }
+            case 'n' -> {
+                binderView.displayTradeCancellation();
+                return true;
+            }
+            default -> {
+                return false;
+            }
         }
     }
 }

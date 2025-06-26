@@ -40,8 +40,9 @@ public class Binder {
         return binderCards.size() >= 20;
     }
 
-    public void tradeCard(Card card) {
-
+    public void tradeCard(Card newCard, Card oldCard) {
+        addCard(newCard);
+        removeCard(oldCard);
     }
 
     public ArrayList<Card> getCardsSortedWithDuplicates() {

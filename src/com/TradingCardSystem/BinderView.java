@@ -86,4 +86,61 @@ public class BinderView {
     public void displayBinderFull() {
         System.out.println("Maximum card count reached");
     }
+
+    public String promptTradeStart(){
+        System.out.print("Would you like to trade one of your cards? (y/n): ");
+        return sc.nextLine();
+    }
+
+    public String promptTradeCardName(){
+        System.out.print("Enter the card name to be traded: ");
+        return sc.nextLine();
+    }
+
+    public String promptTradeNewCard(){
+        System.out.print("Enter the new card name: ");
+        return sc.nextLine();
+    }
+
+    public Card promptTradeCardDetails(CardController cardController) {
+        System.out.print("Enter the details of the card to be traded: ");
+
+        String name = promptTradeNewCard();
+        return cardController.makeCardFromName(name);
+    }
+
+    public char promptTradeConfirmation(double oldCard, double newCard){
+        if(oldCard - newCard > 1.0 || oldCard - newCard < -1.0) {
+            System.out.println("[!] You are trading a card worth more or less than $1 compared to the new card.");
+        } else {
+            System.out.println("[✔] Old card and New card to be replaced are of similar value");
+        }
+        System.out.print("Would you like to accept the trade? (y/n): ");
+        return sc.nextLine().charAt(0);
+    }
+
+    public void displayTradeCancellation(){
+        System.out.println("Trade Card has been cancelled.");
+    }
+
+    public void displayTradeInformation(Card oldCard, Card newCard) {
+        System.out.println("\nTrade Information:");
+        System.out.println("=================================");
+
+        System.out.println("Removed Card:");
+        System.out.println("-Name   : " + oldCard.getName());
+        System.out.println("-Value  : $" + oldCard.getValue());
+        System.out.println("-Rarity : " + oldCard.getRarity());
+        System.out.println("-Variant: " + oldCard.getVariant());
+
+        System.out.println("---------------------------------");
+
+        System.out.println("Added Card:");
+        System.out.println("-Name   : " + newCard.getName());
+        System.out.println("-Value  : $" + newCard.getValue());
+        System.out.println("-Rarity : " + newCard.getRarity());
+        System.out.println("-Variant: " + newCard.getVariant());
+
+        System.out.println("=================================");
+    }
 }
