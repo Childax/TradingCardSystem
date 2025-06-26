@@ -15,10 +15,12 @@ public class TradingCardApp {
 
         TradingCardView view = new TradingCardView(sc);
         TradingCardController controller = new TradingCardController(collector,
-                view,
-                collectorView,
-                collectorController,
-                sc);
+                        view,
+                        collectorView,
+                        collectorController,
+                cardController,
+                cardView,
+                        sc);
 
         controller.start();
     }
