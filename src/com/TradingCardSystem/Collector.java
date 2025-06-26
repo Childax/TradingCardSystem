@@ -74,7 +74,9 @@ public class Collector {
 
         System.out.println("Your Collection:");
         for (Card card : cards) {
-            card.displayCardHidden();
+            if(card.getCount() > 0) {
+                card.displayCardHidden();
+            }
         }
     }
 
