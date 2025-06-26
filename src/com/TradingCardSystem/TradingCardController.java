@@ -10,17 +10,23 @@ public class TradingCardController {
     private TradingCardView view;
     private CollectorView collectorView;
     private CollectorController collectorController;
+    private CardView cardView;
+    private CardController cardController;
     private Scanner sc;
 
     public TradingCardController(Collector collector,
                                  TradingCardView view,
                                  CollectorView collectorView,
                                  CollectorController collectorController,
+                                 CardController cardController,
+                                 CardView cardView,
                                  Scanner sc) {
         this.collector = collector;
         this.view = view;
         this.collectorView = collectorView;
         this.collectorController = collectorController;
+        this.cardView = cardView;
+        this.cardController = cardController;
         this.sc = sc;
     }
 
@@ -86,7 +92,7 @@ public class TradingCardController {
                 Binder binder = collectorController.returnBinderChoice();
                 if (binder != null){
                     BinderView binderView = new BinderView(sc);
-                    BinderController binderController = new BinderController(collector, binder, binderView);
+                    BinderController binderController = new BinderController(collector, binder, binderView, cardController);
 
                     binderController.manageBinder();
                 } else {
