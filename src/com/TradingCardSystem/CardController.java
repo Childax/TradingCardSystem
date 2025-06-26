@@ -15,7 +15,6 @@ public class CardController {
         Card newCard = new Card();
 
         newCard.setName(name);
-        view.displayRarities();
         Rarity rarity = view.promptRarity();
 
         Variant variant = Variant.NONE;
