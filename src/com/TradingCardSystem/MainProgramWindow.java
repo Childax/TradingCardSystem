@@ -7,7 +7,7 @@ public class MainProgramWindow extends JFrame {
 
     private JPanel mainPanel;
     private CardLayout cardLayout;
-    private DisplayCollectionPanel displayCollectionPanel;
+    private ViewCollectionPanel viewCollectionPanel;
 
     public MainProgramWindow(Collector collector, CollectorController controller,
                              CollectorView view, CardController cardController, CollectorController collectorController) {
@@ -26,8 +26,8 @@ public class MainProgramWindow extends JFrame {
         // Other Panels
         mainPanel.add(new AddCardPanel(this, collector, collectorController), "addCard");
 
-        displayCollectionPanel = new DisplayCollectionPanel(this, collector);
-        mainPanel.add(displayCollectionPanel, "displayCollection");
+        viewCollectionPanel = new ViewCollectionPanel(this, collector);
+        mainPanel.add(viewCollectionPanel, "viewCollection");
 
 
 
@@ -38,8 +38,8 @@ public class MainProgramWindow extends JFrame {
     }
 
     public void showPanel(String panelName) {
-        if (panelName.equals("displayCollection")) {
-            displayCollectionPanel.refresh();
+        if (panelName.equals("viewCollection")) {
+            viewCollectionPanel.refresh();
         }
         cardLayout.show(mainPanel, panelName);
     }

@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class DisplayCollectionPanel extends JPanel {
+public class ViewCollectionPanel extends JPanel {
     private MainProgramWindow mainWindow;
     private Collector collector;
     private JPanel cardGridPanel;
 
-    public DisplayCollectionPanel(MainProgramWindow mainWindow, Collector collector) {
+    public ViewCollectionPanel(MainProgramWindow mainWindow, Collector collector) {
         this.collector = collector;
         this.mainWindow = mainWindow;
 

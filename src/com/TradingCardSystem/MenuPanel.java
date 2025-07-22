@@ -14,8 +14,7 @@ public class MenuPanel extends JPanel {
         JButton btnAddCard = new JButton("Add Card to Collection");
         JButton btnCreateBinder = new JButton("Create Binder");
         JButton btnCreateDeck = new JButton("Create Deck");
-        JButton btnDisplayCollection = new JButton("Display Collection");
-        JButton btnCardDetails = new JButton("Show Card Details");
+        JButton btnViewCollection = new JButton("View Collection");
         JButton btnRemoveCard = new JButton("Remove Card from Collection");
         JButton btnManageBinder = new JButton("Manage Binder");
         JButton btnManageDeck = new JButton("Manage Deck");
@@ -33,11 +32,9 @@ public class MenuPanel extends JPanel {
         // Create Deck
         btnCreateDeck.addActionListener(e -> collectorController.createDeck(collector));
         // Display Collection
-        btnDisplayCollection.addActionListener(e -> {
-            mainWindow.showPanel("displayCollection");
+        btnViewCollection.addActionListener(e -> {
+            mainWindow.showPanel("viewCollection");
         });
-        // Show Card Details
-        btnCardDetails.addActionListener(e -> collectorView.showCardDetails(collector));
         // Remove Card
         btnRemoveCard.addActionListener(e -> collectorController.removeCardFromCollection(collector));
 
@@ -62,8 +59,7 @@ public class MenuPanel extends JPanel {
         add(btnAddCard);
         add(btnCreateBinder);
         add(btnCreateDeck);
-        add(btnDisplayCollection);
-        add(btnCardDetails);
+        add(btnViewCollection);
         add(btnRemoveCard);
         add(btnManageBinder);
         add(btnManageDeck);
