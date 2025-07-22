@@ -2,8 +2,6 @@ package com.TradingCardSystem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class DisplayCollectionPanel extends JPanel {
@@ -22,16 +20,10 @@ public class DisplayCollectionPanel extends JPanel {
         add(title, BorderLayout.NORTH);
 
         cardGridPanel = new JPanel();
-        cardGridPanel.setLayout(new GridLayout(0, 4, 10, 10)); // 0 rows = dynamic, 4 columns
+        cardGridPanel.setLayout(new GridLayout(0, 4, 10, 10));
+        cardGridPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        List<Card> collection = collector.getCards();
-        if (collection.isEmpty()) {
-            cardGridPanel.add(new JLabel("You have no cards in your collection."));
-        } else {
-            for (Card card : collection) {
-                cardGridPanel.add(createCardPanel(card));
-            }
-        }
+        populateCardGrid();
 
         JScrollPane scrollPane = new JScrollPane(cardGridPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -46,32 +38,37 @@ public class DisplayCollectionPanel extends JPanel {
 
     private JPanel createCardPanel(Card card) {
         JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-        panel.setPreferredSize(new Dimension(150, 100));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setPreferredSize(new Dimension(150, 120));
+        panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-        JLabel nameLabel = new JLabel("<html><b>" + card.getName() + "</b></html>", SwingConstants.CENTER);
-        JTextArea shortInfo = new JTextArea(card.getName());
-        shortInfo.setLineWrap(true);
-        shortInfo.setWrapStyleWord(true);
-        shortInfo.setEditable(false);
-        shortInfo.setBackground(null);
-        shortInfo.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        JLabel nameLabel = new JLabel(card.getName(), SwingConstants.CENTER);
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel countLabel = new JLabel("Count: " + card.getCount());
+        countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        countLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
 
         JButton detailsBtn = new JButton("Details");
+        detailsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsBtn.addActionListener(e -> {
             JOptionPane.showMessageDialog(this,
                     card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE);
         });
 
-        panel.add(nameLabel, BorderLayout.NORTH);
-        panel.add(shortInfo, BorderLayout.CENTER);
-        panel.add(detailsBtn, BorderLayout.SOUTH);
+        panel.add(Box.createVerticalStrut(10));
+        panel.add(nameLabel);
+        panel.add(Box.createVerticalStrut(5));
+        panel.add(countLabel);
+        panel.add(Box.createVerticalGlue());
+        panel.add(detailsBtn);
+        panel.add(Box.createVerticalStrut(10));
 
         return panel;
     }
 
-    public void refresh() {
+    private void populateCardGrid() {
         cardGridPanel.removeAll();
 
         List<Card> cards = collector.getCards();
@@ -85,5 +82,9 @@ public class DisplayCollectionPanel extends JPanel {
 
         cardGridPanel.revalidate();
         cardGridPanel.repaint();
+    }
+
+    public void refresh() {
+        populateCardGrid();
     }
 }
