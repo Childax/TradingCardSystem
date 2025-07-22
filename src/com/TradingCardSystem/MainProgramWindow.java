@@ -32,6 +32,8 @@ public class MainProgramWindow extends JFrame {
         viewCollectionPanel = new ViewCollectionPanel(this, collector);
         mainPanel.add(viewCollectionPanel, "viewCollection");
 
+        mainPanel.add(new ManageBindersPanel(this, collector), "manageBinders");
+
         this.add(mainPanel);
         this.setVisible(true);
 
@@ -59,4 +61,10 @@ public class MainProgramWindow extends JFrame {
         mainPanel.add(deckMenu, "deckMenu");
         showPanel("deckMenu");
     }
+
+    public void showManageBindersPanel(Collector collector) {
+        mainPanel.add(new ManageBindersPanel(this, collector), "manageBinders");
+        cardLayout.show(mainPanel, "manageBinders");
+    }
+
 }

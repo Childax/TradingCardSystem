@@ -56,15 +56,8 @@ public class MenuPanel extends JPanel {
         // Display Collection
         btnViewCollection.addActionListener(e -> mainWindow.showPanel("viewCollection"));
 
-//        btnManageBinder.addActionListener(e -> {
-//            Binder binder = collectorController.returnBinderChoice();
-//            if (binder != null) {
-//                BinderView binderView = new BinderView(new Scanner(System.in)); // temporary
-//                BinderController binderController = new BinderController(collector, binder, binderView, cardController);
-//                binderController.manageBinder();
-//            }
-//        });
-//
+        btnManageBinder.addActionListener(e -> mainWindow.showManageBindersPanel(collector));
+
 //        btnManageDeck.addActionListener(e -> {
 //            Deck deck = collectorController.returnDeckChoice();
 //            if (deck != null) {
