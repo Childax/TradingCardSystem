@@ -50,6 +50,21 @@ public class ViewCollectionPanel extends JPanel {
         countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         countLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
 
+        JButton removeBtn = new JButton("Remove");
+        removeBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        removeBtn.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "Are you sure you want to remove this card?",
+                    "Confirm Remove",
+                    JOptionPane.YES_NO_OPTION
+            );
+            if (confirm == JOptionPane.YES_OPTION) {
+                collector.removeCardObject(card.getName());
+                refresh(); // refresh collection view
+            }
+        });
+
         JButton detailsBtn = new JButton("Details");
         detailsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         detailsBtn.addActionListener(e -> {
@@ -57,13 +72,17 @@ public class ViewCollectionPanel extends JPanel {
                     card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE);
         });
 
+
         panel.add(Box.createVerticalStrut(10));
         panel.add(nameLabel);
         panel.add(Box.createVerticalStrut(5));
         panel.add(countLabel);
         panel.add(Box.createVerticalGlue());
+        panel.add(removeBtn);
+        panel.add(Box.createVerticalStrut(5));
         panel.add(detailsBtn);
         panel.add(Box.createVerticalStrut(10));
+
 
         return panel;
     }
