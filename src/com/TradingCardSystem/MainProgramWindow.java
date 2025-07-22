@@ -25,9 +25,11 @@ public class MainProgramWindow extends JFrame {
 
         // Other Panels
         mainPanel.add(new AddCardPanel(this, collector, collectorController), "addCard");
+        mainPanel.add(new CreateBinderPanel(this, collector), "createBinder");
 
         viewCollectionPanel = new ViewCollectionPanel(this, collector);
         mainPanel.add(viewCollectionPanel, "viewCollection");
+
 
 
 

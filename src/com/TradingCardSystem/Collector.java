@@ -192,6 +192,15 @@ public class Collector {
     }
 
     /**
+     * Adds a new binder to the collector with the specified binder object
+     *
+     * @param binder the binder to be added
+     */
+    public void addBinder(Binder binder) {
+        binders.add(binder);
+    }
+
+    /**
      * Deletes a binder by name. Returns cards in the binder back to the collection.
      *
      * @param name the name of the binder

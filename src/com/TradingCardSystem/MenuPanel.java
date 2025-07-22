@@ -27,7 +27,7 @@ public class MenuPanel extends JPanel {
         });
 
         // Create Binder
-        btnCreateBinder.addActionListener(e -> collectorController.createBinder(collector));
+        btnCreateBinder.addActionListener(e -> mainWindow.showPanel("createBinder"));
         // Create Deck
         btnCreateDeck.addActionListener(e -> collectorController.createDeck(collector));
         // Display Collection
