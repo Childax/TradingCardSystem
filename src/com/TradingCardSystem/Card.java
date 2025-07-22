@@ -242,6 +242,7 @@ public class Card {
         sb.append("Rarity: ").append(rarity).append("\n");
         sb.append("Variant: ").append(variant).append("\n");
         sb.append("Value: ").append(value).append("\n");
+        sb.append("Count: ").append(count).append("\n");
         return sb.toString();
     }
 }

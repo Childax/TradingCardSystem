@@ -84,6 +84,7 @@ public class Collector {
             }
         }
         cards.add(newCard);
+        newCard.incrementCount();
     }
 
     /**
