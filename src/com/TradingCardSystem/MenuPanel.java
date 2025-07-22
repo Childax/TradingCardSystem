@@ -18,6 +18,19 @@ public class MenuPanel extends JPanel {
         JButton btnManageBinder = new JButton("Manage Binders");
         JButton btnManageDeck = new JButton("Manage Decks");
 
+        // Check if collection, binders, or decks are empty
+        if (collector.getCards().isEmpty()) {
+            btnViewCollection.setEnabled(false);
+        }
+
+        if (collector.getBinders().isEmpty()) {
+            btnManageBinder.setEnabled(false);
+        }
+
+        if (collector.getDecks().isEmpty()) {
+            btnManageDeck.setEnabled(false);
+        }
+
         // Button actions
 
         // Add Card

@@ -30,6 +30,8 @@ public class BinderMenuPanel extends JPanel {
 
         // Add button listeners here (e.g., mainWindow.showPanel("binderView"), etc.)
 
+        backBtn.addActionListener(e -> mainWindow.showPanel("menu"));
+
         for (JButton btn : new JButton[]{viewBtn, addBtn, removeBtn, tradeBtn, renameBtn, backBtn}) {
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);
             btn.setMaximumSize(new Dimension(200, 40));
