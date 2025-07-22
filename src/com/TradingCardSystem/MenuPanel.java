@@ -20,35 +20,44 @@ public class MenuPanel extends JPanel {
         JButton btnManageBinder = new JButton("Manage Binder");
         JButton btnManageDeck = new JButton("Manage Deck");
 
-        // Button actions (still use controller)
+        // Button actions
+
+        // Add Card
         btnAddCard.addActionListener(e -> {
             // Show add card screen, or reuse existing logic
             mainWindow.showPanel("addCard");
         });
 
+        // Create Binder
         btnCreateBinder.addActionListener(e -> collectorController.createBinder(collector));
+        // Create Deck
         btnCreateDeck.addActionListener(e -> collectorController.createDeck(collector));
-        btnDisplayCollection.addActionListener(e -> collectorView.displayCollection(collector));
+        // Display Collection
+        btnDisplayCollection.addActionListener(e -> {
+            mainWindow.showPanel("displayCollection");
+        });
+        // Show Card Details
         btnCardDetails.addActionListener(e -> collectorView.showCardDetails(collector));
+        // Remove Card
         btnRemoveCard.addActionListener(e -> collectorController.removeCardFromCollection(collector));
 
-        btnManageBinder.addActionListener(e -> {
-            Binder binder = collectorController.returnBinderChoice();
-            if (binder != null) {
-                BinderView binderView = new BinderView(new Scanner(System.in)); // temporary
-                BinderController binderController = new BinderController(collector, binder, binderView, cardController);
-                binderController.manageBinder();
-            }
-        });
-
-        btnManageDeck.addActionListener(e -> {
-            Deck deck = collectorController.returnDeckChoice();
-            if (deck != null) {
-                DeckView deckView = new DeckView(new Scanner(System.in)); // temporary
-                DeckController deckController = new DeckController(collector, deckView, deck);
-                deckController.manageDeck();
-            }
-        });
+//        btnManageBinder.addActionListener(e -> {
+//            Binder binder = collectorController.returnBinderChoice();
+//            if (binder != null) {
+//                BinderView binderView = new BinderView(new Scanner(System.in)); // temporary
+//                BinderController binderController = new BinderController(collector, binder, binderView, cardController);
+//                binderController.manageBinder();
+//            }
+//        });
+//
+//        btnManageDeck.addActionListener(e -> {
+//            Deck deck = collectorController.returnDeckChoice();
+//            if (deck != null) {
+//                DeckView deckView = new DeckView(new Scanner(System.in)); // temporary
+//                DeckController deckController = new DeckController(collector, deckView, deck);
+//                deckController.manageDeck();
+//            }
+//        });
 
         add(btnAddCard);
         add(btnCreateBinder);

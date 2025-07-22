@@ -235,4 +235,13 @@ public class Card {
             }
         }
     }
+
+    public String getDetailedInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(name).append("\n");
+        sb.append("Rarity: ").append(rarity).append("\n");
+        sb.append("Variant: ").append(variant).append("\n");
+        sb.append("Value: ").append(value).append("\n");
+        return sb.toString();
+    }
 }

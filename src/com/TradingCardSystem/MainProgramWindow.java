@@ -2,12 +2,12 @@ package com.TradingCardSystem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Scanner;
 
 public class MainProgramWindow extends JFrame {
 
     private JPanel mainPanel;
     private CardLayout cardLayout;
+    private DisplayCollectionPanel displayCollectionPanel;
 
     public MainProgramWindow(Collector collector, CollectorController controller,
                              CollectorView view, CardController cardController, CollectorController collectorController) {
@@ -23,8 +23,13 @@ public class MainProgramWindow extends JFrame {
         MenuPanel menu = new MenuPanel(this, collector, controller, view, cardController);
         mainPanel.add(menu, "menu");
 
-        // Add more panels later (e.g., addCardPanel, deckPanel, etc.)
+        // Other Panels
         mainPanel.add(new AddCardPanel(this, collector, collectorController), "addCard");
+
+        displayCollectionPanel = new DisplayCollectionPanel(this, collector);
+        mainPanel.add(displayCollectionPanel, "displayCollection");
+
+
 
         this.add(mainPanel);
         this.setVisible(true);
@@ -33,6 +38,9 @@ public class MainProgramWindow extends JFrame {
     }
 
     public void showPanel(String panelName) {
+        if (panelName.equals("displayCollection")) {
+            displayCollectionPanel.refresh();
+        }
         cardLayout.show(mainPanel, panelName);
     }
 }
