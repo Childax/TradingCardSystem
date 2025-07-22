@@ -21,32 +21,33 @@ public class MenuPanel extends JPanel {
         // Check if collection, binders, or decks are empty
         if (collector.getCards().isEmpty()) {
             btnViewCollection.setEnabled(false);
+        } else {
+            btnViewCollection.setEnabled(true);
         }
 
         if (collector.getBinders().isEmpty()) {
             btnManageBinder.setEnabled(false);
+        } else {
+            btnManageBinder.setEnabled(true);
         }
 
         if (collector.getDecks().isEmpty()) {
             btnManageDeck.setEnabled(false);
+        } else {
+            btnManageDeck.setEnabled(true);
         }
 
         // Button actions
 
         // Add Card
-        btnAddCard.addActionListener(e -> {
-            // Show add card screen, or reuse existing logic
-            mainWindow.showPanel("addCard");
-        });
+        btnAddCard.addActionListener(e -> mainWindow.showPanel("addCard"));
 
         // Create Binder
         btnCreateBinder.addActionListener(e -> mainWindow.showPanel("createBinder"));
         // Create Deck
-        btnCreateDeck.addActionListener(e -> collectorController.createDeck(collector));
+        btnCreateDeck.addActionListener(e -> mainWindow.showPanel("createDeck"));
         // Display Collection
-        btnViewCollection.addActionListener(e -> {
-            mainWindow.showPanel("viewCollection");
-        });
+        btnViewCollection.addActionListener(e -> mainWindow.showPanel("viewCollection"));
 
 //        btnManageBinder.addActionListener(e -> {
 //            Binder binder = collectorController.returnBinderChoice();

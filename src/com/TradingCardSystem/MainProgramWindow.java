@@ -26,6 +26,7 @@ public class MainProgramWindow extends JFrame {
         // Other Panels
         mainPanel.add(new AddCardPanel(this, collector, collectorController), "addCard");
         mainPanel.add(new CreateBinderPanel(this, collector), "createBinder");
+        mainPanel.add(new CreateDeckPanel(this, collector), "createDeck");
 
         viewCollectionPanel = new ViewCollectionPanel(this, collector);
         mainPanel.add(viewCollectionPanel, "viewCollection");
@@ -43,9 +44,15 @@ public class MainProgramWindow extends JFrame {
         cardLayout.show(mainPanel, panelName);
     }
 
-    public void showBinderMenu(Binder binder) {
-        BinderMenuPanel binderMenu = new BinderMenuPanel(this, binder);
+    public void showBinderMenu(Collector collector, Binder binder) {
+        BinderMenuPanel binderMenu = new BinderMenuPanel(this, binder, collector);
         mainPanel.add(binderMenu, "binderMenu");
         showPanel("binderMenu");
+    }
+
+    public void showDeckMenu(Collector collector, Deck deck) {
+        DeckMenuPanel deckMenu = new DeckMenuPanel(this, deck, collector);
+        mainPanel.add(deckMenu, "deckMenu");
+        showPanel("deckMenu");
     }
 }

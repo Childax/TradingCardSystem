@@ -263,6 +263,8 @@ public class Collector {
         decks.add(new Deck(name));
     }
 
+    public void addDeck(Deck deck) { decks.add(deck); }
+
     /**
      * Deletes a deck by name and returns its cards back to the collection.
      *
