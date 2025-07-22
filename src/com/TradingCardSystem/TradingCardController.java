@@ -100,7 +100,7 @@ public class TradingCardController {
     private void handleChoice(int choice) {
         switch (choice) {
             case 1:
-                collectorController.addCardToCollection(collector);
+//                collectorController.addCardToCollection(collector);
                 break;
 
             case 2:

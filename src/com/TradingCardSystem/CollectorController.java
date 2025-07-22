@@ -27,31 +27,35 @@ public class CollectorController {
      * @param collector the collector whose collection is being modified
      * @return true if the card was added or incremented; false otherwise
      */
-    public boolean addCardToCollection(Collector collector) {
-        Card card = collectorView.promptAddCard(collector);
-        if (card == null) {
-            return false;
-        }
+    public boolean addCardToCollection(Collector collector, String cardName, Rarity rarity, Variant variant, double value) {
 
-        if (!collector.hasCardWithName(card.getName())) {
-            if (collectorView.promptAddCardChoice().equalsIgnoreCase("Y")) {
-                collectorView.displayAddCardConfirmation(card);
-                collector.addCard(card);
-                return true;
-            } else {
-                collectorView.displayAddCardDenial();
-                return false;
-            }
-        } else {
-            if (collectorView.promptDuplicateCard().equalsIgnoreCase("Y")) {
-                collector.getCardWithName(card.getName()).incrementCount();
-                collectorView.displayAddCardConfirmation(card);
-                return true;
-            } else {
-                collectorView.displayAddCardDenial();
-                return false;
-            }
-        }
+        collector.addCard(new Card(cardName, rarity, variant, value));
+        return true;
+
+//        Card card = collectorView.promptAddCard(collector);
+//        if (card == null) {
+//            return false;
+//        }
+//
+//        if (!collector.hasCardWithName(card.getName())) {
+//            if (collectorView.promptAddCardChoice().equalsIgnoreCase("Y")) {
+//                collectorView.displayAddCardConfirmation(card);
+//                collector.addCard(card);
+//                return true;
+//            } else {
+//                collectorView.displayAddCardDenial();
+//                return false;
+//            }
+//        } else {
+//            if (collectorView.promptDuplicateCard().equalsIgnoreCase("Y")) {
+//                collector.getCardWithName(card.getName()).incrementCount();
+//                collectorView.displayAddCardConfirmation(card);
+//                return true;
+//            } else {
+//                collectorView.displayAddCardDenial();
+//                return false;
+//            }
+//        }
     }
 
     /**
