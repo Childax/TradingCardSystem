@@ -27,6 +27,7 @@ public class TradingCardApp {
         CollectorController collectorController = new CollectorController(collector, collectorView);
 
         TradingCardView view = new TradingCardView(sc);
+
         TradingCardController controller = new TradingCardController(
                 collector,
                 view,
@@ -37,6 +38,7 @@ public class TradingCardApp {
                 sc
         );
 
+        new TradingCardWindow(collector, collectorController, collectorView, cardController);
         controller.start();
     }
 }

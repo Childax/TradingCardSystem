@@ -72,4 +72,5 @@ public class TradingCardView {
     public void showExitMessage() {
         System.out.println("See you next time.");
     }
+
 }

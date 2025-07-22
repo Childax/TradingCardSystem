@@ -16,6 +16,7 @@ public class TradingCardController {
     private CollectorController collectorController;
     private CardView cardView;
     private CardController cardController;
+    private CardWindow cardWindow;
     private Scanner sc;
 
     /**
