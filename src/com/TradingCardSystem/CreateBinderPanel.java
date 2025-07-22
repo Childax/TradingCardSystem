@@ -43,6 +43,7 @@ public class CreateBinderPanel extends JPanel {
             collector.addBinder(new Binder(binderName));
             JOptionPane.showMessageDialog(this, "Binder '" + binderName + "' created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             nameField.setText("");
+            mainWindow.showBinderMenu(collector.getBinderByName(binderName));
         });
 
         centerPanel.add(nameLabel);

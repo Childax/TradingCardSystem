@@ -30,9 +30,6 @@ public class MainProgramWindow extends JFrame {
         viewCollectionPanel = new ViewCollectionPanel(this, collector);
         mainPanel.add(viewCollectionPanel, "viewCollection");
 
-
-
-
         this.add(mainPanel);
         this.setVisible(true);
 
@@ -44,5 +41,11 @@ public class MainProgramWindow extends JFrame {
             viewCollectionPanel.refresh();
         }
         cardLayout.show(mainPanel, panelName);
+    }
+
+    public void showBinderMenu(Binder binder) {
+        BinderMenuPanel binderMenu = new BinderMenuPanel(this, binder);
+        mainPanel.add(binderMenu, "binderMenu");
+        showPanel("binderMenu");
     }
 }
