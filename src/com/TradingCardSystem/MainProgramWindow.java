@@ -8,6 +8,7 @@ public class MainProgramWindow extends JFrame {
     private JPanel mainPanel;
     private CardLayout cardLayout;
     private ViewCollectionPanel viewCollectionPanel;
+    private MenuPanel menu;
 
     public MainProgramWindow(Collector collector, CollectorController controller,
                              CollectorView view, CardController cardController, CollectorController collectorController) {
@@ -20,7 +21,7 @@ public class MainProgramWindow extends JFrame {
         mainPanel = new JPanel(cardLayout);
 
         // Add the menu screen
-        MenuPanel menu = new MenuPanel(this, collector, controller, view, cardController);
+        menu = new MenuPanel(this, collector, controller, view, cardController);
         mainPanel.add(menu, "menu");
 
         // Other Panels
@@ -40,6 +41,9 @@ public class MainProgramWindow extends JFrame {
     public void showPanel(String panelName) {
         if (panelName.equals("viewCollection")) {
             viewCollectionPanel.refresh();
+        }
+        if (panelName.equals("menu")) {
+            menu.refresh();
         }
         cardLayout.show(mainPanel, panelName);
     }

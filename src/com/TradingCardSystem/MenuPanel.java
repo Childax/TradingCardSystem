@@ -5,18 +5,25 @@ import java.awt.*;
 import java.util.Scanner;
 
 public class MenuPanel extends JPanel {
+
+    private Collector collector;
+    private JButton btnViewCollection;
+    private JButton btnManageBinder;
+    private JButton btnManageDeck;
+
     public MenuPanel(MainProgramWindow mainWindow, Collector collector,
                      CollectorController collectorController,
                      CollectorView collectorView, CardController cardController) {
 
+        this.collector = collector;
         setLayout(new GridLayout(10, 1, 10, 10));
 
         JButton btnAddCard = new JButton("Add Card to Collection");
         JButton btnCreateBinder = new JButton("Create Binder");
         JButton btnCreateDeck = new JButton("Create Deck");
-        JButton btnViewCollection = new JButton("View Collection");
-        JButton btnManageBinder = new JButton("Manage Binders");
-        JButton btnManageDeck = new JButton("Manage Decks");
+        btnViewCollection = new JButton("View Collection");
+        btnManageBinder = new JButton("Manage Binders");
+        btnManageDeck = new JButton("Manage Decks");
 
         // Check if collection, binders, or decks are empty
         if (collector.getCards().isEmpty()) {
@@ -73,5 +80,11 @@ public class MenuPanel extends JPanel {
         add(btnViewCollection);
         add(btnManageBinder);
         add(btnManageDeck);
+    }
+
+    public void refresh() {
+        btnViewCollection.setEnabled(!collector.getCards().isEmpty());
+        btnManageBinder.setEnabled(!collector.getBinders().isEmpty());
+        btnManageDeck.setEnabled(!collector.getDecks().isEmpty());
     }
 }
