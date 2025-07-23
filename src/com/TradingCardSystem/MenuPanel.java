@@ -58,6 +58,7 @@ public class MenuPanel extends JPanel {
 
         btnManageBinder.addActionListener(e -> mainWindow.showManageBindersPanel(collector));
 
+        btnManageDeck.addActionListener((e -> mainWindow.showManageDecksPanel(collector)));
 //        btnManageDeck.addActionListener(e -> {
 //            Deck deck = collectorController.returnDeckChoice();
 //            if (deck != null) {

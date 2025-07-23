@@ -67,4 +67,9 @@ public class MainProgramWindow extends JFrame {
         cardLayout.show(mainPanel, "manageBinders");
     }
 
+    public void showManageDecksPanel(Collector collector) {
+        mainPanel.add(new ManageDecksPanel(this, collector), "manageDecks");
+        cardLayout.show(mainPanel, "manageDecks");
+    }
+
 }
