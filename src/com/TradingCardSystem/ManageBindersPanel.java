@@ -2,6 +2,7 @@ package com.TradingCardSystem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ManageBindersPanel extends JPanel {
 
@@ -23,24 +24,34 @@ public class ManageBindersPanel extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Populate binders
-        for (Binder binder : collector.getBinders()) {
-            JPanel binderPanel = new JPanel(new BorderLayout(10, 10));
-            binderPanel.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)
-            ));
+        ArrayList<Binder> binders = collector.getBinders();
+        if (binders.isEmpty()) {
+            // Show message if no binders exist
+            JLabel emptyLabel = new JLabel("No binders available.", SwingConstants.CENTER);
+            emptyLabel.setFont(new Font("SansSerif", Font.ITALIC, 16));
+            emptyLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            binderListPanel.add(Box.createVerticalStrut(20));
+            binderListPanel.add(emptyLabel);
+        } else {
+            // Populate binders
+            for (Binder binder : binders) {
+                JPanel binderPanel = new JPanel(new BorderLayout(10, 10));
+                binderPanel.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                ));
 
-            JLabel binderLabel = new JLabel(binder.getName());
-            binderLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
-            binderPanel.add(binderLabel, BorderLayout.CENTER);
+                JLabel binderLabel = new JLabel(binder.getName());
+                binderLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
+                binderPanel.add(binderLabel, BorderLayout.CENTER);
 
-            JButton manageBtn = new JButton("Manage");
-            manageBtn.addActionListener(e -> mainWindow.showBinderMenu(collector, binder));
-            binderPanel.add(manageBtn, BorderLayout.EAST);
+                JButton manageBtn = new JButton("Manage");
+                manageBtn.addActionListener(e -> mainWindow.showBinderMenu(collector, binder));
+                binderPanel.add(manageBtn, BorderLayout.EAST);
 
-            binderListPanel.add(Box.createVerticalStrut(10));
-            binderListPanel.add(binderPanel);
+                binderListPanel.add(Box.createVerticalStrut(10));
+                binderListPanel.add(binderPanel);
+            }
         }
 
         // Back button

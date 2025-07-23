@@ -38,7 +38,7 @@ public class BinderMenuPanel extends JPanel {
             if (confirm == JOptionPane.YES_OPTION) {
                 collector.deleteBinder(activeBinder.getName());
                 JOptionPane.showMessageDialog(this, "Binder deleted successfully.");
-                mainWindow.showPanel("menu");
+                mainWindow.showManageBindersPanel(collector);
             }
         });
 
