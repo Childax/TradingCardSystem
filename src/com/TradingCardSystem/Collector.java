@@ -83,7 +83,6 @@ public class Collector {
                 return;
             }
         }
-        newCard.adjustValueByVariant(); // update card value based on variant
         cards.add(newCard);
         newCard.incrementCount();
     }

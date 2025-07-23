@@ -24,6 +24,7 @@ public class Card {
         this.rarity = rarity;
         this.variant = variant;
         this.value = value;
+        this.adjustValueByVariant();
         this.count = 0;
     }
 
