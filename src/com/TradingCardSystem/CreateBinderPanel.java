@@ -7,7 +7,7 @@ public class CreateBinderPanel extends AbstractCreatePanel {
     private MainProgramWindow mainWindow;
 
     public CreateBinderPanel(MainProgramWindow mainWindow, Collector collector) {
-        super("Create New Binder", mainWindow);
+        super("Create New Binder", mainWindow, collector);
         this.collector = collector;
         this.mainWindow = mainWindow;
         createButton.setText("Create Binder");

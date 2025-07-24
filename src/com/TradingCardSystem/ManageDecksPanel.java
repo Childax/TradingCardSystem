@@ -55,7 +55,7 @@ public class ManageDecksPanel extends JPanel {
         // Back button
         JButton backBtn = new JButton("Back to Main Menu");
         backBtn.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        backBtn.addActionListener(e -> mainWindow.showPanel("menu"));
+        backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
         JPanel backBtnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         backBtnPanel.add(backBtn);
         add(backBtnPanel, BorderLayout.SOUTH);

@@ -11,9 +11,7 @@ public class MenuPanel extends JPanel {
     private JButton btnManageBinder;
     private JButton btnManageDeck;
 
-    public MenuPanel(MainProgramWindow mainWindow, Collector collector,
-                     CollectorController collectorController,
-                     CollectorView collectorView, CardController cardController) {
+    public MenuPanel(MainProgramWindow mainWindow, Collector collector) {
 
         this.collector = collector;
         setLayout(new GridLayout(10, 1, 10, 10));
@@ -47,26 +45,17 @@ public class MenuPanel extends JPanel {
         // Button actions
 
         // Add Card
-        btnAddCard.addActionListener(e -> mainWindow.showPanel("addCard"));
-
+        btnAddCard.addActionListener(e -> mainWindow.showCustomPanel(new AddCardPanel(mainWindow, collector)));
         // Create Binder
-        btnCreateBinder.addActionListener(e -> mainWindow.showPanel("createBinder"));
+        btnCreateBinder.addActionListener(e -> mainWindow.showCustomPanel(new CreateBinderPanel(mainWindow, collector)));
         // Create Deck
-        btnCreateDeck.addActionListener(e -> mainWindow.showPanel("createDeck"));
+        btnCreateDeck.addActionListener(e -> mainWindow.showCustomPanel(new CreateDeckPanel(mainWindow, collector)));
         // Display Collection
-        btnViewCollection.addActionListener(e -> mainWindow.showPanel("viewCollection"));
+        btnViewCollection.addActionListener(e -> mainWindow.showCustomPanel(new ViewCollectionPanel(mainWindow, collector)));
 
         btnManageBinder.addActionListener(e -> mainWindow.showManageBindersPanel(collector));
 
         btnManageDeck.addActionListener((e -> mainWindow.showManageDecksPanel(collector)));
-//        btnManageDeck.addActionListener(e -> {
-//            Deck deck = collectorController.returnDeckChoice();
-//            if (deck != null) {
-//                DeckView deckView = new DeckView(new Scanner(System.in)); // temporary
-//                DeckController deckController = new DeckController(collector, deckView, deck);
-//                deckController.manageDeck();
-//            }
-//        });
 
         add(btnAddCard);
         add(btnCreateBinder);

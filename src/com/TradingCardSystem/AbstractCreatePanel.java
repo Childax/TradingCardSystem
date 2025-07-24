@@ -9,7 +9,7 @@ public abstract class AbstractCreatePanel extends JPanel {
     protected JButton cancelButton;
     protected JLabel titleLabel;
 
-    public AbstractCreatePanel(String titleText, MainProgramWindow mainWindow) {
+    public AbstractCreatePanel(String titleText, MainProgramWindow mainWindow, Collector collector) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(40, 100, 40, 100));
 
@@ -31,7 +31,7 @@ public abstract class AbstractCreatePanel extends JPanel {
         cancelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         cancelButton.addActionListener(e -> {
             nameField.setText("");
-            mainWindow.showPanel("menu");
+            mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector));
         });
 
         add(titleLabel);

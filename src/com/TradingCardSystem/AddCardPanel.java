@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddCardPanel extends JPanel {
-    public AddCardPanel(MainProgramWindow mainWindow, Collector collector, CollectorController collectorController) {
+    public AddCardPanel(MainProgramWindow mainWindow, Collector collector) {
         setLayout(new BorderLayout(10, 10));
 
         JLabel title = new JLabel("Add Card to Collection", SwingConstants.CENTER);
@@ -59,7 +59,7 @@ public class AddCardPanel extends JPanel {
                 Rarity rarity = Rarity.valueOf(rarityInput.toUpperCase());
                 Variant variant = Variant.valueOf(variantInput.toUpperCase());
                 double value = Double.parseDouble(valueInput);
-                collectorController.addCardToCollection(collector, nameInput, rarity, variant, value);
+                collector.addCard(new Card(nameInput, rarity, variant, value));
                 JOptionPane.showMessageDialog(this, "Card added successfully!");
 
                 nameField.setText("");
@@ -75,7 +75,7 @@ public class AddCardPanel extends JPanel {
         });
 
         // Action: Back to menu
-        backBtn.addActionListener(e -> mainWindow.showPanel("menu"));
+        backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
     }
 }
 

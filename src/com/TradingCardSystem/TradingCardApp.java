@@ -38,7 +38,7 @@ public class TradingCardApp {
                 sc
         );
 
-        new MainProgramWindow(collector, collectorController, collectorView, cardController, collectorController);
+        new MainProgramWindow(collector);
         controller.start();
     }
 }

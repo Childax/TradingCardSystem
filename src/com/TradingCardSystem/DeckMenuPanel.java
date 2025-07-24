@@ -23,9 +23,9 @@ public class DeckMenuPanel extends JPanel {
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));
 
+        JButton viewBtn = new JButton("View Cards in Deck");
         JButton addBtn = new JButton("Add Card to Deck");
         JButton removeBtn = new JButton("Remove Card from Deck");
-        JButton viewBtn = new JButton("View Cards in Deck");
         JButton deleteBtn = new JButton("Delete Deck");
         JButton backBtn = new JButton("Back to Main Menu");
 
@@ -38,13 +38,13 @@ public class DeckMenuPanel extends JPanel {
             if (confirm == JOptionPane.YES_OPTION) {
                 collector.deleteDeck(activeDeck.getName());
                 JOptionPane.showMessageDialog(this, "Deck deleted successfully.");
-                mainWindow.showPanel("menu");
+                mainWindow.showManageDecksPanel(collector);
             }
         });
 
-        backBtn.addActionListener(e -> mainWindow.showPanel("menu"));
+        backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
 
-        for (JButton btn : new JButton[]{addBtn, removeBtn, viewBtn, deleteBtn, backBtn}) {
+        for (JButton btn : new JButton[]{viewBtn, addBtn, removeBtn, deleteBtn, backBtn}) {
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);
             btn.setMaximumSize(new Dimension(200, 40));
             btn.setFont(new Font("SansSerif", Font.PLAIN, 14));

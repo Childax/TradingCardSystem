@@ -30,7 +30,9 @@ public class BinderMenuPanel extends JPanel {
         JButton deleteBtn = new JButton("Delete Binder");
         JButton backBtn = new JButton("Back to Main Menu");
 
-        // Add button listeners here (e.g., mainWindow.showPanel("binderView"), etc.)
+        // Add button listeners here
+        viewBtn.addActionListener(e -> mainWindow.showCustomPanel(new ViewBinderCardsPanel(mainWindow, collector, activeBinder)));
+
         deleteBtn.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this,
                     "Are you sure you want to delete the binder \"" + activeBinder.getName() + "\"?",
@@ -42,7 +44,7 @@ public class BinderMenuPanel extends JPanel {
             }
         });
 
-        backBtn.addActionListener(e -> mainWindow.showPanel("menu"));
+        backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
 
         for (JButton btn : new JButton[]{viewBtn, addBtn, removeBtn, tradeBtn, deleteBtn, backBtn}) {
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);

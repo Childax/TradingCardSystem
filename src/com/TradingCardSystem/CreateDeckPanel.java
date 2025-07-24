@@ -7,7 +7,7 @@ public class CreateDeckPanel extends AbstractCreatePanel {
     private MainProgramWindow mainWindow;
 
     public CreateDeckPanel(MainProgramWindow mainWindow, Collector collector) {
-        super("Create New Deck", mainWindow);
+        super("Create New Deck", mainWindow, collector);
         this.collector = collector;
         this.mainWindow = mainWindow;
         createButton.setText("Create Deck");

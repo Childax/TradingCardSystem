@@ -24,7 +24,9 @@ public class ManageBindersPanel extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         add(scrollPane, BorderLayout.CENTER);
 
+        // Fetch Binders
         ArrayList<Binder> binders = collector.getBinders();
+
         if (binders.isEmpty()) {
             // Show message if no binders exist
             JLabel emptyLabel = new JLabel("No binders available.", SwingConstants.CENTER);
@@ -57,7 +59,7 @@ public class ManageBindersPanel extends JPanel {
         // Back button
         JButton backBtn = new JButton("Back to Main Menu");
         backBtn.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        backBtn.addActionListener(e -> mainWindow.showPanel("menu"));
+        backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
         JPanel backBtnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         backBtnPanel.add(backBtn);
         add(backBtnPanel, BorderLayout.SOUTH);
