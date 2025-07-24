@@ -45,6 +45,6 @@ public abstract class AbstractCreatePanel extends JPanel {
         add(cancelButton);
     }
 
-    // Each subclass must define how to handle creation
+    // Define creation handling
     protected abstract void handleCreate();
 }
