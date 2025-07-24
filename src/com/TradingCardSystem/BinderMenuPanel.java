@@ -46,6 +46,8 @@ public class BinderMenuPanel extends JPanel {
             ));
         });
 
+        // Trade Card
+        tradeBtn.addActionListener(e -> mainWindow.showCustomPanel(new TradeCardPanel(mainWindow, collector, activeBinder)));
 
         // Delete Binder
         deleteBtn.addActionListener(e -> {
