@@ -13,12 +13,12 @@ public class ViewBinderCardsPanel extends JPanel {
 
         CardGridPanel cardGrid = new CardGridPanel(
                 binder.getCards(),
+                "Remove",
                 card -> {
                     int confirm = JOptionPane.showConfirmDialog(this, "Remove this card from binder?", "Confirm", JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
                         binder.removeCard(card);
                         collector.addCard(card);
-                        // Refresh panel manually
                         mainWindow.showBinderMenu(collector, binder);
                     }
                 },

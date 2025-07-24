@@ -30,9 +30,25 @@ public class BinderMenuPanel extends JPanel {
         JButton deleteBtn = new JButton("Delete Binder");
         JButton backBtn = new JButton("Back to Main Menu");
 
-        // Add button listeners here
-        viewBtn.addActionListener(e -> mainWindow.showCustomPanel(new ViewBinderCardsPanel(mainWindow, collector, activeBinder)));
+        // View Cards in Binder
+        viewBtn.addActionListener(e -> showBinderCards());
 
+        // Add Card to Binder
+        addBtn.addActionListener(e -> {
+            mainWindow.showCustomPanel(new AddCardFromCollectionPanel(
+                    mainWindow,
+                    collector,
+                    "Add Card to Binder: " + activeBinder.getName(),
+                    card -> {
+                        activeBinder.addCard(card);
+                        card.decrementCount();
+                    },
+                    () -> mainWindow.showBinderMenu(collector, activeBinder)
+            ));
+        });
+
+
+        // Delete Binder
         deleteBtn.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this,
                     "Are you sure you want to delete the binder \"" + activeBinder.getName() + "\"?",
@@ -44,6 +60,7 @@ public class BinderMenuPanel extends JPanel {
             }
         });
 
+        // Back to main menu
         backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
 
         for (JButton btn : new JButton[]{viewBtn, addBtn, removeBtn, tradeBtn, deleteBtn, backBtn}) {
@@ -55,5 +72,31 @@ public class BinderMenuPanel extends JPanel {
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+    }
+
+    private void showBinderCards() {
+        BinderCardGridPanel grid = new BinderCardGridPanel(
+                activeBinder.getCards(),
+                "Remove",
+                card -> {
+                    activeBinder.removeCard(card);
+                    card.incrementCount();
+                    showBinderCards(); // Refresh the view
+                }
+        );
+
+        JScrollPane scrollPane = new JScrollPane(grid);
+
+        JPanel wrapper = new JPanel(new BorderLayout());
+        wrapper.add(scrollPane, BorderLayout.CENTER);
+
+        JButton backBtn = new JButton("Back");
+        backBtn.addActionListener(e -> mainWindow.showBinderMenu(collector, activeBinder));
+
+        JPanel bottom = new JPanel();
+        bottom.add(backBtn);
+        wrapper.add(bottom, BorderLayout.SOUTH);
+
+        mainWindow.showCustomPanel(wrapper);
     }
 }

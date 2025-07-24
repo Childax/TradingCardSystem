@@ -36,6 +36,7 @@ public class ViewCollectionPanel extends JPanel {
 
         CardGridPanel cardGrid = new CardGridPanel(
                 collector.getCards(),
+                "Remove",
                 card -> {
                     int confirm = JOptionPane.showConfirmDialog(this, "Remove this card?", "Confirm", JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
