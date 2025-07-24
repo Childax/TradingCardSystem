@@ -25,7 +25,6 @@ public class BinderMenuPanel extends JPanel {
 
         JButton viewBtn = new JButton("View Cards in Binder");
         JButton addBtn = new JButton("Add Card to Binder");
-        JButton removeBtn = new JButton("Remove Card from Binder");
         JButton tradeBtn = new JButton("Trade Cards");
         JButton deleteBtn = new JButton("Delete Binder");
         JButton backBtn = new JButton("Back to Main Menu");
@@ -63,7 +62,7 @@ public class BinderMenuPanel extends JPanel {
         // Back to main menu
         backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
 
-        for (JButton btn : new JButton[]{viewBtn, addBtn, removeBtn, tradeBtn, deleteBtn, backBtn}) {
+        for (JButton btn : new JButton[]{viewBtn, addBtn, tradeBtn, deleteBtn, backBtn}) {
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);
             btn.setMaximumSize(new Dimension(200, 40));
             btn.setFont(new Font("SansSerif", Font.PLAIN, 14));
