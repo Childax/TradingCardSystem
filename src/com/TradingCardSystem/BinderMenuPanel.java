@@ -90,7 +90,7 @@ public class BinderMenuPanel extends JPanel {
                     JOptionPane.showMessageDialog(this, "Card removed!");
                     mainWindow.showBinderMenu(collector, activeBinder);
                 },
-                card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE)
+                card -> JOptionPane.showMessageDialog(this, card.getDetailedInfoWithoutCount(), "Card Details", JOptionPane.INFORMATION_MESSAGE)
         );
 
         JScrollPane scrollPane = new JScrollPane(grid);
