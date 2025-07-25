@@ -39,8 +39,13 @@ public class BinderMenuPanel extends JPanel {
                     collector,
                     "Add Card to Binder: " + activeBinder.getName(),
                     card -> {
+                        if (activeBinder.getCards().size() >= 20) {
+                            JOptionPane.showMessageDialog(this, "Binder is already full.");
+                            return;
+                        }
                         activeBinder.addCard(card);
                         card.decrementCount();
+                        JOptionPane.showMessageDialog(this, "Card added!");
                     },
                     () -> mainWindow.showBinderMenu(collector, activeBinder)
             ));

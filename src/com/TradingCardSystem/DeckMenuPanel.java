@@ -29,8 +29,33 @@ public class DeckMenuPanel extends JPanel {
         JButton backBtn = new JButton("Back to Main Menu");
 
         // TODO: Add button listeners for deck functionality
+        // View Deck Cards
+        viewBtn.addActionListener(e -> showDeckCards());
 
+        // Add Card to Deck
+        addBtn.addActionListener(e -> {
+            AddCardFromCollectionPanel addPanel = new AddCardFromCollectionPanel(
+                    mainWindow,
+                    collector,
+                    "Add a Card to Deck: " + activeDeck.getName(),
+                    card -> {
+                        if (activeDeck.getCards().size() >= 10) {
+                            JOptionPane.showMessageDialog(this, "Deck is already full.");
+                            return;
+                        } else if (activeDeck.getCardWithName(card.getName()) != null) {
+                            JOptionPane.showMessageDialog(this, "Deck already contains this card.");
+                            return;
+                        }
+                        activeDeck.addCard(card);
+                        JOptionPane.showMessageDialog(this, "Card added!");
+                    },
+                    () -> mainWindow.showCustomPanel(this)
+            );
 
+            mainWindow.showCustomPanel(addPanel);
+        });
+
+        // Delete Deck
         deleteBtn.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this,
                     "Are you sure you want to delete the deck \"" + activeDeck.getName() + "\"?",
@@ -53,5 +78,38 @@ public class DeckMenuPanel extends JPanel {
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+    }
+
+    private void showDeckCards() {
+        JPanel viewPanel = new JPanel(new BorderLayout());
+
+        JLabel title = new JLabel("Cards in Deck: " + activeDeck.getName(), SwingConstants.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 18));
+        viewPanel.add(title, BorderLayout.NORTH);
+
+        DeckCardGridPanel gridPanel = new DeckCardGridPanel(
+                activeDeck.getCards(),
+                cardToRemove -> {
+                    activeDeck.removeCard(cardToRemove);
+                    JOptionPane.showMessageDialog(this, "Card removed from deck.");
+                    showDeckCards(); // Refresh view
+                },
+                cardToInspect -> {
+                    JOptionPane.showMessageDialog(this, cardToInspect.getDetailedInfoWithoutCount(),
+                            "Card Details", JOptionPane.INFORMATION_MESSAGE);
+                }
+        );
+
+        JScrollPane scrollPane = new JScrollPane(gridPanel);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        viewPanel.add(scrollPane, BorderLayout.CENTER);
+
+        JButton backBtn = new JButton("Back");
+        backBtn.addActionListener(e -> mainWindow.showCustomPanel(this));
+        JPanel backPanel = new JPanel();
+        backPanel.add(backBtn);
+        viewPanel.add(backPanel, BorderLayout.SOUTH);
+
+        mainWindow.showCustomPanel(viewPanel);
     }
 }
