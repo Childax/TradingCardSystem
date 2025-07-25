@@ -64,6 +64,7 @@ public class Binder {
      */
     public void addCard(Card card) {
         this.binderCards.add(card);
+        this.sortCards();
     }
 
     /**
@@ -126,5 +127,9 @@ public class Binder {
             }
         }
         return null;
+    }
+
+    public void sortCards() {
+        this.binderCards.sort(Comparator.comparing(Card::getName, String.CASE_INSENSITIVE_ORDER));
     }
 }
