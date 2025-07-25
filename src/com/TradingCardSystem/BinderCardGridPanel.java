@@ -6,54 +6,55 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class BinderCardGridPanel extends JPanel {
-    public BinderCardGridPanel(
-            List<Card> cards,
-            String buttonLabel,
-            Consumer<Card> onCardClicked
-    ) {
-        setLayout(new GridLayout(0, 2, 10, 10)); // 2 cards per row
+    public BinderCardGridPanel(List<Card> cards, String buttonLabel, Consumer<Card> onCardClicked, Consumer<Card> onDetailsClicked) {
+        setLayout(new GridLayout(4, 5, 10, 10)); // 4 rows, 5 columns = 20 slots
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        if (cards == null || cards.isEmpty()) {
-            JLabel emptyLabel = new JLabel("No cards in this binder.", SwingConstants.CENTER);
-            emptyLabel.setFont(new Font("Arial", Font.ITALIC, 16));
-            add(emptyLabel, BorderLayout.CENTER);
-            return;
-        }
+        int totalSlots = 20;
 
-        JPanel gridPanel = new JPanel(new GridLayout(0, 2, 10, 10));
-
-        for (Card card : cards) {
+        for (int i = 0; i < totalSlots; i++) {
             JPanel cardPanel = new JPanel();
             cardPanel.setLayout(new BoxLayout(cardPanel, BoxLayout.Y_AXIS));
-            cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            cardPanel.setPreferredSize(new Dimension(200, 200));
+            cardPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
             cardPanel.setBackground(Color.WHITE);
-            cardPanel.setPreferredSize(new Dimension(200, 150));
 
-            JLabel nameLabel = new JLabel(card.getName());
-            JLabel rarityLabel = new JLabel("Rarity: " + card.getRarity());
-            JLabel variantLabel = new JLabel("Variant: " + card.getVariant());
-            JLabel valueLabel = new JLabel(String.format("Value: $%.2f", card.getValue()));
+            if (i < cards.size()) {
+                Card card = cards.get(i);
 
-            nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            rarityLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            variantLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            valueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                JLabel nameLabel = new JLabel(card.getName(), SwingConstants.CENTER);
+                nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
+                nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            JButton actionBtn = new JButton(buttonLabel);
-            actionBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-            actionBtn.addActionListener(e -> onCardClicked.accept(card));
+                JButton removeBtn = new JButton(buttonLabel);
+                JButton detailsBtn = new JButton("Details");
 
-            cardPanel.add(Box.createVerticalStrut(5));
-            cardPanel.add(nameLabel);
-            cardPanel.add(rarityLabel);
-            cardPanel.add(variantLabel);
-            cardPanel.add(valueLabel);
-            cardPanel.add(Box.createVerticalStrut(10));
-            cardPanel.add(actionBtn);
+                removeBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+                detailsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            gridPanel.add(cardPanel);
+                JPanel buttonRow = new JPanel();
+                buttonRow.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
+                buttonRow.add(removeBtn);
+                buttonRow.add(detailsBtn);
+
+                removeBtn.addActionListener(e -> onCardClicked.accept(card));
+                detailsBtn.addActionListener(e -> onDetailsClicked.accept(card));
+
+                cardPanel.add(Box.createVerticalGlue());
+                cardPanel.add(nameLabel);
+                cardPanel.add(Box.createVerticalStrut(10));
+                cardPanel.add(buttonRow);
+                cardPanel.add(Box.createVerticalGlue());
+            } else {
+                JLabel emptyLabel = new JLabel("Empty Slot", SwingConstants.CENTER);
+                emptyLabel.setFont(new Font("Arial", Font.ITALIC, 14));
+                emptyLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                cardPanel.add(Box.createVerticalGlue());
+                cardPanel.add(emptyLabel);
+                cardPanel.add(Box.createVerticalGlue());
+            }
+
+            add(cardPanel);
         }
-
-        add(new JScrollPane(gridPanel), BorderLayout.CENTER);
     }
 }
