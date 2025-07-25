@@ -12,40 +12,55 @@ public class CardGridPanel extends JPanel {
             Consumer<Card> onCardClicked,
             Consumer<Card> onViewDetailsClicked
     ) {
-        setLayout(new GridLayout(0, 2, 10, 10));
+        setLayout(new GridLayout());
 
+        JPanel gridPanel = new JPanel(new GridLayout(0, 2, 10, 10));
+
+        boolean hasVisibleCards = false;
         for (Card card : cards) {
-            JPanel cardPanel = new JPanel(new BorderLayout());
-            cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            if (card.getCount() != 0) {
+                hasVisibleCards = true;
 
-            JPanel topPanel = new JPanel();
-            topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+                JPanel cardPanel = new JPanel(new BorderLayout());
+                cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-            JLabel nameLabel = new JLabel(card.getName(), SwingConstants.CENTER);
-            nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                JPanel topPanel = new JPanel();
+                topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
-            JLabel countLabel = new JLabel("x" + card.getCount(), SwingConstants.CENTER);
-            countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                JLabel nameLabel = new JLabel(card.getName(), SwingConstants.CENTER);
+                nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            topPanel.add(nameLabel);
-            topPanel.add(countLabel);
+                JLabel countLabel = new JLabel("x" + card.getCount(), SwingConstants.CENTER);
+                countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            cardPanel.add(topPanel, BorderLayout.NORTH);
+                topPanel.add(nameLabel);
+                topPanel.add(countLabel);
 
-            // Buttons
-            JButton actionBtn = new JButton(buttonLabel);
-            actionBtn.addActionListener(e -> onCardClicked.accept(card));
+                cardPanel.add(topPanel, BorderLayout.NORTH);
 
-            JButton detailsBtn = new JButton("Details");
-            detailsBtn.addActionListener(e -> onViewDetailsClicked.accept(card));
+                // Buttons
+                JButton actionBtn = new JButton(buttonLabel);
+                actionBtn.addActionListener(e -> onCardClicked.accept(card));
 
-            JPanel btnPanel = new JPanel();
-            btnPanel.add(actionBtn);
-            btnPanel.add(detailsBtn);
+                JButton detailsBtn = new JButton("Details");
+                detailsBtn.addActionListener(e -> onViewDetailsClicked.accept(card));
 
-            cardPanel.add(btnPanel, BorderLayout.SOUTH);
+                JPanel btnPanel = new JPanel();
+                btnPanel.add(actionBtn);
+                btnPanel.add(detailsBtn);
 
-            add(cardPanel);
+                cardPanel.add(btnPanel, BorderLayout.SOUTH);
+
+                gridPanel.add(cardPanel);
+            }
+        }
+
+        if (hasVisibleCards) {
+            add(new JScrollPane(gridPanel), BorderLayout.CENTER);
+        } else {
+            JLabel emptyLabel = new JLabel("No cards available.", SwingConstants.CENTER);
+            emptyLabel.setFont(new Font("Arial", Font.ITALIC, 16));
+            add(emptyLabel, BorderLayout.CENTER);
         }
     }
 }

@@ -246,4 +246,13 @@ public class Card {
         sb.append("Count: ").append(count).append("\n");
         return sb.toString();
     }
+
+    public String getDetailedInfoWithoutCount() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(name).append("\n");
+        sb.append("Rarity: ").append(rarity).append("\n");
+        sb.append("Variant: ").append(variant).append("\n");
+        sb.append("Value: ").append(value).append("\n");
+        return sb.toString();
+    }
 }

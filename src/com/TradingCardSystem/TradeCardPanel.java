@@ -1,12 +1,19 @@
 package com.TradingCardSystem;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.util.List;
 
 public class TradeCardPanel extends JPanel {
     public TradeCardPanel(MainProgramWindow mainWindow, Collector collector, Binder binder) {
         setLayout(new BorderLayout(10, 10));
+
+        // TODO: Fix trading bugs (test the trading functionality for bugs)
+        // Bugs: outgoing card gets added to collection
+        // instead of being removed completely
 
         JLabel title = new JLabel("Select a Card to Trade", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
@@ -25,9 +32,22 @@ public class TradeCardPanel extends JPanel {
 
         for (Card card : cards) {
             JPanel cardPanel = new JPanel(new BorderLayout());
-            JTextArea cardInfo = new JTextArea(card.toString());
+            cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            cardPanel.setBackground(Color.WHITE);
+
+            JTextPane cardInfo = new JTextPane();
+            cardInfo.setText(card.getDetailedInfoWithoutCount());
             cardInfo.setEditable(false);
-            cardInfo.setFont(new Font("Monospaced", Font.PLAIN, 12));
+            cardInfo.setFont(new Font("Gill Sans MT", Font.PLAIN, 12));
+            cardInfo.setFocusable(false);
+
+
+            // Center align the text content
+            StyledDocument doc = cardInfo.getStyledDocument();
+            SimpleAttributeSet center = new SimpleAttributeSet();
+            StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+            StyleConstants.setBold(center, true);
+            doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
             JButton tradeBtn = new JButton("Trade This Card");
             tradeBtn.addActionListener(e -> openTradeDialog(mainWindow, collector, binder, card));
@@ -64,7 +84,7 @@ public class TradeCardPanel extends JPanel {
 
             int confirm = JOptionPane.showConfirmDialog(
                     this,
-                    String.format("Trade %s (₱%.2f) for %s (₱%.2f)?",
+                    String.format("Trade %s ($%.2f) for %s ($%.2f)?",
                             cardToBeRemoved.getName(), removedVal,
                             cardToBeAdded.getName(), addedVal),
                     "Confirm Trade",
@@ -73,7 +93,7 @@ public class TradeCardPanel extends JPanel {
 
             if (confirm == JOptionPane.YES_OPTION) {
                 binder.tradeCard(cardToBeAdded, cardToBeRemoved);
-                cardToBeRemoved.incrementCount(); // Return original to pool, optional
+                collector.removeCardObject(cardToBeRemoved.getName());
                 JOptionPane.showMessageDialog(this, "Trade completed successfully!");
                 mainWindow.showCustomPanel(new BinderMenuPanel(mainWindow, binder, collector)); // Refresh
             } else {

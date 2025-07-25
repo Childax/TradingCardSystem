@@ -13,6 +13,15 @@ public class BinderCardGridPanel extends JPanel {
     ) {
         setLayout(new GridLayout(0, 2, 10, 10)); // 2 cards per row
 
+        if (cards == null || cards.isEmpty()) {
+            JLabel emptyLabel = new JLabel("No cards in this binder.", SwingConstants.CENTER);
+            emptyLabel.setFont(new Font("Arial", Font.ITALIC, 16));
+            add(emptyLabel, BorderLayout.CENTER);
+            return;
+        }
+
+        JPanel gridPanel = new JPanel(new GridLayout(0, 2, 10, 10));
+
         for (Card card : cards) {
             JPanel cardPanel = new JPanel();
             cardPanel.setLayout(new BoxLayout(cardPanel, BoxLayout.Y_AXIS));
@@ -42,7 +51,9 @@ public class BinderCardGridPanel extends JPanel {
             cardPanel.add(Box.createVerticalStrut(10));
             cardPanel.add(actionBtn);
 
-            add(cardPanel);
+            gridPanel.add(cardPanel);
         }
+
+        add(new JScrollPane(gridPanel), BorderLayout.CENTER);
     }
 }
