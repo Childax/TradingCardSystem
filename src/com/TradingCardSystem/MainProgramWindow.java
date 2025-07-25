@@ -7,7 +7,7 @@ public class MainProgramWindow extends JFrame {
 
     public MainProgramWindow(Collector collector) {
         this.setTitle("Trading Card Inventory System");
-        this.setSize(500, 600);
+        this.setSize(700, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
