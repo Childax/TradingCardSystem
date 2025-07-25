@@ -47,6 +47,7 @@ public class DeckMenuPanel extends JPanel {
                             return;
                         }
                         activeDeck.addCard(card);
+                        card.decrementCount();
                         JOptionPane.showMessageDialog(this, "Card added!");
                     },
                     () -> mainWindow.showCustomPanel(this)
@@ -91,6 +92,7 @@ public class DeckMenuPanel extends JPanel {
                 activeDeck.getCards(),
                 cardToRemove -> {
                     activeDeck.removeCard(cardToRemove);
+                    cardToRemove.incrementCount();
                     JOptionPane.showMessageDialog(this, "Card removed from deck.");
                     showDeckCards(); // Refresh view
                 },
