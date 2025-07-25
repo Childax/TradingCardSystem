@@ -11,10 +11,6 @@ public class TradeCardPanel extends JPanel {
     public TradeCardPanel(MainProgramWindow mainWindow, Collector collector, Binder binder) {
         setLayout(new BorderLayout(10, 10));
 
-        // TODO: Fix trading bugs (test the trading functionality for bugs)
-        // Bugs: outgoing card gets added to collection
-        // instead of being removed completely
-
         JLabel title = new JLabel("Select a Card to Trade", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 18));
 
