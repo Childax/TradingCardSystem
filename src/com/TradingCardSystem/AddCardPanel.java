@@ -6,21 +6,32 @@ import java.awt.*;
 public class AddCardPanel extends JPanel {
     public AddCardPanel(MainProgramWindow mainWindow, Collector collector) {
         setLayout(new BorderLayout(10, 10));
+        setBackground(new Color(30, 30, 30));
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Title styling
         JLabel title = new JLabel("Add Card to Collection", SwingConstants.CENTER);
-        title.setFont(new Font("Arial", Font.BOLD, 18));
+        title.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        title.setForeground(Color.WHITE);
+        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+        add(title, BorderLayout.NORTH);
 
+        // Input panel
         CardInputPanel inputPanel = new CardInputPanel();
+        add(inputPanel, BorderLayout.CENTER);
 
-        JButton submitBtn = new JButton("Add Card");
-        JButton backBtn = new JButton("Back to Menu");
+        // Button panel
+        JButton submitBtn = createStyledButton("Add Card");
+        JButton backBtn = createStyledButton("Back to Menu");
+
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 15));
+        buttonPanel.setBackground(new Color(30, 30, 30));
         buttonPanel.add(submitBtn);
         buttonPanel.add(backBtn);
-
-        add(title, BorderLayout.NORTH);
-        add(inputPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
+        // Button actions
         submitBtn.addActionListener(e -> {
             try {
                 Card newCard = inputPanel.getCard();
@@ -36,6 +47,33 @@ public class AddCardPanel extends JPanel {
 
         backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
     }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFocusPainted(false);
+        button.setBackground(new Color(60, 60, 60));
+        button.setForeground(Color.WHITE);
+        button.setSize(100, 50);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.DARK_GRAY),
+                BorderFactory.createEmptyBorder(10, 20, 10, 20) // top, left, bottom, right padding
+        ));
+        button.setCursor(Cursor.getDefaultCursor());
+
+        // Flash effect on hover
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(80, 80, 80));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(60, 60, 60));
+            }
+        });
+
+        return button;
+    }
 }
-
-
