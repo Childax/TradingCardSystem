@@ -14,25 +14,27 @@ public class BinderMenuPanel extends JPanel {
         this.collector = collector;
 
         setLayout(new BorderLayout());
+        setBackground(new Color(30, 30, 30));
 
         JLabel titleLabel = new JLabel("Binder: " + activeBinder.getName(), SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(30, 10, 20, 10));
         add(titleLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100));
+        buttonPanel.setBackground(new Color(30, 30, 30));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 100, 30, 100));
 
-        JButton viewBtn = new JButton("View Cards in Binder");
-        JButton addBtn = new JButton("Add Card to Binder");
-        JButton tradeBtn = new JButton("Trade Cards");
-        JButton deleteBtn = new JButton("Delete Binder");
-        JButton backBtn = new JButton("Back to Main Menu");
+        JButton viewBtn = createStyledButton("View Cards in Binder");
+        JButton addBtn = createStyledButton("Add Card to Binder");
+        JButton tradeBtn = createStyledButton("Trade Cards");
+        JButton deleteBtn = createStyledButton("Delete Binder");
+        JButton backBtn = createStyledButton("Back to Main Menu");
 
-        // View Cards in Binder
         viewBtn.addActionListener(e -> showBinderCards());
 
-        // Add Card to Binder
         addBtn.addActionListener(e -> {
             mainWindow.showCustomPanel(new AddCardFromCollectionPanel(
                     mainWindow,
@@ -51,10 +53,8 @@ public class BinderMenuPanel extends JPanel {
             ));
         });
 
-        // Trade Card
         tradeBtn.addActionListener(e -> mainWindow.showCustomPanel(new TradeCardPanel(mainWindow, collector, activeBinder)));
 
-        // Delete Binder
         deleteBtn.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this,
                     "Are you sure you want to delete the binder \"" + activeBinder.getName() + "\"?",
@@ -66,18 +66,40 @@ public class BinderMenuPanel extends JPanel {
             }
         });
 
-        // Back to main menu
         backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
 
         for (JButton btn : new JButton[]{viewBtn, addBtn, tradeBtn, deleteBtn, backBtn}) {
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btn.setMaximumSize(new Dimension(200, 40));
-            btn.setFont(new Font("SansSerif", Font.PLAIN, 14));
             buttonPanel.add(btn);
-            buttonPanel.add(Box.createVerticalStrut(15));
+            buttonPanel.add(Box.createVerticalStrut(20));
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+    }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFocusPainted(false);
+        button.setBackground(new Color(60, 60, 60));
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        button.setMaximumSize(new Dimension(240, 45));
+        button.setCursor(Cursor.getDefaultCursor());
+        button.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(80, 80, 80));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(60, 60, 60));
+            }
+        });
+
+        return button;
     }
 
     private void showBinderCards() {
@@ -94,14 +116,20 @@ public class BinderMenuPanel extends JPanel {
         );
 
         JScrollPane scrollPane = new JScrollPane(grid);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setBorder(null);
+        scrollPane.getViewport().setBackground(new Color(30, 30, 30));
 
         JPanel wrapper = new JPanel(new BorderLayout());
+        wrapper.setBackground(new Color(30, 30, 30));
         wrapper.add(scrollPane, BorderLayout.CENTER);
 
-        JButton backBtn = new JButton("Back");
+        JButton backBtn = createStyledButton("Back");
         backBtn.addActionListener(e -> mainWindow.showBinderMenu(collector, activeBinder));
 
         JPanel bottom = new JPanel();
+        bottom.setBackground(new Color(30, 30, 30));
+        bottom.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
         bottom.add(backBtn);
         wrapper.add(bottom, BorderLayout.SOUTH);
 
