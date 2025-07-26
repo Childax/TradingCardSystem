@@ -1,64 +1,127 @@
 package com.TradingCardSystem;
 
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.util.List;
 
 public class TradeCardPanel extends JPanel {
     public TradeCardPanel(MainProgramWindow mainWindow, Collector collector, Binder binder) {
-        setLayout(new BorderLayout(10, 10));
+        setLayout(new BorderLayout());
+        setBackground(new Color(30, 30, 30));
 
         JLabel title = new JLabel("Select a Card to Trade", SwingConstants.CENTER);
-        title.setFont(new Font("Arial", Font.BOLD, 18));
+        title.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        title.setForeground(Color.WHITE);
+        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        add(title, BorderLayout.NORTH);
 
-        JPanel cardGrid = new JPanel(new GridLayout(0, 2, 10, 10));
         List<Card> cards = binder.getCards();
+        boolean hasVisibleCards = false;
 
-        if (cards.isEmpty()) {
-            add(title, BorderLayout.NORTH);
-            add(new JLabel("No cards available in the binder.", SwingConstants.CENTER), BorderLayout.CENTER);
-            JButton backBtn = new JButton("Back");
-            backBtn.addActionListener(e -> mainWindow.showCustomPanel(new BinderMenuPanel(mainWindow, binder, collector)));
-            add(backBtn, BorderLayout.SOUTH);
-            return;
-        }
+        JPanel gridPanel = new JPanel();
+        gridPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));
+        gridPanel.setBackground(new Color(30, 30, 30));
 
         for (Card card : cards) {
-            JPanel cardPanel = new JPanel(new BorderLayout());
-            cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            cardPanel.setBackground(Color.WHITE);
+            if (!binder.getCards().isEmpty()) {
+                hasVisibleCards = true;
+                gridPanel.add(createCardBox(card, mainWindow, collector, binder));
+            }
+        }
 
-            JTextPane cardInfo = new JTextPane();
-            cardInfo.setText(card.getDetailedInfoWithoutCount());
-            cardInfo.setEditable(false);
-            cardInfo.setFont(new Font("Gill Sans MT", Font.PLAIN, 12));
-            cardInfo.setFocusable(false);
-
-
-            // Center align the text content
-            StyledDocument doc = cardInfo.getStyledDocument();
-            SimpleAttributeSet center = new SimpleAttributeSet();
-            StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-            StyleConstants.setBold(center, true);
-            doc.setParagraphAttributes(0, doc.getLength(), center, false);
-
-            JButton tradeBtn = new JButton("Trade This Card");
-            tradeBtn.addActionListener(e -> openTradeDialog(mainWindow, collector, binder, card));
-
-            cardPanel.add(cardInfo, BorderLayout.CENTER);
-            cardPanel.add(tradeBtn, BorderLayout.SOUTH);
-            cardGrid.add(cardPanel);
+        if (hasVisibleCards) {
+            JScrollPane scrollPane = new JScrollPane(gridPanel);
+            scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+            scrollPane.setBorder(null);
+            scrollPane.getViewport().setBackground(new Color(30, 30, 30));
+            add(scrollPane, BorderLayout.CENTER);
+        } else {
+            JLabel emptyLabel = new JLabel("No cards available in the binder.", SwingConstants.CENTER);
+            emptyLabel.setFont(new Font("Segoe UI", Font.ITALIC, 16));
+            emptyLabel.setForeground(Color.GRAY);
+            add(emptyLabel, BorderLayout.CENTER);
         }
 
         JButton backBtn = new JButton("Back");
+        styleButton(backBtn);
         backBtn.addActionListener(e -> mainWindow.showCustomPanel(new BinderMenuPanel(mainWindow, binder, collector)));
 
-        add(title, BorderLayout.NORTH);
-        add(new JScrollPane(cardGrid), BorderLayout.CENTER);
-        add(backBtn, BorderLayout.SOUTH);
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setBackground(new Color(30, 30, 30));
+        bottomPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        bottomPanel.add(backBtn);
+        add(bottomPanel, BorderLayout.SOUTH);
+    }
+
+    private JPanel createCardBox(Card card, MainProgramWindow mainWindow, Collector collector, Binder binder) {
+        JPanel cardPanel = new JPanel();
+        cardPanel.setPreferredSize(new Dimension(150, 120));
+        cardPanel.setLayout(new BorderLayout(5, 5));
+        cardPanel.setBackground(new Color(45, 45, 45));
+        cardPanel.setBorder(BorderFactory.createLineBorder(new Color(70, 70, 70)));
+
+        JLabel nameLabel = new JLabel(card.getName(), SwingConstants.CENTER);
+        nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        nameLabel.setForeground(Color.WHITE);
+
+        JPanel labelPanel = new JPanel();
+        labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
+        labelPanel.setBackground(new Color(45, 45, 45));
+
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        labelPanel.add(Box.createVerticalStrut(5));
+        labelPanel.add(nameLabel);
+        labelPanel.add(Box.createVerticalStrut(4));
+
+        cardPanel.add(labelPanel, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 2));
+        buttonPanel.setBackground(new Color(45, 45, 45));
+
+        JButton tradeBtn = createStyledButton("Trade");
+        tradeBtn.addActionListener(e -> openTradeDialog(mainWindow, collector, binder, card));
+
+        JButton detailsBtn = createStyledButton("Details");
+        detailsBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE));
+
+        buttonPanel.add(tradeBtn);
+        buttonPanel.add(detailsBtn);
+        cardPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        return cardPanel;
+    }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFocusPainted(false);
+        button.setBackground(new Color(60, 60, 60));
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        button.setBorder(BorderFactory.createEmptyBorder(4, 10, 4, 10));
+        button.setCursor(Cursor.getDefaultCursor());
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(80, 80, 80));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(60, 60, 60));
+            }
+        });
+
+        return button;
+    }
+
+    private void styleButton(JButton button) {
+        button.setBackground(new Color(60, 60, 60));
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
     }
 
     private void openTradeDialog(MainProgramWindow mainWindow, Collector collector, Binder binder, Card cardToBeRemoved) {
@@ -88,10 +151,14 @@ public class TradeCardPanel extends JPanel {
             );
 
             if (confirm == JOptionPane.YES_OPTION) {
+                if (!collector.hasCardWithName(cardToBeAdded.getName())) {
+                    collector.addCard(cardToBeAdded);
+                    cardToBeAdded.decrementCount();
+                }
                 binder.tradeCard(cardToBeAdded, cardToBeRemoved);
                 collector.removeCardObject(cardToBeRemoved.getName());
                 JOptionPane.showMessageDialog(this, "Trade completed successfully!");
-                mainWindow.showCustomPanel(new BinderMenuPanel(mainWindow, binder, collector)); // Refresh
+                mainWindow.showCustomPanel(new TradeCardPanel(mainWindow, collector, binder));
             } else {
                 JOptionPane.showMessageDialog(this, "Trade cancelled.");
             }
