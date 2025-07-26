@@ -64,7 +64,6 @@ public class BinderCardGridPanel extends JPanel {
                 cardPanel.add(Box.createVerticalGlue());
             }
 
-            // Hover effect (optional)
             cardPanel.addMouseListener(new MouseAdapter() {
                 public void mouseEntered(MouseEvent e) {
                     cardPanel.setBackground(new Color(40, 40, 40));
