@@ -6,6 +6,15 @@ import java.awt.*;
 public class MainProgramWindow extends JFrame {
 
     public MainProgramWindow(Collector collector) {
+        UIManager.put("OptionPane.background", new Color(30, 30, 30));
+        UIManager.put("Panel.background", new Color(30, 30, 30));
+        UIManager.put("OptionPane.messageForeground", Color.WHITE);
+        UIManager.put("OptionPane.messageFont", new Font("Segoe UI", Font.PLAIN, 14));
+        UIManager.put("Button.background", new Color(60, 60, 60));
+        UIManager.put("Button.foreground", Color.WHITE);
+        UIManager.put("Button.font", new Font("Segoe UI", Font.PLAIN, 14));
+        UIManager.put("Button.focus", new Color(0, 0, 0, 0));
+
         this.setTitle("Trading Card Inventory System");
         this.setSize(700, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
