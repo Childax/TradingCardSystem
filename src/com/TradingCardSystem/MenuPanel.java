@@ -29,7 +29,7 @@ public class MenuPanel extends JPanel {
         buttonPanel.setBackground(new Color(30, 30, 30));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 80, 20, 80)); // padding
 
-        JButton btnAddCard = createMenuButton("Add Card to Collection");
+        JButton btnAddCard = createMenuButton("Add New Card");
         JButton btnCreateBinder = createMenuButton("Create Binder");
         JButton btnCreateDeck = createMenuButton("Create Deck");
         btnViewCollection = createMenuButton("View Collection");

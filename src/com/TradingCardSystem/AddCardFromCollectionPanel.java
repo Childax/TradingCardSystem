@@ -19,7 +19,9 @@ public class AddCardFromCollectionPanel extends JPanel {
                     onCardAdded.accept(card);
                     onBack.run();
                 },
-                card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE)
+                card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE),
+                Card::incrementCount,
+                Card::decrementCount
         );
 
 

@@ -11,7 +11,9 @@ public class CardGridPanel extends JPanel {
             List<Card> cards,
             String buttonLabel,
             Consumer<Card> onCardClicked,
-            Consumer<Card> onViewDetailsClicked
+            Consumer<Card> onViewDetailsClicked,
+            Consumer<Card> onIncrementClicked,
+            Consumer<Card> onDecrementClicked
     ) {
         setLayout(new BorderLayout());
         setBackground(new Color(30, 30, 30));
@@ -25,7 +27,7 @@ public class CardGridPanel extends JPanel {
         for (Card card : cards) {
             if (card.getCount() != 0) {
                 hasVisibleCards = true;
-                gridPanel.add(createCardBox(card, buttonLabel, onCardClicked, onViewDetailsClicked));
+                gridPanel.add(createCardBox(card, buttonLabel, onCardClicked, onViewDetailsClicked, onIncrementClicked, onDecrementClicked));
             }
         }
 
@@ -47,10 +49,12 @@ public class CardGridPanel extends JPanel {
             Card card,
             String buttonLabel,
             Consumer<Card> onCardClicked,
-            Consumer<Card> onViewDetailsClicked
+            Consumer<Card> onViewDetailsClicked,
+            Consumer<Card> onIncrementClicked,
+            Consumer<Card> onDecrementClicked
     ) {
         JPanel cardPanel = new JPanel();
-        cardPanel.setPreferredSize(new Dimension(150, 120));
+        cardPanel.setPreferredSize(new Dimension(150, 150));
         cardPanel.setLayout(new BorderLayout(5, 5));
         cardPanel.setBackground(new Color(45, 45, 45));
         cardPanel.setBorder(BorderFactory.createLineBorder(new Color(70, 70, 70)));
@@ -63,22 +67,41 @@ public class CardGridPanel extends JPanel {
         countLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         countLabel.setForeground(Color.LIGHT_GRAY);
 
+        // Increment/Decrement buttons
+        JButton plusBtn = createSmallButton("+");
+        JButton minusBtn = createSmallButton("−");
+
+        plusBtn.addActionListener(e -> {
+            onIncrementClicked.accept(card);
+            countLabel.setText("x" + card.getCount());
+        });
+
+        minusBtn.addActionListener(e -> {
+            onDecrementClicked.accept(card);
+            countLabel.setText("x" + card.getCount());
+        });
+
         JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
         labelPanel.setBackground(new Color(45, 45, 45));
 
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JPanel incDecPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+        incDecPanel.setBackground(new Color(45, 45, 45));
+        incDecPanel.add(minusBtn);
+        incDecPanel.add(plusBtn);
 
         labelPanel.add(Box.createVerticalStrut(5));
         labelPanel.add(nameLabel);
         labelPanel.add(Box.createVerticalStrut(4));
         labelPanel.add(countLabel);
+        labelPanel.add(Box.createVerticalStrut(3));
         labelPanel.add(Box.createVerticalStrut(5));
-
+        labelPanel.add(incDecPanel);
         cardPanel.add(labelPanel, BorderLayout.CENTER);
 
-        // Buttons
+        // Main buttons
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 2));
         buttonPanel.setBackground(new Color(45, 45, 45));
 
@@ -114,6 +137,31 @@ public class CardGridPanel extends JPanel {
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 button.setBackground(new Color(60, 60, 60));
+            }
+        });
+
+        return button;
+    }
+
+    private JButton createSmallButton(String text) {
+        JButton button = new JButton(text);
+        button.setFocusPainted(false);
+        button.setPreferredSize(new Dimension(36, 22));
+        button.setBackground(new Color(70, 70, 70));
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        button.setBorder(BorderFactory.createEmptyBorder(2, 6, 2, 6));
+        button.setCursor(Cursor.getDefaultCursor());
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(90, 90, 90));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(70, 70, 70));
             }
         });
 

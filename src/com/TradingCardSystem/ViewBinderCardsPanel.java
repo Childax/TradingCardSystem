@@ -22,7 +22,9 @@ public class ViewBinderCardsPanel extends JPanel {
                         mainWindow.showBinderMenu(collector, binder);
                     }
                 },
-                card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE)
+                card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE),
+                Card::incrementCount,
+                Card::decrementCount
         );
 
         add(new JScrollPane(cardGrid), BorderLayout.CENTER);

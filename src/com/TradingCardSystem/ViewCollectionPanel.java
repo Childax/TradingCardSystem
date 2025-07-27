@@ -44,7 +44,9 @@ public class ViewCollectionPanel extends JPanel {
                         refresh();
                     }
                 },
-                card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE)
+                card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE),
+                Card::incrementCount,
+                Card::decrementCount
         );
 
         scrollWrapper.add(cardGrid, BorderLayout.CENTER);
