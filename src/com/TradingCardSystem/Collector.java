@@ -13,16 +13,18 @@ public class Collector {
     private ArrayList<Card> cards;
     private ArrayList<Binder> binders;
     private ArrayList<Deck> decks;
+    private double money;
 
     /**
      * Constructs a {@code Collector} with a default name ("fn") and initializes empty
-     * lists for cards, binders, and decks.
+     * lists for cards, binders, decks, and sets the money of the collector to 0.
      */
     public Collector() {
         this.username = "fn";
         this.cards = new ArrayList<>();
         this.binders = new ArrayList<>();
         this.decks = new ArrayList<>();
+        this.money = 0;
     }
 
     /**
@@ -69,6 +71,25 @@ public class Collector {
     public ArrayList<Deck> getDecks() {
         return decks;
     }
+
+    /**
+     * Returns the collector's current money
+     *
+     * @return the money
+     */
+    public double getMoney() {
+        return money;
+    }
+
+    /**
+     * Sets the money of the collector
+     *
+     * @param money
+     */
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
 
     /**
      * Adds a card to the collection. If a card with the same name already exists,
