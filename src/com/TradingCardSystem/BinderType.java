@@ -22,7 +22,7 @@ public enum BinderType {
     LUXURY,
 
     /**
-     * Sellable binder that only contain rare and legendary cards + special variants.
+     * Non-sellable binder that only contain rare and legendary cards + special variants.
      */
     COLLECTOR
 }
