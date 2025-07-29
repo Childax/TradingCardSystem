@@ -1,6 +1,7 @@
 package com.TradingCardSystem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -124,7 +125,10 @@ public class Collector {
             return false;
         }
 
-        double value = newCard.getValue() * newCard.adjustValueByVariant();
+        double value = newCard.getValue();
+        addMoney(newCard.getValue());
+        cards.remove(newCard);
+        return true;
     }
 
     /**
