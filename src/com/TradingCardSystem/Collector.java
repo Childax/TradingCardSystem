@@ -120,6 +120,12 @@ public class Collector {
         newCard.incrementCount();
     }
 
+    /**
+     * Removes one instance of a card and adds its value to the collector's money
+     *
+     * @param newCard
+     * @return
+     */
     public boolean sellCard(Card newCard) {
         if(!cards.contains(newCard)) {
             return false;
