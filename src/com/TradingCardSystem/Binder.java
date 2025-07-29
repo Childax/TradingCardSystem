@@ -10,15 +10,17 @@ import java.util.Comparator;
 public class Binder {
     private String name;
     private ArrayList<Card> binderCards;
+    private BinderType type;
 
     /**
      * Constructs a Binder with the specified name.
      *
      * @param name the name of the binder
      */
-    public Binder(String name) {
+    public Binder(String name, BinderType type) {
         this.binderCards = new ArrayList<>();
         this.name = name;
+        this.type = type;
     }
 
     /**
@@ -62,9 +64,22 @@ public class Binder {
      *
      * @param card the card to add
      */
-    public void addCard(Card card) {
-        this.binderCards.add(card);
-        this.sortCards();
+    public boolean addCard(Card card) {
+        boolean isValid = switch (this.type) {
+            case PAUPER -> card.isCommonOrUncommon();
+            case RARES -> card.isRareOrLegendary();
+            case LUXURY -> !card.isNormalVariant();
+            case COLLECTOR -> card.isRareOrLegendary() && !card.isNormalVariant();
+            case NON_CURATED -> true;
+        };
+
+        if (isValid && !isFull()) {
+            binderCards.add(card);
+            sortCards();
+            return true;
+        }
+
+        return false;
     }
 
     /**
