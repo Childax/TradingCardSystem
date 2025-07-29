@@ -17,28 +17,28 @@ public class TradingCardApp {
      * Sets up the {@link Scanner}, views, controllers, and the main {@link Collector} model.
      */
     public void run() {
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
 
-        CardView cardView = new CardView(sc);
-        CardController cardController = new CardController(cardView);
+//        CardView cardView = new CardView(sc);
+//        CardController cardController = new CardController(cardView);
 
         Collector collector = new Collector();
-        CollectorView collectorView = new CollectorView(cardController, cardView, sc);
-        CollectorController collectorController = new CollectorController(collector, collectorView);
+//        CollectorView collectorView = new CollectorView(cardController, cardView, sc);
+//        CollectorController collectorController = new CollectorController(collector, collectorView);
 
-        TradingCardView view = new TradingCardView(sc);
+//        TradingCardView view = new TradingCardView(sc);
 
-        TradingCardController controller = new TradingCardController(
-                collector,
-                view,
-                collectorView,
-                collectorController,
-                cardController,
-                cardView,
-                sc
-        );
+//        TradingCardController controller = new TradingCardController(
+//                collector,
+//                view,
+//                collectorView,
+//                collectorController,
+//                cardController,
+//                cardView,
+//                sc
+//        );
 
         new MainProgramWindow(collector);
-        controller.start();
+//        controller.start();
     }
 }

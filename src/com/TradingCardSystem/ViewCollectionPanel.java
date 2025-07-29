@@ -46,7 +46,14 @@ public class ViewCollectionPanel extends JPanel {
                 },
                 card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE),
                 Card::incrementCount,
-                Card::decrementCount
+                Card::decrementCount,
+                card -> {
+                    int confirm = JOptionPane.showConfirmDialog(this, "Sell this card?", "Confirm Sell", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        card.decrementCount();
+                        refresh();
+                    }
+                } // TODO: edit when sell is available
         );
 
         scrollWrapper.add(cardGrid, BorderLayout.CENTER);

@@ -13,7 +13,8 @@ public class CardGridPanel extends JPanel {
             Consumer<Card> onCardClicked,
             Consumer<Card> onViewDetailsClicked,
             Consumer<Card> onIncrementClicked,
-            Consumer<Card> onDecrementClicked
+            Consumer<Card> onDecrementClicked,
+            Consumer<Card> onSellClicked
     ) {
         setLayout(new BorderLayout());
         setBackground(new Color(30, 30, 30));
@@ -27,7 +28,7 @@ public class CardGridPanel extends JPanel {
         for (Card card : cards) {
             if (card.getCount() != 0) {
                 hasVisibleCards = true;
-                gridPanel.add(createCardBox(card, buttonLabel, onCardClicked, onViewDetailsClicked, onIncrementClicked, onDecrementClicked));
+                gridPanel.add(createCardBox(card, buttonLabel, onCardClicked, onViewDetailsClicked, onIncrementClicked, onDecrementClicked, onSellClicked));
             }
         }
 
@@ -51,10 +52,11 @@ public class CardGridPanel extends JPanel {
             Consumer<Card> onCardClicked,
             Consumer<Card> onViewDetailsClicked,
             Consumer<Card> onIncrementClicked,
-            Consumer<Card> onDecrementClicked
+            Consumer<Card> onDecrementClicked,
+            Consumer<Card> onSellClicked
     ) {
         JPanel cardPanel = new JPanel();
-        cardPanel.setPreferredSize(new Dimension(150, 150));
+        cardPanel.setPreferredSize(new Dimension(150, 200));
         cardPanel.setLayout(new BorderLayout(5, 5));
         cardPanel.setBackground(new Color(45, 45, 45));
         cardPanel.setBorder(BorderFactory.createLineBorder(new Color(70, 70, 70)));
@@ -102,7 +104,8 @@ public class CardGridPanel extends JPanel {
         cardPanel.add(labelPanel, BorderLayout.CENTER);
 
         // Main buttons
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 2));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setBackground(new Color(45, 45, 45));
 
         JButton actionBtn = createStyledButton(buttonLabel);
@@ -111,8 +114,23 @@ public class CardGridPanel extends JPanel {
         JButton detailsBtn = createStyledButton("Details");
         detailsBtn.addActionListener(e -> onViewDetailsClicked.accept(card));
 
-        buttonPanel.add(actionBtn);
+        JButton sellBtn = null;
+//        if (onSellClicked != null) {
+            sellBtn = createStyledButton("Sell");
+            sellBtn.addActionListener(e -> onSellClicked.accept(card));
+        //}
+
         buttonPanel.add(detailsBtn);
+        detailsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(Box.createVerticalStrut(5));
+        buttonPanel.add(actionBtn);
+        actionBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(Box.createVerticalStrut(5));
+//        if (sellBtn != null) {
+            buttonPanel.add(sellBtn);
+            sellBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+            buttonPanel.add(Box.createVerticalStrut(5));
+        //}
 
         cardPanel.add(buttonPanel, BorderLayout.SOUTH);
 

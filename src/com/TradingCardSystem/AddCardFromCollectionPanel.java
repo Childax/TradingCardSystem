@@ -21,7 +21,8 @@ public class AddCardFromCollectionPanel extends JPanel {
                 },
                 card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE),
                 Card::incrementCount,
-                Card::decrementCount
+                Card::decrementCount,
+                Card::decrementCount // TODO: edit when sell is available
         );
 
 
