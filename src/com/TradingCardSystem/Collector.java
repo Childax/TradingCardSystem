@@ -90,7 +90,6 @@ public class Collector {
         this.money = money;
     }
 
-
     /**
      * Adds a card to the collection. If a card with the same name already exists,
      * its count is incremented instead of adding a new entry.
@@ -222,6 +221,42 @@ public class Collector {
     }
 
     /**
+     * Removes the binder with the given name from the binder list
+     *
+     * @param name the name of the binder
+     */
+    public void removeBinder(String name) {
+        binders.remove(this.getBinderByName(name));
+    }
+
+    /**
+     * Removes the specified binder from the binder list
+     *
+     * @param binder the binder to be removed
+     */
+    public void removeBinder(Binder binder) {
+        binders.remove(binder);
+    }
+
+    /**
+     * Removes the deck with the specified name from the deck list
+     *
+     * @param name
+     */
+    public void removeDeck(String name) {
+        decks.remove(this.getDeckByName(name));
+    }
+
+    /**
+     * Removes the specified deck from the deck list
+     *
+     * @param deck
+     */
+    public void removeDeck(Deck deck) {
+        decks.remove(deck);
+    }
+
+    /**
      * Deletes a binder by name. Returns cards in the binder back to the collection.
      *
      * @param name the name of the binder
@@ -284,6 +319,11 @@ public class Collector {
         decks.add(new Deck(name));
     }
 
+    /**
+     * Adds a new deck with the given Deck Object.
+     *
+     * @param deck
+     */
     public void addDeck(Deck deck) { decks.add(deck); }
 
     /**

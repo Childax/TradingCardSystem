@@ -31,6 +31,7 @@ public class BinderMenuPanel extends JPanel {
         JButton addBtn = createStyledButton("Add Card to Binder");
         JButton tradeBtn = createStyledButton("Trade Cards");
         JButton deleteBtn = createStyledButton("Delete Binder");
+        JButton sellBtn = createStyledButton("Sell Binder");
         JButton backBtn = createStyledButton("Back to Main Menu");
 
         viewBtn.addActionListener(e -> showBinderCards());
@@ -66,9 +67,21 @@ public class BinderMenuPanel extends JPanel {
             }
         });
 
+        sellBtn.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(this,
+                    "Are you sure you want to sell this binder?",
+                    "Confirm Sale", JOptionPane.YES_NO_OPTION);
+            // TODO: Edit when binder sale is implemented
+            if (confirm == JOptionPane.YES_OPTION) {
+                collector.removeBinder(activeBinder);
+                JOptionPane.showMessageDialog(this, "Binder sold for 10 million dollars.");
+                mainWindow.showManageBindersPanel(collector);
+            }
+        });
+
         backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
 
-        for (JButton btn : new JButton[]{viewBtn, addBtn, tradeBtn, deleteBtn, backBtn}) {
+        for (JButton btn : new JButton[]{viewBtn, addBtn, tradeBtn, deleteBtn, sellBtn, backBtn}) {
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);
             buttonPanel.add(btn);
             buttonPanel.add(Box.createVerticalStrut(20));

@@ -30,6 +30,7 @@ public class DeckMenuPanel extends JPanel {
         JButton viewBtn = createStyledButton("View Cards in Deck");
         JButton addBtn = createStyledButton("Add Card to Deck");
         JButton deleteBtn = createStyledButton("Delete Deck");
+        JButton sellBtn = createStyledButton("Sell Deck");
         JButton backBtn = createStyledButton("Back to Main Menu");
 
         viewBtn.addActionListener(e -> showDeckCards());
@@ -68,9 +69,21 @@ public class DeckMenuPanel extends JPanel {
             }
         });
 
+        sellBtn.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(this,
+                    "Are you sure you want to sell this deck?",
+                    "Confirm Sale", JOptionPane.YES_NO_OPTION);
+            // TODO: Edit when deck sale is implemented
+            if (confirm == JOptionPane.YES_OPTION) {
+                collector.removeDeck(activeDeck);
+                JOptionPane.showMessageDialog(this, "Deck sold for 10 million dollars.");
+                mainWindow.showManageDecksPanel(collector);
+            }
+        });
+
         backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
 
-        for (JButton btn : new JButton[]{viewBtn, addBtn, deleteBtn, backBtn}) {
+        for (JButton btn : new JButton[]{viewBtn, addBtn, deleteBtn, sellBtn, backBtn}) {
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);
             buttonPanel.add(btn);
             buttonPanel.add(Box.createVerticalStrut(20));
