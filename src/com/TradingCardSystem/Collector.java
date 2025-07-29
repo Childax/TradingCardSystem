@@ -91,6 +91,18 @@ public class Collector {
     }
 
     /**
+     * Adds the money of the collector
+     *
+     * @param amount
+     */
+    public void addMoney(double amount) { this.money += amount; }
+
+    /**
+     * Resets the money of the Collector
+     */
+    public void resetMoney() { this.money = 0; }
+
+    /**
      * Adds a card to the collection. If a card with the same name already exists,
      * its count is incremented instead of adding a new entry.
      *
