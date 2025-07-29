@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Deck {
     private String deckName;
     private ArrayList<Card> deckCards;
+    private boolean isSellable;
 
     /**
      * Constructs a {@code Deck} with the given name.
@@ -19,6 +20,7 @@ public class Deck {
     public Deck(String name) {
         this.deckName = name;
         this.deckCards = new ArrayList<>();
+        this.isSellable = false;
     }
 
     /**
@@ -85,6 +87,20 @@ public class Deck {
     }
 
     /**
+     * Returns boolean value if deck is sellable
+     *
+     * @return true or false
+     */
+    public boolean getSellability() { return isSellable; }
+
+    /**
+     * Allows user to set if deck is sellable.
+     *
+     * @param isSellable checks if deck is sellable
+     */
+    public void setSellablility(boolean isSellable) { this.isSellable = isSellable; }
+
+    /**
      * Retrieves a card from the deck by its name (case-insensitive).
      *
      * @param name the name of the card
@@ -97,5 +113,18 @@ public class Deck {
             }
         }
         return null;
+    }
+
+    /**
+     *  Gets the total value of the deck.
+     *
+     * @return total value
+     */
+    public double getDeckPrice() {
+        double total = 0;
+        for (Card c : getCards()) {
+            total += c.getValue();
+        }
+        return total;
     }
 }
