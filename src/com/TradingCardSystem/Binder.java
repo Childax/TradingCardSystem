@@ -17,10 +17,10 @@ public class Binder {
      *
      * @param name the name of the binder
      */
-    public Binder(String name, BinderType type) {
+    public Binder(String name) {
         this.binderCards = new ArrayList<>();
         this.name = name;
-        this.type = type;
+        this.type = BinderType.NON_CURATED; // automatically set as non curated until set so
     }
 
     /**
@@ -49,6 +49,20 @@ public class Binder {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Returns the type of the binder
+     *
+     * @return
+     */
+    public BinderType getType() { return type; }
+
+    /**
+     * Sets a new type for the binder
+     *
+     * @param type
+     */
+    public void setType(BinderType type) { this.type = type; }
 
     /**
      * Returns the number of cards in the binder.
