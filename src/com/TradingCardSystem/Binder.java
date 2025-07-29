@@ -188,9 +188,9 @@ public class Binder {
     }
 
     /**
-     * Gets the final value of the binder depending on type.
+     * Gets the extra value of the binder based on type
      *
-     * @return final sell price
+     * @return extra value of binder
      */
     public double getHandlingFee() {
         return switch (type) {
@@ -199,6 +199,11 @@ public class Binder {
         };
     }
 
+    /**
+     * Adds base value and handling fee for better quality binders
+     *
+     * @return final sell price
+     */
     public double getSellPrice() {
         return getBaseValue() + getHandlingFee();
     }
