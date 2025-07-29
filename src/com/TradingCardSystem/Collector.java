@@ -119,6 +119,14 @@ public class Collector {
         newCard.incrementCount();
     }
 
+    public boolean sellCard(Card newCard) {
+        if(!cards.contains(newCard)) {
+            return false;
+        }
+
+        double value = newCard.getValue() * newCard.adjustValueByVariant();
+    }
+
     /**
      * Removes one instance of a card by name from the collection.
      *
