@@ -255,4 +255,16 @@ public class Card {
         sb.append("Value: ").append(value).append("\n");
         return sb.toString();
     }
+
+    public boolean isRareOrLegendary() {
+        return getRarity() == Rarity.RARE || getRarity() == Rarity.LEGENDARY;
+    }
+
+    public boolean isCommonOrUncommon() {
+        return getRarity() == Rarity.COMMON || getRarity() == Rarity.UNCOMMON;
+    }
+
+    public boolean isNormalVariant() {
+        return getVariant() == Variant.NORMAL;
+    }
 }
