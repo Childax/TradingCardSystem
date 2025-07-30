@@ -2,6 +2,7 @@ package com.TradingCardSystem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class MainProgramWindow extends JFrame {
 
@@ -20,6 +21,9 @@ public class MainProgramWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/icon.jpg")));
+        setIconImage(icon.getImage());
 
         showCustomPanel(new MenuPanel(this, collector));
     }
