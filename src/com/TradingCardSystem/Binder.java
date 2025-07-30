@@ -10,6 +10,7 @@ import java.util.Comparator;
 public class Binder {
     private String name;
     private ArrayList<Card> binderCards;
+    private BinderType type;
 
     /**
      * Constructs a Binder with the specified name.
@@ -19,6 +20,7 @@ public class Binder {
     public Binder(String name) {
         this.binderCards = new ArrayList<>();
         this.name = name;
+        this.type = BinderType.NON_CURATED; // automatically set as NON_CURATED until set so
     }
 
     /**
@@ -49,6 +51,20 @@ public class Binder {
     }
 
     /**
+     * Returns the type of the binder
+     *
+     * @return type the type of binder
+     */
+    public BinderType getType() { return type; }
+
+    /**
+     * Sets a new type for the binder
+     *
+     * @param type the type of the binder
+     */
+    public void setType(BinderType type) { this.type = type; }
+
+    /**
      * Returns the number of cards in the binder.
      *
      * @return the number of cards
@@ -62,9 +78,22 @@ public class Binder {
      *
      * @param card the card to add
      */
-    public void addCard(Card card) {
-        this.binderCards.add(card);
-        this.sortCards();
+    public boolean addCard(Card card) {
+        boolean isValid = switch (this.type) {
+            case PAUPER -> card.isCommonOrUncommon();
+            case RARES -> card.isRareOrLegendary();
+            case LUXURY -> !card.isNormalVariant();
+            case COLLECTOR -> card.isRareOrLegendary() && !card.isNormalVariant();
+            case NON_CURATED -> true;
+        };
+
+        if (isValid && !isFull()) {
+            binderCards.add(card);
+            sortCards();
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -129,7 +158,53 @@ public class Binder {
         return null;
     }
 
+    /**
+     * Sorts the cards within the binder
+     */
     public void sortCards() {
         this.binderCards.sort(Comparator.comparing(Card::getName, String.CASE_INSENSITIVE_ORDER));
+    }
+
+    /**
+     * Checks if binder is sellable
+     *
+     * @return 1 if the type is any of the sellable binders
+     */
+    public boolean isSellable() {
+        return type == BinderType.PAUPER || type == BinderType.RARES || type == BinderType.LUXURY;
+    }
+
+    /**
+     *  Gets the total value of the binder.
+     *
+     * @return total value
+     */
+    public double getBaseValue() {
+        double total = 0;
+        for (Card c : getCards()) {
+            total += c.getValue();
+        }
+        return total;
+    }
+
+    /**
+     * Gets the extra value of the binder based on type
+     *
+     * @return extra value of binder
+     */
+    public double getHandlingFee() {
+        return switch (type) {
+            case RARES, LUXURY -> getBaseValue() * 0.10;
+            default -> 0;
+        };
+    }
+
+    /**
+     * Adds base value and handling fee for better quality binders
+     *
+     * @return final sell price
+     */
+    public double getSellPrice() {
+        return getBaseValue() + getHandlingFee();
     }
 }

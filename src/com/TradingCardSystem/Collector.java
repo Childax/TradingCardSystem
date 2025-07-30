@@ -1,6 +1,7 @@
 package com.TradingCardSystem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -91,6 +92,18 @@ public class Collector {
     }
 
     /**
+     * Adds the money of the collector
+     *
+     * @param amount
+     */
+    public void addMoney(double amount) { this.money += amount; }
+
+    /**
+     * Resets the money of the Collector
+     */
+    public void resetMoney() { this.money = 0; }
+
+    /**
      * Adds a card to the collection. If a card with the same name already exists,
      * its count is incremented instead of adding a new entry.
      *
@@ -105,6 +118,23 @@ public class Collector {
         }
         cards.add(newCard);
         newCard.incrementCount();
+    }
+
+    /**
+     * Removes one instance of a card and adds its value to the collector's money
+     *
+     * @param newCard
+     * @return
+     */
+    public boolean sellCard(Card newCard) {
+        if(!cards.contains(newCard)) {
+            return false;
+        }
+
+        double value = newCard.getValue();
+        addMoney(newCard.getValue());
+        cards.remove(newCard);
+        return true;
     }
 
     /**
@@ -311,6 +341,23 @@ public class Collector {
     }
 
     /**
+     * Allows collector to receive money from selling binders
+     *
+     * @param binder the binder to be sold
+     * @return boolean value to check
+     */
+    public boolean sellBinder(Binder binder) {
+        if (binder == null || !binder.isSellable()) {
+            return false;
+        }
+
+        double sellPrice = binder.getSellPrice();
+        addMoney(sellPrice);
+        binders.remove(binder);
+        return true;
+    }
+
+    /**
      * Adds a new deck to the collector with the specified name.
      *
      * @param name the name of the deck
@@ -378,5 +425,16 @@ public class Collector {
             }
         }
         return false;
+    }
+
+    public boolean sellDeck(Deck deck) {
+        if (deck == null || !deck.getSellability()) {
+            return false;
+        }
+
+        double sellPrice = deck.getDeckPrice();
+        addMoney(sellPrice);
+        decks.remove(deck);
+        return true;
     }
 }

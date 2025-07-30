@@ -255,4 +255,31 @@ public class Card {
         sb.append("Value: ").append(value).append("\n");
         return sb.toString();
     }
+
+    /**
+     * Returns if card is rare or legendary
+     *
+     * @return true if card is rare or legendary
+     */
+    public boolean isRareOrLegendary() {
+        return getRarity() == Rarity.RARE || getRarity() == Rarity.LEGENDARY;
+    }
+
+    /**
+     * Returns if card is common or uncommon
+     *
+     * @return true if card is common or uncommon
+     */
+    public boolean isCommonOrUncommon() {
+        return getRarity() == Rarity.COMMON || getRarity() == Rarity.UNCOMMON;
+    }
+
+    /**
+     * Returns if card is rare or legendary
+     *
+     * @return true if card is normal variant
+     */
+    public boolean isNormalVariant() {
+        return getVariant() == Variant.NORMAL;
+    }
 }
