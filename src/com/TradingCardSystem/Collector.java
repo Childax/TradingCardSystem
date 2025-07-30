@@ -280,7 +280,7 @@ public class Collector {
     /**
      * Removes the specified deck from the deck list
      *
-     * @param deck
+     * @param deck removes deck
      */
     public void removeDeck(Deck deck) {
         decks.remove(deck);
