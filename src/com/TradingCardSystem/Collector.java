@@ -444,6 +444,7 @@ public class Collector {
         return false;
     }
 
+
     public boolean sellDeck(Deck deck) {
         if (deck == null || !deck.getSellability()) {
             return false;

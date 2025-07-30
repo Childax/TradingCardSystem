@@ -57,6 +57,11 @@ public class Binder {
      */
     public BinderType getType() { return type; }
 
+    /**
+     * String checker for binder type
+     *
+     * @return type of binder
+     */
     public String getTypeString() {
         return switch (this.type) {
             case NON_CURATED -> "Non-curated";
