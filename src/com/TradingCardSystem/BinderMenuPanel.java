@@ -7,6 +7,7 @@ public class BinderMenuPanel extends JPanel {
     private MainProgramWindow mainWindow;
     private Binder activeBinder;
     private Collector collector;
+    private JLabel valueLabel;
 
     public BinderMenuPanel(MainProgramWindow mainWindow, Binder activeBinder, Collector collector) {
         this.mainWindow = mainWindow;
@@ -51,12 +52,13 @@ public class BinderMenuPanel extends JPanel {
         JButton sellBtn = createStyledButton("Sell Binder");
         JButton backBtn = createStyledButton("Back to Main Menu");
 
+        tradeBtn.setEnabled(!activeBinder.isSellable());
         sellBtn.setEnabled(activeBinder.isSellable());
 
         viewBtn.addActionListener(e -> showBinderCards());
 
         addBtn.addActionListener(e -> {
-            mainWindow.showCustomPanel(new AddCardFromCollectionPanel(
+            AddCardFromCollectionPanel addPanel = new AddCardFromCollectionPanel(
                     mainWindow,
                     collector,
                     "Add Card to Binder: " + activeBinder.getName(),
@@ -65,15 +67,23 @@ public class BinderMenuPanel extends JPanel {
                             JOptionPane.showMessageDialog(this, "Binder is already full.");
                             return;
                         }
-                        activeBinder.addCard(card);
-                        card.decrementCount();
-                        JOptionPane.showMessageDialog(this, "Card added!");
+                        if (activeBinder.addCard(card)) {
+                            card.decrementCount();
+                            JOptionPane.showMessageDialog(this, "Card added!");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Card could not be added.");
+                        }
                     },
                     () -> mainWindow.showBinderMenu(collector, activeBinder)
-            ));
+            );
+            mainWindow.showCustomPanel(addPanel);
+            refresh();
         });
 
-        tradeBtn.addActionListener(e -> mainWindow.showCustomPanel(new TradeCardPanel(mainWindow, collector, activeBinder)));
+        tradeBtn.addActionListener(e -> {
+            mainWindow.showCustomPanel(new TradeCardPanel(mainWindow, collector, activeBinder));
+            refresh();
+        });
 
         deleteBtn.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this,
@@ -110,6 +120,12 @@ public class BinderMenuPanel extends JPanel {
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+
+        valueLabel = new JLabel("Binder Value: $" + String.format("%.2f", activeBinder.getSellPrice()), SwingConstants.CENTER);
+        valueLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        valueLabel.setForeground(Color.WHITE);
+        valueLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+        add(valueLabel, BorderLayout.SOUTH);
     }
 
     private JButton createStyledButton(String text) {
@@ -135,6 +151,10 @@ public class BinderMenuPanel extends JPanel {
         });
 
         return button;
+    }
+
+    public void refresh() {
+        valueLabel.setText("Binder Value: $" + String.format("%.2f", activeBinder.getSellPrice()));
     }
 
     private void showBinderCards() {

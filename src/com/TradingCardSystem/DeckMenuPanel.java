@@ -7,6 +7,7 @@ public class DeckMenuPanel extends JPanel {
     private MainProgramWindow mainWindow;
     private Deck activeDeck;
     private Collector collector;
+    private JLabel valueLabel;
 
     public DeckMenuPanel(MainProgramWindow mainWindow, Deck activeDeck, Collector collector) {
         this.mainWindow = mainWindow;
@@ -16,11 +17,27 @@ public class DeckMenuPanel extends JPanel {
         setLayout(new BorderLayout());
         setBackground(new Color(30, 30, 30));
 
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+        titlePanel.setBackground(new Color(30, 30, 30));
+
         JLabel titleLabel = new JLabel("Deck: " + activeDeck.getName(), SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(30, 10, 20, 10));
-        add(titleLabel, BorderLayout.NORTH);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JLabel typeLabel = new JLabel("Type: " + ((activeDeck.getSellability()) ? "Sellable" : "Normal"), SwingConstants.CENTER);
+        typeLabel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        typeLabel.setForeground(Color.LIGHT_GRAY);
+        typeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
+        titlePanel.add(titleLabel);
+        titlePanel.add(Box.createVerticalStrut(5));
+        titlePanel.add(typeLabel);
+
+        add(titlePanel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -75,7 +92,6 @@ public class DeckMenuPanel extends JPanel {
             int confirm = JOptionPane.showConfirmDialog(this,
                     "Are you sure you want to sell this deck?",
                     "Confirm Sale", JOptionPane.YES_NO_OPTION);
-            // TODO: Edit when deck sale is implemented
             if (confirm == JOptionPane.YES_OPTION) {
                 double price = activeDeck.getDeckPrice();
                 if (collector.sellDeck(activeDeck)) {
@@ -97,6 +113,12 @@ public class DeckMenuPanel extends JPanel {
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+
+        valueLabel = new JLabel("Deck Value: $" + String.format("%.2f", activeDeck.getDeckPrice()), SwingConstants.CENTER);
+        valueLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        valueLabel.setForeground(Color.WHITE);
+        valueLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+        add(valueLabel, BorderLayout.SOUTH);
     }
 
     private JButton createStyledButton(String text) {

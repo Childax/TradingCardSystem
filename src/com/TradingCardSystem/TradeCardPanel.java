@@ -155,15 +155,20 @@ public class TradeCardPanel extends JPanel {
                     collector.addCard(cardToBeAdded);
                     cardToBeAdded.decrementCount();
                 }
-                binder.tradeCard(cardToBeAdded, cardToBeRemoved);
-                collector.removeCardObject(cardToBeRemoved.getName());
-                JOptionPane.showMessageDialog(this, "Trade completed successfully!");
-                mainWindow.showCustomPanel(new TradeCardPanel(mainWindow, collector, binder));
+
+                if (binder.tradeCard(cardToBeAdded, cardToBeRemoved)) {
+                    collector.removeCardObject(cardToBeRemoved.getName());
+                    JOptionPane.showMessageDialog(this, "Trade completed successfully!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Trade failed!");
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Trade cancelled.");
             }
+            mainWindow.showCustomPanel(new TradeCardPanel(mainWindow, collector, binder));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Invalid input. Trade aborted.");
+            mainWindow.showCustomPanel(new TradeCardPanel(mainWindow, collector, binder));
         }
     }
 }

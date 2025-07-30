@@ -130,9 +130,12 @@ public class Binder {
      * @param newCard the new card to add
      * @param oldCard the old card to remove
      */
-    public void tradeCard(Card newCard, Card oldCard) {
-        addCard(newCard);
-        removeCard(oldCard);
+    public boolean tradeCard(Card newCard, Card oldCard) {
+        if (addCard(newCard)) {
+            removeCard(oldCard);
+            return true;
+        }
+        return false;
     }
 
     /**
