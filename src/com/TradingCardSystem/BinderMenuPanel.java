@@ -16,11 +16,28 @@ public class BinderMenuPanel extends JPanel {
         setLayout(new BorderLayout());
         setBackground(new Color(30, 30, 30));
 
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+        titlePanel.setBackground(new Color(30, 30, 30));
+
         JLabel titleLabel = new JLabel("Binder: " + activeBinder.getName(), SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(30, 10, 20, 10));
-        add(titleLabel, BorderLayout.NORTH);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JLabel typeLabel = new JLabel("Type: " + activeBinder.getTypeString(), SwingConstants.CENTER);
+        typeLabel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        typeLabel.setForeground(Color.LIGHT_GRAY);
+        typeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        titlePanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
+        titlePanel.add(titleLabel);
+        titlePanel.add(Box.createVerticalStrut(5));
+        titlePanel.add(typeLabel);
+
+        add(titlePanel, BorderLayout.NORTH);
+
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -33,6 +50,8 @@ public class BinderMenuPanel extends JPanel {
         JButton deleteBtn = createStyledButton("Delete Binder");
         JButton sellBtn = createStyledButton("Sell Binder");
         JButton backBtn = createStyledButton("Back to Main Menu");
+
+        sellBtn.setEnabled(activeBinder.isSellable());
 
         viewBtn.addActionListener(e -> showBinderCards());
 

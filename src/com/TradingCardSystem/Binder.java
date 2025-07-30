@@ -57,6 +57,16 @@ public class Binder {
      */
     public BinderType getType() { return type; }
 
+    public String getTypeString() {
+        return switch (this.type) {
+            case NON_CURATED -> "Non-curated";
+            case PAUPER -> "Pauper";
+            case RARES -> "Rares";
+            case LUXURY -> "Luxury";
+            case COLLECTOR -> "Collector";
+        };
+    }
+
     /**
      * Sets a new type for the binder
      *

@@ -50,7 +50,7 @@ public class ViewCollectionPanel extends JPanel {
                 card -> {
                     int confirm = JOptionPane.showConfirmDialog(this, "Sell this card?", "Confirm Sell", JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
-                        card.decrementCount();
+                        collector.sellCard(card);
                         refresh();
                     }
                 } // TODO: edit when sell is available

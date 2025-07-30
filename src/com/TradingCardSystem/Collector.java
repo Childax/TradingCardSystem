@@ -133,7 +133,7 @@ public class Collector {
 
         double value = newCard.getValue();
         addMoney(newCard.getValue());
-        cards.remove(newCard);
+        this.removeCardObject(newCard.getName());
         return true;
     }
 

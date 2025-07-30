@@ -115,10 +115,10 @@ public class CardGridPanel extends JPanel {
         detailsBtn.addActionListener(e -> onViewDetailsClicked.accept(card));
 
         JButton sellBtn = null;
-//        if (onSellClicked != null) {
+        if (onSellClicked != null) {
             sellBtn = createStyledButton("Sell");
             sellBtn.addActionListener(e -> onSellClicked.accept(card));
-        //}
+        }
 
         buttonPanel.add(detailsBtn);
         detailsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -126,11 +126,11 @@ public class CardGridPanel extends JPanel {
         buttonPanel.add(actionBtn);
         actionBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(Box.createVerticalStrut(5));
-//        if (sellBtn != null) {
+        if (sellBtn != null) {
             buttonPanel.add(sellBtn);
             sellBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
             buttonPanel.add(Box.createVerticalStrut(5));
-        //}
+        }
 
         cardPanel.add(buttonPanel, BorderLayout.SOUTH);
 
