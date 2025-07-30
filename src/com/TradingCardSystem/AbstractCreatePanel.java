@@ -5,11 +5,12 @@ import java.awt.*;
 
 public abstract class AbstractCreatePanel extends JPanel {
     protected JTextField nameField;
+    protected JComboBox<String> typeComboBox;
     protected JButton createButton;
     protected JButton cancelButton;
     protected JLabel titleLabel;
 
-    public AbstractCreatePanel(String titleText, MainProgramWindow mainWindow, Collector collector) {
+    public AbstractCreatePanel(String titleText, String[] typeChoices, MainProgramWindow mainWindow, Collector collector) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(new Color(30, 30, 30));
         setBorder(BorderFactory.createEmptyBorder(40, 100, 40, 100));
@@ -33,6 +34,20 @@ public abstract class AbstractCreatePanel extends JPanel {
         nameField.setBorder(BorderFactory.createLineBorder(new Color(80, 80, 80)));
         nameField.setHorizontalAlignment(JTextField.CENTER);
 
+        JLabel typeLabel = new JLabel("Select Type:");
+        typeLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        typeLabel.setForeground(Color.LIGHT_GRAY);
+        typeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        typeComboBox = new JComboBox<>(typeChoices);
+        typeComboBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        typeComboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        typeComboBox.setBackground(new Color(50, 50, 50));
+        typeComboBox.setForeground(Color.WHITE);
+        typeComboBox.setFocusable(false);
+        typeComboBox.setCursor(Cursor.getDefaultCursor());
+        typeComboBox.setBorder(BorderFactory.createLineBorder(new Color(80, 80, 80)));
+
         createButton = createStyledButton("Create");
         cancelButton = createStyledButton("Back to Main Menu");
 
@@ -47,6 +62,10 @@ public abstract class AbstractCreatePanel extends JPanel {
         add(nameLabel);
         add(Box.createVerticalStrut(10));
         add(nameField);
+        add(Box.createVerticalStrut(20));
+        add(typeLabel);
+        add(Box.createVerticalStrut(10));
+        add(typeComboBox);
         add(Box.createVerticalStrut(30));
         add(createButton);
         add(Box.createVerticalStrut(10));
@@ -65,7 +84,6 @@ public abstract class AbstractCreatePanel extends JPanel {
         button.setMaximumSize(new Dimension(180, 40));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Flash effect on hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -82,4 +100,8 @@ public abstract class AbstractCreatePanel extends JPanel {
     }
 
     protected abstract void handleCreate();
+
+    public String getSelectedType() {
+        return (String) typeComboBox.getSelectedItem();
+    }
 }

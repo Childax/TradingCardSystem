@@ -1,13 +1,16 @@
 package com.TradingCardSystem;
 
 import javax.swing.*;
+import java.util.Map;
 
 public class CreateBinderPanel extends AbstractCreatePanel {
     private Collector collector;
     private MainProgramWindow mainWindow;
 
     public CreateBinderPanel(MainProgramWindow mainWindow, Collector collector) {
-        super("Create New Binder", mainWindow, collector);
+        super("Create New Binder", new String[] {
+                "Non-Curated", "Collector", "Pauper", "Rares", "Luxury"
+        }, mainWindow, collector);
         this.collector = collector;
         this.mainWindow = mainWindow;
         createButton.setText("Create Binder");
@@ -16,6 +19,15 @@ public class CreateBinderPanel extends AbstractCreatePanel {
     @Override
     protected void handleCreate() {
         String binderName = nameField.getText().trim();
+        String type = getSelectedType();
+        Map<String, BinderType> displayNameToType = Map.of(
+                "Non-Curated", BinderType.NON_CURATED,
+                "Collector", BinderType.COLLECTOR,
+                "Pauper", BinderType.PAUPER,
+                "Rares", BinderType.RARES,
+                "Luxury", BinderType.LUXURY
+        );
+
         if (binderName.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Binder name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -27,6 +39,7 @@ public class CreateBinderPanel extends AbstractCreatePanel {
         }
 
         Binder binder = new Binder(binderName);
+        binder.setType(displayNameToType.get(type));
         collector.addBinder(binder);
         JOptionPane.showMessageDialog(this, "Binder '" + binderName + "' created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
         nameField.setText("");

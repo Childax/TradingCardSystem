@@ -33,6 +33,8 @@ public class DeckMenuPanel extends JPanel {
         JButton sellBtn = createStyledButton("Sell Deck");
         JButton backBtn = createStyledButton("Back to Main Menu");
 
+        sellBtn.setEnabled(activeDeck.getSellability());
+
         viewBtn.addActionListener(e -> showDeckCards());
 
         addBtn.addActionListener(e -> {
@@ -75,8 +77,13 @@ public class DeckMenuPanel extends JPanel {
                     "Confirm Sale", JOptionPane.YES_NO_OPTION);
             // TODO: Edit when deck sale is implemented
             if (confirm == JOptionPane.YES_OPTION) {
-                collector.removeDeck(activeDeck);
-                JOptionPane.showMessageDialog(this, "Deck sold for 10 million dollars.");
+                double price = activeDeck.getDeckPrice();
+                if (collector.sellDeck(activeDeck)) {
+                    JOptionPane.showMessageDialog(this, String.format("Deck sold for $%.2f", price));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Deck was not sold.");
+                }
+
                 mainWindow.showManageDecksPanel(collector);
             }
         });

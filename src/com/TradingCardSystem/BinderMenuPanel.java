@@ -90,10 +90,13 @@ public class BinderMenuPanel extends JPanel {
             int confirm = JOptionPane.showConfirmDialog(this,
                     "Are you sure you want to sell this binder?",
                     "Confirm Sale", JOptionPane.YES_NO_OPTION);
-            // TODO: Edit when binder sale is implemented
             if (confirm == JOptionPane.YES_OPTION) {
-                collector.removeBinder(activeBinder);
-                JOptionPane.showMessageDialog(this, "Binder sold for 10 million dollars.");
+                double price = activeBinder.getSellPrice();
+                if (collector.sellBinder(activeBinder)) {
+                    JOptionPane.showMessageDialog(this, String.format("Binder sold for $%.2f", price));;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Binder was not sold.");
+                }
                 mainWindow.showManageBindersPanel(collector);
             }
         });
