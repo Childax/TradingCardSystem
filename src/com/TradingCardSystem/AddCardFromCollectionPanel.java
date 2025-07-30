@@ -22,7 +22,7 @@ public class AddCardFromCollectionPanel extends JPanel {
                 card -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE),
                 Card::incrementCount,
                 Card::decrementCount,
-                collector::sellCard
+                null
         );
 
 

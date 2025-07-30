@@ -51,9 +51,10 @@ public class ViewCollectionPanel extends JPanel {
                     int confirm = JOptionPane.showConfirmDialog(this, "Sell this card?", "Confirm Sell", JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
                         collector.sellCard(card);
+                        JOptionPane.showMessageDialog(this, String.format("Card sold for $%.2f", card.getValue()));
                         refresh();
                     }
-                } // TODO: edit when sell is available
+                }
         );
 
         scrollWrapper.add(cardGrid, BorderLayout.CENTER);

@@ -9,6 +9,7 @@ public class MenuPanel extends JPanel {
     private JButton btnViewCollection;
     private JButton btnManageBinder;
     private JButton btnManageDeck;
+    private JLabel moneyLabel;
 
     public MenuPanel(MainProgramWindow mainWindow, Collector collector) {
         this.collector = collector;
@@ -56,12 +57,19 @@ public class MenuPanel extends JPanel {
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+
+        moneyLabel = new JLabel("Money: $" + String.format("%.2f", collector.getMoney()), SwingConstants.CENTER);
+        moneyLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        moneyLabel.setForeground(Color.WHITE);
+        moneyLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+        add(moneyLabel, BorderLayout.SOUTH);
     }
 
     public void refresh() {
         btnViewCollection.setEnabled(!collector.getCards().isEmpty());
         btnManageBinder.setEnabled(!collector.getBinders().isEmpty());
         btnManageDeck.setEnabled(!collector.getDecks().isEmpty());
+        moneyLabel.setText("Money: $" + String.format("%.2f", collector.getMoney()));
     }
 
     private JButton createMenuButton(String text) {
