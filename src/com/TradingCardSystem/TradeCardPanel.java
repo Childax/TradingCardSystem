@@ -83,7 +83,7 @@ public class TradeCardPanel extends JPanel {
         tradeBtn.addActionListener(e -> openTradeDialog(mainWindow, collector, binder, card));
 
         JButton detailsBtn = createStyledButton("Details");
-        detailsBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, card.getDetailedInfo(), "Card Details", JOptionPane.INFORMATION_MESSAGE));
+        detailsBtn.addActionListener(e -> JOptionPane.showMessageDialog(this, card.getDetailedInfoWithoutCount(), "Card Details", JOptionPane.INFORMATION_MESSAGE));
 
         buttonPanel.add(tradeBtn);
         buttonPanel.add(detailsBtn);
