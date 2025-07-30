@@ -4,8 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Panel that displays all binders owned by the collector and allows the user to manage them.
+ * Each binder is displayed as a clickable card with a "Manage" button.
+ */
 public class ManageBindersPanel extends JPanel {
 
+    /**
+     * Constructs the ManageBindersPanel with a list of the collector's binders.
+     *
+     * @param mainWindow the main application window for panel switching
+     * @param collector  the collector whose binders will be displayed
+     */
     public ManageBindersPanel(MainProgramWindow mainWindow, Collector collector) {
         setLayout(new BorderLayout(10, 10));
         setBackground(new Color(30, 30, 30));
@@ -29,7 +39,7 @@ public class ManageBindersPanel extends JPanel {
         scrollPane.setBorder(null);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Fetch Binders
+        // Fetch and display binders
         ArrayList<Binder> binders = collector.getBinders();
 
         if (binders.isEmpty()) {
@@ -53,6 +63,14 @@ public class ManageBindersPanel extends JPanel {
         add(backBtnPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Creates a UI card representing a single binder, with a manage button.
+     *
+     * @param binder     the binder to display
+     * @param mainWindow the main window for panel switching
+     * @param collector  the collector who owns the binder
+     * @return a JPanel representing the binder card
+     */
     private JPanel createBinderCard(Binder binder, MainProgramWindow mainWindow, Collector collector) {
         JPanel cardPanel = new JPanel();
         cardPanel.setPreferredSize(new Dimension(160, 100));
@@ -88,6 +106,12 @@ public class ManageBindersPanel extends JPanel {
         return cardPanel;
     }
 
+    /**
+     * Creates a styled JButton with hover effects and consistent appearance.
+     *
+     * @param text the button text
+     * @return a styled JButton
+     */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);

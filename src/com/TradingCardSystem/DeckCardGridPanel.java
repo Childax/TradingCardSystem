@@ -7,7 +7,19 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * A panel that displays cards in a deck using a grid layout.
+ * Supports up to 10 card slots and provides buttons for removing or viewing details of each card.
+ */
 public class DeckCardGridPanel extends JPanel {
+
+    /**
+     * Constructs a DeckCardGridPanel to display up to 10 cards from a deck.
+     *
+     * @param deckCards the list of cards in the deck
+     * @param onRemoveClicked a callback triggered when the remove button is clicked for a card
+     * @param onDetailsClicked a callback triggered when the details button is clicked for a card
+     */
     public DeckCardGridPanel(
             List<Card> deckCards,
             Consumer<Card> onRemoveClicked,
@@ -83,6 +95,13 @@ public class DeckCardGridPanel extends JPanel {
         }
     }
 
+    /**
+     * Styles the provided JButton with background and foreground colors.
+     *
+     * @param button the button to style
+     * @param bgColor the background color
+     * @param fgColor the foreground color
+     */
     private void styleButton(JButton button, Color bgColor, Color fgColor) {
         button.setBackground(bgColor);
         button.setForeground(fgColor);

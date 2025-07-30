@@ -4,11 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * The ViewCollectionPanel displays the collector's card collection
+ * and provides functionalities to remove, sell, or modify card counts.
+ */
 public class ViewCollectionPanel extends JPanel {
     private MainProgramWindow mainWindow;
     private Collector collector;
     private JPanel scrollWrapper;
 
+    /**
+     * Constructs the panel for viewing the collector's card collection.
+     *
+     * @param mainWindow the main program window to switch panels
+     * @param collector  the collector whose card collection is displayed
+     */
     public ViewCollectionPanel(MainProgramWindow mainWindow, Collector collector) {
         this.collector = collector;
         this.mainWindow = mainWindow;
@@ -31,6 +41,10 @@ public class ViewCollectionPanel extends JPanel {
         add(bottom, BorderLayout.SOUTH);
     }
 
+    /**
+     * Refreshes the card grid to reflect current state of the collector's collection.
+     * Updates UI after card modifications like removal or selling.
+     */
     public void refresh() {
         scrollWrapper.removeAll();
 
@@ -62,4 +76,3 @@ public class ViewCollectionPanel extends JPanel {
         scrollWrapper.repaint();
     }
 }
-

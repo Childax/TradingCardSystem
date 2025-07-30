@@ -3,12 +3,24 @@ package com.TradingCardSystem;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel for interacting with a specific deck.
+ * Allows users to view, add, delete, or sell cards in a deck,
+ * and return to the main menu.
+ */
 public class DeckMenuPanel extends JPanel {
     private MainProgramWindow mainWindow;
     private Deck activeDeck;
     private Collector collector;
     private JLabel valueLabel;
 
+    /**
+     * Constructs a panel for managing a selected deck.
+     *
+     * @param mainWindow The main application window.
+     * @param activeDeck The deck currently being managed.
+     * @param collector  The current collector managing the deck.
+     */
     public DeckMenuPanel(MainProgramWindow mainWindow, Deck activeDeck, Collector collector) {
         this.mainWindow = mainWindow;
         this.activeDeck = activeDeck;
@@ -17,6 +29,7 @@ public class DeckMenuPanel extends JPanel {
         setLayout(new BorderLayout());
         setBackground(new Color(30, 30, 30));
 
+        // Title panel
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
         titlePanel.setBackground(new Color(30, 30, 30));
@@ -39,6 +52,7 @@ public class DeckMenuPanel extends JPanel {
 
         add(titlePanel, BorderLayout.NORTH);
 
+        // Button panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setBackground(new Color(30, 30, 30));
@@ -121,10 +135,19 @@ public class DeckMenuPanel extends JPanel {
         add(valueLabel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Updates the displayed value label to match the current deck value.
+     */
     public void refresh() {
         valueLabel.setText("Deck Value: $" + String.format("%.2f", activeDeck.getDeckPrice()));
     }
 
+    /**
+     * Creates a styled JButton with hover effects.
+     *
+     * @param text The button text.
+     * @return A styled JButton.
+     */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);
@@ -150,6 +173,10 @@ public class DeckMenuPanel extends JPanel {
         return button;
     }
 
+    /**
+     * Displays a grid of cards currently in the active deck.
+     * Allows the user to remove or view more details of each card.
+     */
     private void showDeckCards() {
         DeckCardGridPanel gridPanel = new DeckCardGridPanel(
                 activeDeck.getCards(),

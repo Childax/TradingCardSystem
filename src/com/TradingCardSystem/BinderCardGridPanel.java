@@ -7,7 +7,22 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * A panel that displays a fixed grid of up to 20 cards in a binder-style layout.
+ *
+ * Each card slot shows the card name and buttons for an action and viewing details.
+ * Empty slots are labeled accordingly.
+ */
 public class BinderCardGridPanel extends JPanel {
+
+    /**
+     * Constructs the binder grid panel with cards and action buttons.
+     *
+     * @param cards the list of cards to display (up to 20)
+     * @param buttonLabel the label for the main action button (e.g., "Remove", "Select")
+     * @param onCardClicked callback for when the main action button is clicked
+     * @param onDetailsClicked callback for when the "Details" button is clicked
+     */
     public BinderCardGridPanel(List<Card> cards, String buttonLabel, Consumer<Card> onCardClicked, Consumer<Card> onDetailsClicked) {
         setLayout(new GridLayout(4, 5, 20, 20));
         setBackground(new Color(18, 18, 18)); // dark background
@@ -78,6 +93,13 @@ public class BinderCardGridPanel extends JPanel {
         }
     }
 
+    /**
+     * Applies styling to a button with specified background and foreground colors.
+     *
+     * @param button the button to style
+     * @param bgColor the background color
+     * @param fgColor the foreground (text) color
+     */
     private void styleButton(JButton button, Color bgColor, Color fgColor) {
         button.setBackground(bgColor);
         button.setForeground(fgColor);

@@ -3,10 +3,20 @@ package com.TradingCardSystem;
 import javax.swing.*;
 import java.util.Map;
 
+/**
+ * Panel for creating new binders within the application.
+ * Allows users to specify the binder name and type, and creates a new binder accordingly.
+ */
 public class CreateBinderPanel extends AbstractCreatePanel {
     private Collector collector;
     private MainProgramWindow mainWindow;
 
+    /**
+     * Constructs the CreateBinderPanel.
+     *
+     * @param mainWindow the main program window
+     * @param collector the collector who owns the binders
+     */
     public CreateBinderPanel(MainProgramWindow mainWindow, Collector collector) {
         super("Create New Binder", new String[] {
                 "Non-Curated", "Collector", "Pauper", "Rares", "Luxury"
@@ -16,6 +26,11 @@ public class CreateBinderPanel extends AbstractCreatePanel {
         createButton.setText("Create Binder");
     }
 
+    /**
+     * Handles the logic for creating a new binder.
+     * Displays appropriate error messages if validation fails.
+     * Adds the new binder to the collector and transitions to the binder menu.
+     */
     @Override
     protected void handleCreate() {
         String binderName = nameField.getText().trim();

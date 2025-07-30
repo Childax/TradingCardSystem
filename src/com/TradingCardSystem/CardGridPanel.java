@@ -5,8 +5,23 @@ import java.awt.*;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * A panel that displays a grid of cards, allowing interactions such as viewing details,
+ * incrementing/decrementing count, performing a custom action (e.g., add/remove), and optionally selling.
+ */
 public class CardGridPanel extends JPanel {
 
+    /**
+     * Constructs a new CardGridPanel with the given card list and action handlers.
+     *
+     * @param cards               the list of cards to display
+     * @param buttonLabel         the label for the action button on each card
+     * @param onCardClicked       the action to perform when the main button is clicked
+     * @param onViewDetailsClicked the action to perform when the details button is clicked
+     * @param onIncrementClicked  the action to perform when the increment button is clicked
+     * @param onDecrementClicked  the action to perform when the decrement button is clicked
+     * @param onSellClicked       the action to perform when the sell button is clicked (can be null if unused)
+     */
     public CardGridPanel(
             List<Card> cards,
             String buttonLabel,
@@ -46,6 +61,18 @@ public class CardGridPanel extends JPanel {
         }
     }
 
+    /**
+     * Creates a single card box component with labels and buttons for actions.
+     *
+     * @param card                 the card to display
+     * @param buttonLabel          the label for the action button
+     * @param onCardClicked        action on primary button click
+     * @param onViewDetailsClicked action on details button click
+     * @param onIncrementClicked   action on increment button click
+     * @param onDecrementClicked   action on decrement button click
+     * @param onSellClicked        action on sell button click (nullable)
+     * @return the constructed JPanel representing the card
+     */
     private JPanel createCardBox(
             Card card,
             String buttonLabel,
@@ -69,7 +96,6 @@ public class CardGridPanel extends JPanel {
         countLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         countLabel.setForeground(Color.LIGHT_GRAY);
 
-        // Increment/Decrement buttons
         JButton plusBtn = createSmallButton("+");
         JButton minusBtn = createSmallButton("−");
 
@@ -103,7 +129,6 @@ public class CardGridPanel extends JPanel {
         labelPanel.add(incDecPanel);
         cardPanel.add(labelPanel, BorderLayout.CENTER);
 
-        // Main buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setBackground(new Color(45, 45, 45));
@@ -137,6 +162,12 @@ public class CardGridPanel extends JPanel {
         return cardPanel;
     }
 
+    /**
+     * Creates a styled button used for card actions.
+     *
+     * @param text the button label
+     * @return the styled JButton
+     */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);
@@ -161,6 +192,12 @@ public class CardGridPanel extends JPanel {
         return button;
     }
 
+    /**
+     * Creates a small-sized button used for increment/decrement controls.
+     *
+     * @param text the button label
+     * @return the small JButton
+     */
     private JButton createSmallButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);

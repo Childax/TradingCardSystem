@@ -14,10 +14,10 @@ public class Card {
      * Constructs a card with the specified name, rarity, variant, and base value.
      * The count is initialized to 0.
      *
-     * @param name    the name of the card
-     * @param rarity  the rarity of the card
+     * @param name the name of the card
+     * @param rarity the rarity of the card
      * @param variant the variant of the card
-     * @param value   the base value of the card
+     * @param value the base value of the card
      */
     public Card(String name, Rarity rarity, Variant variant, double value) {
         this.name = name;
@@ -237,6 +237,11 @@ public class Card {
         }
     }
 
+    /**
+     * Gets a string with detailed card information including count.
+     *
+     * @return the detailed card info with count
+     */
     public String getDetailedInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(name).append("\n");
@@ -247,6 +252,11 @@ public class Card {
         return sb.toString();
     }
 
+    /**
+     * Gets a string with detailed card information excluding count.
+     *
+     * @return the detailed card info without count
+     */
     public String getDetailedInfoWithoutCount() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(name).append("\n");
@@ -257,7 +267,7 @@ public class Card {
     }
 
     /**
-     * Returns if card is rare or legendary
+     * Returns if card is rare or legendary.
      *
      * @return true if card is rare or legendary
      */
@@ -266,7 +276,7 @@ public class Card {
     }
 
     /**
-     * Returns if card is common or uncommon
+     * Returns if card is common or uncommon.
      *
      * @return true if card is common or uncommon
      */
@@ -275,7 +285,7 @@ public class Card {
     }
 
     /**
-     * Returns if card is rare or legendary
+     * Returns if card is normal variant.
      *
      * @return true if card is normal variant
      */

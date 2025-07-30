@@ -3,6 +3,11 @@ package com.TradingCardSystem;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A panel for user input to create a new {@link Card} instance.
+ * Allows setting the card's name, rarity, variant (conditionally), and value.
+ * UI is styled with a dark theme.
+ */
 public class CardInputPanel extends JPanel {
     private final JTextField nameField;
     private final JComboBox<String> rarityDropdown;
@@ -12,6 +17,10 @@ public class CardInputPanel extends JPanel {
     private final Rarity[] rarityValues;
     private final Variant[] variantValues;
 
+    /**
+     * Constructs a CardInputPanel with initialized fields and dropdowns.
+     * Configures layout and event handling for dynamic UI behavior.
+     */
     public CardInputPanel() {
         this.nameField = createTextField();
         this.valueField = createTextField();
@@ -40,6 +49,13 @@ public class CardInputPanel extends JPanel {
         add(createLabeledField("Value:", valueField));
     }
 
+    /**
+     * Creates a labeled panel for a given input field.
+     *
+     * @param labelText   The text for the label.
+     * @param inputField  The associated input component (text field or dropdown).
+     * @return A JPanel containing the label and input field.
+     */
     private JPanel createLabeledField(String labelText, JComponent inputField) {
         JLabel label = new JLabel(labelText);
         label.setForeground(Color.WHITE);
@@ -56,6 +72,11 @@ public class CardInputPanel extends JPanel {
         return panel;
     }
 
+    /**
+     * Creates a styled text field component.
+     *
+     * @return A customized JTextField instance.
+     */
     private JTextField createTextField() {
         JTextField field = new JTextField();
         Dimension size = new Dimension(100, 30);
@@ -74,6 +95,12 @@ public class CardInputPanel extends JPanel {
         return field;
     }
 
+    /**
+     * Creates a styled combo box populated with the provided items.
+     *
+     * @param items The string items to populate the combo box.
+     * @return A customized JComboBox.
+     */
     private JComboBox<String> createComboBox(String[] items) {
         JComboBox<String> comboBox = new JComboBox<>(items);
         Dimension size = new Dimension(150, 30);
@@ -102,15 +129,20 @@ public class CardInputPanel extends JPanel {
 
                 label.setForeground(Color.WHITE);
                 label.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-                label.setOpaque(true); // <- VERY important
+                label.setOpaque(true);
                 return label;
             }
         });
 
         return comboBox;
-
     }
 
+    /**
+     * Formats an array of enum values to display strings for UI components.
+     *
+     * @param values Array of Enum values.
+     * @return Array of formatted strings.
+     */
     private String[] getFormattedEnumStrings(Enum<?>[] values) {
         String[] result = new String[values.length];
         for (int i = 0; i < values.length; i++) {
@@ -119,11 +151,25 @@ public class CardInputPanel extends JPanel {
         return result;
     }
 
+    /**
+     * Converts an enum constant to a more user-friendly string.
+     * Example: LEGENDARY -> Legendary
+     *
+     * @param e The enum constant.
+     * @return Formatted string.
+     */
     private String formatEnumName(Enum<?> e) {
         String name = e.name().toLowerCase().replace("_", "-");
         return Character.toUpperCase(name.charAt(0)) + name.substring(1);
     }
 
+    /**
+     * Gathers the input field values and constructs a {@link Card} object.
+     *
+     * @return A new {@link Card} instance based on form inputs.
+     * @throws IllegalArgumentException If any required fields are empty.
+     * @throws NumberFormatException    If value is not a valid number.
+     */
     public Card getCard() throws IllegalArgumentException, NumberFormatException {
         String name = nameField.getText().trim();
         String rarityStr = ((String) rarityDropdown.getSelectedItem()).toUpperCase().replace("-", "_");
@@ -141,6 +187,9 @@ public class CardInputPanel extends JPanel {
         return new Card(name, rarity, variant, value);
     }
 
+    /**
+     * Clears all input fields and resets dropdowns to default values.
+     */
     public void clearFields() {
         nameField.setText("");
         valueField.setText("");

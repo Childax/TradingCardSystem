@@ -1,5 +1,10 @@
 package com.TradingCardSystem;
 
+/**
+ * Represents the different types of binders that can be created in the trading card system.
+ * Each binder type has specific rules for what kinds of cards it can contain,
+ * and whether it is sellable or not.
+ */
 public enum BinderType {
     /**
      * Basic binder, does not have restrictions and CANNOT be sold

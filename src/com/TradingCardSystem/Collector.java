@@ -430,7 +430,12 @@ public class Collector {
         return false;
     }
 
-
+    /**
+     * Sells the deck selected
+     *
+     * @param deck deck to be sold
+     * @return checker
+     */
     public boolean sellDeck(Deck deck) {
         if (deck == null || !deck.getSellability()) {
             return false;

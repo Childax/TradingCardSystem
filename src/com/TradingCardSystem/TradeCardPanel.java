@@ -4,7 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * TradeCardPanel displays a UI panel where users can trade cards
+ * from a selected binder by inputting details of a new card to receive in exchange.
+ */
 public class TradeCardPanel extends JPanel {
+
+    /**
+     * Constructs a TradeCardPanel where the user can trade a card from a binder.
+     *
+     * @param mainWindow the main window of the program
+     * @param collector  the collector object representing the user
+     * @param binder     the binder containing cards available for trade
+     */
     public TradeCardPanel(MainProgramWindow mainWindow, Collector collector, Binder binder) {
         setLayout(new BorderLayout());
         setBackground(new Color(30, 30, 30));
@@ -53,6 +65,15 @@ public class TradeCardPanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Creates a card box component with trade and details buttons for a specific card.
+     *
+     * @param card      the card to display
+     * @param mainWindow the main program window
+     * @param collector  the collector object
+     * @param binder     the binder the card belongs to
+     * @return a JPanel component representing the card
+     */
     private JPanel createCardBox(Card card, MainProgramWindow mainWindow, Collector collector, Binder binder) {
         JPanel cardPanel = new JPanel();
         cardPanel.setPreferredSize(new Dimension(150, 120));
@@ -92,6 +113,12 @@ public class TradeCardPanel extends JPanel {
         return cardPanel;
     }
 
+    /**
+     * Creates a styled button with hover effects for uniform appearance.
+     *
+     * @param text the label of the button
+     * @return the styled JButton
+     */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);
@@ -116,6 +143,11 @@ public class TradeCardPanel extends JPanel {
         return button;
     }
 
+    /**
+     * Applies a uniform style to a JButton for consistent layout and appearance.
+     *
+     * @param button the JButton to style
+     */
     private void styleButton(JButton button) {
         button.setBackground(new Color(60, 60, 60));
         button.setForeground(Color.WHITE);
@@ -124,6 +156,14 @@ public class TradeCardPanel extends JPanel {
         button.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
     }
 
+    /**
+     * Opens a dialog to input a new card's details for trading with the selected card.
+     *
+     * @param mainWindow      the main application window
+     * @param collector       the user performing the trade
+     * @param binder          the binder containing the card to be traded away
+     * @param cardToBeRemoved the card to be traded away
+     */
     private void openTradeDialog(MainProgramWindow mainWindow, Collector collector, Binder binder, Card cardToBeRemoved) {
         CardInputPanel inputPanel = new CardInputPanel();
         int result = JOptionPane.showConfirmDialog(

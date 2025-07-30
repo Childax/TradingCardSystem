@@ -3,12 +3,23 @@ package com.TradingCardSystem;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents the menu panel for managing a specific binder.
+ * Allows the user to view, add, trade, delete, and sell cards in the binder.
+ */
 public class BinderMenuPanel extends JPanel {
     private MainProgramWindow mainWindow;
     private Binder activeBinder;
     private Collector collector;
     private JLabel valueLabel;
 
+    /**
+     * Constructs a BinderMenuPanel.
+     *
+     * @param mainWindow the main window of the program
+     * @param activeBinder the currently selected binder
+     * @param collector the collector who owns the binder
+     */
     public BinderMenuPanel(MainProgramWindow mainWindow, Binder activeBinder, Collector collector) {
         this.mainWindow = mainWindow;
         this.activeBinder = activeBinder;
@@ -157,6 +168,12 @@ public class BinderMenuPanel extends JPanel {
         add(valueLabel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Creates a styled button with consistent appearance and hover effects.
+     *
+     * @param text the text to display on the button
+     * @return a styled JButton instance
+     */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);
@@ -182,10 +199,16 @@ public class BinderMenuPanel extends JPanel {
         return button;
     }
 
+    /**
+     * Refreshes the binder's value label to reflect the current total value.
+     */
     public void refresh() {
         valueLabel.setText("Binder Value: $" + String.format("%.2f", activeBinder.getBaseValue()));
     }
 
+    /**
+     * Displays the cards in the binder and allows users to remove cards or view details.
+     */
     private void showBinderCards() {
         BinderCardGridPanel grid = new BinderCardGridPanel(
                 activeBinder.getCards(),

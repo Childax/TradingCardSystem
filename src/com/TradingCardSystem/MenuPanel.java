@@ -3,6 +3,11 @@ package com.TradingCardSystem;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The MenuPanel class represents the main menu UI for the Trading Card Inventory System (TCIS).
+ * It allows users to navigate to various features like adding cards, creating binders or decks,
+ * viewing collections, and managing binders and decks.
+ */
 public class MenuPanel extends JPanel {
 
     private Collector collector;
@@ -11,6 +16,12 @@ public class MenuPanel extends JPanel {
     private JButton btnManageDeck;
     private JLabel moneyLabel;
 
+    /**
+     * Constructs the MenuPanel with interactive buttons to navigate the TCIS system.
+     *
+     * @param mainWindow the main window frame to which this panel belongs
+     * @param collector the collector whose data is being managed
+     */
     public MenuPanel(MainProgramWindow mainWindow, Collector collector) {
         this.collector = collector;
 
@@ -65,6 +76,10 @@ public class MenuPanel extends JPanel {
         add(moneyLabel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Refreshes the panel's components such as enabling/disabling buttons
+     * and updating the money label based on the current collector state.
+     */
     public void refresh() {
         btnViewCollection.setEnabled(!collector.getCards().isEmpty());
         btnManageBinder.setEnabled(!collector.getBinders().isEmpty());
@@ -72,6 +87,12 @@ public class MenuPanel extends JPanel {
         moneyLabel.setText("Money: $" + String.format("%.2f", collector.getMoney()));
     }
 
+    /**
+     * Creates a styled menu button with hover effects.
+     *
+     * @param text the text to display on the button
+     * @return a configured JButton with styles
+     */
     private JButton createMenuButton(String text) {
         JButton button = new JButton(text);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);

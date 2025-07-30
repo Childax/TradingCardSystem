@@ -3,6 +3,12 @@ package com.TradingCardSystem;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * An abstract JPanel used as a template for creating GUI forms to add new items with a name and type.
+ *
+ * Provides common components like name input, type dropdown, and create/cancel buttons.
+ * Subclasses must implement the {@code handleCreate()} method for creation logic.
+ */
 public abstract class AbstractCreatePanel extends JPanel {
     protected JTextField nameField;
     protected JComboBox<String> typeComboBox;
@@ -10,6 +16,14 @@ public abstract class AbstractCreatePanel extends JPanel {
     protected JButton cancelButton;
     protected JLabel titleLabel;
 
+    /**
+     * Constructs the panel with UI components for input and action handling.
+     *
+     * @param titleText the title to display at the top of the panel
+     * @param typeChoices the list of types to show in the combo box
+     * @param mainWindow reference to the main window for panel switching
+     * @param collector the current collector instance
+     */
     public AbstractCreatePanel(String titleText, String[] typeChoices, MainProgramWindow mainWindow, Collector collector) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(new Color(30, 30, 30));
@@ -72,6 +86,12 @@ public abstract class AbstractCreatePanel extends JPanel {
         add(cancelButton);
     }
 
+    /**
+     * Creates a JButton with consistent styling and hover effects.
+     *
+     * @param text the label of the button
+     * @return the styled JButton instance
+     */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);
@@ -99,8 +119,16 @@ public abstract class AbstractCreatePanel extends JPanel {
         return button;
     }
 
+    /**
+     * Abstract method to define the logic when the Create button is pressed.
+     */
     protected abstract void handleCreate();
 
+    /**
+     * Gets the currently selected type from the combo box.
+     *
+     * @return the selected type as a String
+     */
     public String getSelectedType() {
         return (String) typeComboBox.getSelectedItem();
     }

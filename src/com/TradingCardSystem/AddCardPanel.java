@@ -3,7 +3,20 @@ package com.TradingCardSystem;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A panel that allows users to input and add a new card to their collection.
+ *
+ * Includes form inputs for card details, a submit button to add the card,
+ * and a back button to return to the main menu.
+ */
 public class AddCardPanel extends JPanel {
+
+    /**
+     * Constructs the panel for adding a new card to the collection.
+     *
+     * @param mainWindow the main window for switching panels
+     * @param collector the collector object to which the card will be added
+     */
     public AddCardPanel(MainProgramWindow mainWindow, Collector collector) {
         setLayout(new BorderLayout(10, 10));
         setBackground(new Color(30, 30, 30));
@@ -48,6 +61,12 @@ public class AddCardPanel extends JPanel {
         backBtn.addActionListener(e -> mainWindow.showCustomPanel(new MenuPanel(mainWindow, collector)));
     }
 
+    /**
+     * Creates a styled JButton with consistent appearance and hover effects.
+     *
+     * @param text the text to display on the button
+     * @return the styled JButton instance
+     */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);

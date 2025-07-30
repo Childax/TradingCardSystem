@@ -4,8 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Panel that allows users to view and manage their decks.
+ * Displays each deck in a card format with a manage button.
+ */
 public class ManageDecksPanel extends JPanel {
 
+    /**
+     * Constructs the ManageDecksPanel.
+     *
+     * @param mainWindow the main window of the program
+     * @param collector the collector whose decks will be managed
+     */
     public ManageDecksPanel(MainProgramWindow mainWindow, Collector collector) {
         setLayout(new BorderLayout(10, 10));
         setBackground(new Color(30, 30, 30));
@@ -79,6 +89,12 @@ public class ManageDecksPanel extends JPanel {
         add(backBtnPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Creates a styled JButton with hover effects.
+     *
+     * @param text the button label
+     * @return a styled JButton
+     */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFocusPainted(false);
