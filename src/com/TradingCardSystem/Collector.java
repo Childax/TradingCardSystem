@@ -83,25 +83,11 @@ public class Collector {
     }
 
     /**
-     * Sets the money of the collector
-     *
-     * @param money
-     */
-    public void setMoney(double money) {
-        this.money = money;
-    }
-
-    /**
      * Adds the money of the collector
      *
      * @param amount
      */
     public void addMoney(double amount) { this.money += amount; }
-
-    /**
-     * Resets the money of the Collector
-     */
-    public void resetMoney() { this.money = 0; }
 
     /**
      * Adds a card to the collection. If a card with the same name already exists,
