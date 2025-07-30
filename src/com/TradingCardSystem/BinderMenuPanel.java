@@ -100,8 +100,37 @@ public class BinderMenuPanel extends JPanel {
             int confirm = JOptionPane.showConfirmDialog(this,
                     "Are you sure you want to sell this binder?",
                     "Confirm Sale", JOptionPane.YES_NO_OPTION);
+
+            double price = 0;
+
+            if (activeBinder.getType().equals(BinderType.LUXURY)) {
+                double minPrice = activeBinder.getBaseValue();
+                boolean isPriceValid = false;
+                while (!isPriceValid) {
+                    String input = JOptionPane.showInputDialog(this,
+                            String.format("Enter selling price (must be at least $%.2f):", minPrice));
+
+                    if (input == null) return; // user cancelled
+
+                    try {
+                        price = Double.parseDouble(input);
+                        if (price >= minPrice) {
+                            price *= 1.1;
+                            isPriceValid = true;
+                        } else {
+                            JOptionPane.showMessageDialog(this,
+                                    String.format("Price must be at least $%.2f", minPrice));
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(this, "Please enter a valid number.");
+                    }
+                }
+            } else {
+                // use default price for non-luxury binders
+                price = activeBinder.getSellPrice();
+            }
+
             if (confirm == JOptionPane.YES_OPTION) {
-                double price = activeBinder.getSellPrice();
                 if (collector.sellBinder(activeBinder)) {
                     JOptionPane.showMessageDialog(this, String.format("Binder sold for $%.2f", price));;
                 } else {
@@ -121,7 +150,7 @@ public class BinderMenuPanel extends JPanel {
 
         add(buttonPanel, BorderLayout.CENTER);
 
-        valueLabel = new JLabel("Binder Value: $" + String.format("%.2f", activeBinder.getSellPrice()), SwingConstants.CENTER);
+        valueLabel = new JLabel("Binder Value: $" + String.format("%.2f", activeBinder.getBaseValue()), SwingConstants.CENTER);
         valueLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         valueLabel.setForeground(Color.WHITE);
         valueLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
@@ -154,7 +183,7 @@ public class BinderMenuPanel extends JPanel {
     }
 
     public void refresh() {
-        valueLabel.setText("Binder Value: $" + String.format("%.2f", activeBinder.getSellPrice()));
+        valueLabel.setText("Binder Value: $" + String.format("%.2f", activeBinder.getBaseValue()));
     }
 
     private void showBinderCards() {

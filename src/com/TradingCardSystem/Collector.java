@@ -358,6 +358,23 @@ public class Collector {
     }
 
     /**
+     * Allows collector to sell a binder with a custom price
+     *
+     * @param binder
+     * @param price
+     * @return boolean value to check
+     */
+    public boolean sellBinder(Binder binder, Double price) {
+        if (binder == null || !binder.isSellable()) {
+            return false;
+        }
+
+        addMoney(price);
+        binders.remove(binder);
+        return true;
+    }
+
+    /**
      * Adds a new deck to the collector with the specified name.
      *
      * @param name the name of the deck
