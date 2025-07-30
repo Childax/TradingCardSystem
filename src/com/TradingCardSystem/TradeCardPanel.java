@@ -160,7 +160,7 @@ public class TradeCardPanel extends JPanel {
                     collector.removeCardObject(cardToBeRemoved.getName());
                     JOptionPane.showMessageDialog(this, "Trade completed successfully!");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Trade failed!");
+                    JOptionPane.showMessageDialog(this, "Incoming Card is invalid or Binder is full.");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Trade cancelled.");

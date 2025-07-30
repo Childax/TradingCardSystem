@@ -70,10 +70,10 @@ public class DeckMenuPanel extends JPanel {
                         activeDeck.addCard(card);
                         card.decrementCount();
                         JOptionPane.showMessageDialog(this, "Card added!");
+                        refresh();
                     },
                     () -> mainWindow.showCustomPanel(this)
             );
-
             mainWindow.showCustomPanel(addPanel);
         });
 
@@ -119,6 +119,10 @@ public class DeckMenuPanel extends JPanel {
         valueLabel.setForeground(Color.WHITE);
         valueLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
         add(valueLabel, BorderLayout.SOUTH);
+    }
+
+    public void refresh() {
+        valueLabel.setText("Deck Value: $" + String.format("%.2f", activeDeck.getDeckPrice()));
     }
 
     private JButton createStyledButton(String text) {

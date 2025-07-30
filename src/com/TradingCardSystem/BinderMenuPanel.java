@@ -73,11 +73,11 @@ public class BinderMenuPanel extends JPanel {
                         } else {
                             JOptionPane.showMessageDialog(this, "Card could not be added.");
                         }
+                        refresh();
                     },
                     () -> mainWindow.showBinderMenu(collector, activeBinder)
             );
             mainWindow.showCustomPanel(addPanel);
-            refresh();
         });
 
         tradeBtn.addActionListener(e -> {
