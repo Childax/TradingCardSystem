@@ -131,7 +131,7 @@ public class BinderMenuPanel extends JPanel {
             }
 
             if (confirm == JOptionPane.YES_OPTION) {
-                if (collector.sellBinder(activeBinder)) {
+                if (collector.sellBinder(activeBinder, price)) {
                     JOptionPane.showMessageDialog(this, String.format("Binder sold for $%.2f", price));;
                 } else {
                     JOptionPane.showMessageDialog(this, "Binder was not sold.");
